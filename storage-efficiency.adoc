@@ -1,0 +1,27 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
+permalink: storage-efficiency.html 
+summary: Estos informes técnicos ofrecen una descripción general de la eficiencia del almacenamiento en NetApp ONTAP, así como las prácticas recomendadas. 
+---
+= Informes técnicos de eficiencia del almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+ONTAP proporciona una cartera completa de funcionalidades de eficiencia del almacenamiento. La compresión, la deduplicación y la compactación de datos inline trabajan en conjunto para reducir los costes de almacenamiento y maximizar los datos que se pueden almacenar. Además, puede incrementar sus ahorros gracias a copias Snapshot de NetApp con gestión eficiente del espacio, thin provisioning, replicación y tecnologías de clonado.
+
+[NOTE]
+====
+Encontrará documentación sobre procedimientos para la deduplicación en link:https://docs.netapp.com/us-en/ontap/volumes/enable-deduplication-volume-task.html["documentación de deduplicación"]
+La documentación de procedimiento para la compresión se puede encontrar en link:https://docs.netapp.com/us-en/ontap/volumes/enable-data-compression-volume-task.html["documentación de compresión"]
+La documentación de procedimiento para la eficiencia del almacenamiento sensible a la temperatura se puede encontrar en link:https://docs.netapp.com/us-en/ontap/volumes/enable-temperature-sensitive-efficiency-concept.html["documentación de eficiencia de almacenamiento sensible a la temperatura"]
+La documentación de procedimiento para la compactación se puede encontrar en link:https://docs.netapp.com/us-en/ontap/volumes/enable-inline-data-compaction-fas-systems-task.html["documentación de compactación"]
+
+====

@@ -1,0 +1,31 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
+permalink: tiering.html 
+summary: Estos informes técnicos ofrecen una descripción general de la organización en niveles en NetApp ONTAP, así como prácticas recomendadas. 
+---
+= Organización en niveles de los informes técnicos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+
+
+[role="lead"]
+Con la solución de organización en niveles de datos de FabricPool, la experiencia general de usuario de las empresas con sistemas flash mejora y evita los inconvenientes de volver a diseñar aplicaciones para mejorar la eficiencia del almacenamiento. FabricPool reduce el espacio de almacenamiento y los costes asociados del entorno de un sistema. Los datos activos permanecen en SSD de alto rendimiento. Los datos inactivos se organizan en niveles en un almacenamiento de objetos de bajo coste y conservan las eficiencias del almacenamiento.
+
+[NOTE]
+====
+Estos informes técnicos se amplían en la link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html["ONTAP FabricPool"] documentación de productos.
+
+====
+link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf["TR-4598: Prácticas recomendadas de FabricPool"^]
+Conozca las funcionalidades, los requisitos, la implementación y las prácticas recomendadas para FabricPool.
+
+link:https://www.netapp.com/pdf.html?item=/media/19403-tr-4826.pdf["TR-4826: Guía de recomendaciones de NetApp FabricPool con StorageGRID"^]
+Obtenga más información sobre las prácticas recomendadas para poner en marcha y ajustar el tamaño de StorageGRID como nivel de capacidad para la FabricPool del componente de ONTAP. En este documento también se tratan funcionalidades básicas, requisitos, implementación y prácticas recomendadas al utilizar StorageGRID.
+
+link:https://www.netapp.com/pdf.html?item=/media/9138-tr4695.pdf["TR-4695: Organización en niveles de almacenamiento de base de datos con NetApp FabricPool"^]
+Obtenga información sobre las ventajas y las opciones de configuración de FabricPool con varias bases de datos, incluido el sistema de gestión de bases de datos relacionales de Oracle (RDBMS).

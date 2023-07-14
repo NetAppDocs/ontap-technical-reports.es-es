@@ -1,0 +1,42 @@
+---
+settings:
+  name: ONTAP technical reports
+  internal:
+    pdf_enabled: false
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  langs: es-es,us-en,ja-jp,ko-kr,zh-cn,zh-tw,de-de,fr-fr,it-it
+sidebar:
+  entries:
+  - title: Informes técnicos de ONTAP
+    url: "/index.html"
+  - title: Informes técnicos de aplicaciones y bases de datos
+    url: "/apps-dbs.html"
+  - title: Informes técnicos sobre continuidad empresarial
+    url: "/business-continuity.html"
+  - title: Informes técnicos sobre la protección de datos y la recuperación ante desastres
+    url: "/data-protection-disaster-recovery.html"
+  - title: Informes técnicos de FlexCache y FlexGroup Volumes
+    url: "/nas-containers.html"
+  - title: Informes técnicos de NAS
+    url: "/nas.html"
+  - title: Informes técnicos de redes
+    url: "/networking.html"
+  - title: Informes técnicos de SAN
+    url: "/san.html"
+  - title: Informes técnicos de seguridad
+    url: "/security.html"
+  - title: Guías de refuerzo de seguridad
+    url: "/security-hardening-guides.html"
+  - title: Informes técnicos de SnapCenter
+    url: "/snapcenter.html"
+  - title: Organización en niveles de los informes técnicos
+    url: "/tiering.html"
+  - title: Informes técnicos de virtualización
+    url: "/virtualization.html"
+  - title: Avisos legales
+    url: "/legal-notices.html"
+product-family:
+  name: ONTAP
+  repo: ontap-family

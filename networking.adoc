@@ -1,0 +1,26 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
+permalink: networking.html 
+summary: Estos informes técnicos ofrecen una descripción general de las redes en NetApp ONTAP además de las prácticas recomendadas. 
+---
+= Informes técnicos de redes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+ONTAP proporciona una variedad de diferentes capacidades y configuraciones de red para satisfacer las aplicaciones más exigentes de escalabilidad horizontal. Gracias a las funciones y capacidades de red, las empresas pueden crear un acceso fiable y seguro a sus datos.
+
+[NOTE]
+====
+Estos informes técnicos se amplían en la link:https://docs.netapp.com/us-en/ontap/network-management/index.html["Gestión de red de ONTAP"] documentación de productos.
+
+====
+link:https://www.netapp.com/pdf.html?item=/media/79703-TR-4949.pdf["Informe técnico TR-4949: BGP/VIP con ONTAP en el centro de datos"^]
+Aprenda a implementar rápidamente una configuración BGP básica en ONTAP.

@@ -1,0 +1,35 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
+permalink: industry-solutions.html 
+summary: Estos informes técnicos ofrecen una descripción general de las soluciones del sector con NetApp ONTAP, así como las prácticas recomendadas 
+---
+= Informes técnicos de soluciones del sector
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Nuestras soluciones de almacenamiento de datos específicas para cada sector, mejoradas mediante colaboraciones estratégicas, hacen frente a los desafíos empresariales críticos.
+
+
+
+== ADE
+
+link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf["Mejores prácticas de automatización de diseño electrónico en ONTAP"^]
+Descubre las prácticas recomendadas y los consejos de implementación con NetApp ONTAP para cargas de trabajo de automatización de diseño electrónico (EDA), además, FlexGroup Volumes, que son ideales para gestionar la alta sobrecarga de metadatos en entornos de EDA.
+
+
+
+== Sector sanitario
+
+link:https://www.netapp.com/pdf.html?item=/media/17137-tr3928pdf.pdf["Prácticas recomendadas de NetApp para Epic"^]
+Epic hace software para la industria de la salud. Obtenga información sobre las prácticas recomendadas para integrar el almacenamiento de NetApp con entornos de software Epic.
+
+link:https://www.netapp.com/pdf.html?item=/media/86527-tr-4975.pdf["FlexPod - Épica para grandes hospitales"^]
+Obtenga más información sobre las funcionalidades de rendimiento integrales de FlexPod que demuestran la necesidad de la aplicación de registros médicos electrónicos (EHR) con la base de datos intersistema, centrándose en el diseño del almacenamiento y las mejores prácticas para configurar EHR en una solución de FlexPod para grandes hospitales.

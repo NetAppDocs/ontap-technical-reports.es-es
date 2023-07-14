@@ -1,0 +1,46 @@
+---
+layout: landing-page 
+sidebar: sidebar 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
+permalink: nas-containers.html 
+summary: Estos informes técnicos ofrecen una descripción general de FlexCache y FlexGroup Volumes en NetApp ONTAP, así como recomendaciones de prácticas recomendadas 
+---
+= Informes técnicos sobre volúmenes de FlexCache y FlexGroup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Las soluciones de almacenamiento conectado a la red (NAS) de NetApp simplifican la gestión de datos y ayudan a seguir el ritmo de crecimiento a la vez que se optimizan los costes. Las soluciones NAS de ONTAP proporcionan operaciones no disruptivas, una eficiencia contrastada y una escalabilidad fluida dentro de una arquitectura unificada. Con la tecnología de ONTAP, NAS de escalado horizontal aprovecha el ecosistema masivo de ONTAP, con una visión y un liderazgo de innovación significativos para una innovación futura agresiva.
+
+[NOTE]
+====
+Estos informes técnicos se amplían en la link:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html["Volumen de ONTAP FlexCache"] y.. link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html["Volumen de ONTAP FlexGroup"] documentación de productos.
+
+====
+
+
+== FlexCache
+
+link:https://www.netapp.com/pdf.html?item=/media/7336-tr4743.pdf["TR-4743: FlexCache en ONTAP"^]
+FlexCache es una tecnología de almacenamiento en caché que crea réplicas dispersas y editables de volúmenes en los mismos clústeres ONTAP o en diferentes. Puede acercar los datos y los archivos al usuario para obtener un rendimiento más rápido y menos espacio físico. Descubra cómo se puede usar FlexCache y las prácticas recomendadas, los límites y las consideraciones para el diseño y la implementación.
+
+
+
+== Volúmenes de FlexGroup
+
+link:https://www.netapp.com/pdf.html?item=/media/17251-tr4571a.pdf["TR-4571a: Las diez mejores prácticas de FlexGroup"^]
+Este informe técnico es una versión condensada de TR-4571: Mejores prácticas de NetApp ONTAP FlexGroup Volumes y guía de implementación para un consumo rápido.
+
+link:https://www.netapp.com/pdf.html?item=/media/7337-tr4557.pdf["TR-4557: Volúmenes NetApp ONTAP FlexGroup: Información general técnica"^]
+Obtén más información sobre FlexGroup Volumes, un contenedor NAS de escalado horizontal de ONTAP que combina una capacidad casi infinita con un rendimiento predecible y de baja latencia en cargas de trabajo con una gran cantidad de metadatos.
+
+link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf["TR-4571: Prácticas recomendadas y guía de implementación de NetApp ONTAP FlexGroup Volumes"^]
+Obtén más información sobre FlexGroup Volumes, prácticas recomendadas y consejos de implementación. Los volúmenes FlexGroup son una evolución de contenedores NAS de escalado horizontal de ONTAP que combinan una capacidad casi infinita con un rendimiento predecible y de baja latencia en cargas de trabajo con un uso intensivo de metadatos.
+
+link:https://www.netapp.com/pdf.html?item=/media/17064-tr4678.pdf["TR-4678: Protección de datos y backup de volúmenes FlexGroup"^]
+Descubra la protección de datos y el backup para volúmenes de FlexGroup, incluidas copias Snapshot, SnapMirror y otras soluciones de backup y protección de datos.
