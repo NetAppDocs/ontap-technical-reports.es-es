@@ -5,7 +5,7 @@ indexpage:
     protocolos. Algunos informes técnicos de ONTAP proporcionan el contexto arquitectónico
     y las prácticas recomendadas para las funciones y funcionalidades de ONTAP.
   tiles:
-  - title: Informes técnicos de aplicaciones y bases de datos
+  - title: Aplicaciones y bases de datos
     links:
     - title: Microsoft SQL Server con ONTAP
       url: apps-dbs.html
@@ -18,7 +18,7 @@ indexpage:
       url: apps-dbs.html
     - title: Informes técnicos adicionales sobre aplicaciones y bases de datos
       url: apps-dbs.html
-  - title: Informes técnicos sobre continuidad empresarial
+  - title: Continuidad del negocio
     links:
     - title: Continuidad del negocio de SnapMirror (SM-BC)
       url: business-continuity.html
@@ -30,7 +30,7 @@ indexpage:
       url: business-continuity.html
     - title: Informes técnicos adicionales de Continuidad de negocio
       url: business-continuity.html
-  - title: Informes técnicos sobre la protección de datos y la recuperación ante desastres
+  - title: Protección de datos y recuperación ante desastres
     links:
     - title: Prácticas recomendadas y configuración asíncrona para SnapMirror
       url: data-protection-disaster-recovery.html
@@ -41,7 +41,7 @@ indexpage:
     - title: Informes técnicos sobre protección de datos y recuperación ante desastres
         adicionales
       url: data-protection-disaster-recovery.html
-  - title: Informes técnicos de FlexCache y FlexGroup Volumes
+  - title: FlexCache y FlexGroup Volumes
     links:
     - title: Volúmenes de FlexCache
       url: nas-containers.html
@@ -51,7 +51,7 @@ indexpage:
       url: nas-containers.html
     - title: Informes técnicos adicionales sobre FlexCache y FlexGroup Volumes
       url: nas-containers.html
-  - title: Informes técnicos de NAS
+  - title: NAS
     links:
     - title: NFS en prácticas recomendadas e implementación de NetApp ONTAP
       url: nas.html
@@ -66,11 +66,11 @@ indexpage:
       url: nas.html
     - title: Informes técnicos adicionales de NAS
       url: nas.html
-  - title: Informes técnicos de redes
+  - title: Redes
     links:
     - title: BGP/VIP con ONTAP
       url: networking.html
-  - title: Informes técnicos de SAN
+  - title: SAN
     links:
     - title: Prácticas recomendadas para SAN modernas en ONTAP
       url: san.html
@@ -79,7 +79,7 @@ indexpage:
       url: san.html
     - title: Sistemas de cabinas All SAN (ASA) ONTAP AFF
       url: san.html
-  - title: Informes técnicos de seguridad
+  - title: Seguridad
     links:
     - title: Guías de refuerzo de seguridad
       url: security-hardening-guides.html
@@ -95,7 +95,7 @@ indexpage:
       url: security.html
     - title: Informes técnicos de seguridad adicionales
       url: security.html
-  - title: Informes técnicos de SnapCenter
+  - title: SnapCenter
     links:
     - title: SnapCenter para Oracle
       url: snapcenter.html
@@ -107,7 +107,7 @@ indexpage:
       url: snapcenter.html
     - title: Informes técnicos adicionales de SnapCenter
       url: snapcenter.html
-  - title: Organización en niveles de los informes técnicos
+  - title: Organización en niveles
     links:
     - title: Mejores prácticas de FabricPool
       url: tiering.html
@@ -115,7 +115,7 @@ indexpage:
       url: tiering.html
     - title: Niveles de almacenamiento en base de datos con FabricPool
       url: tiering.html
-  - title: Informes técnicos de virtualización
+  - title: Virtualización
     links:
     - title: VMware vSphere para ONTAP
       url: virtualization.html
