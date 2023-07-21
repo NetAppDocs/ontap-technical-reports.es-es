@@ -28,9 +28,6 @@ Obtenga información sobre los protocolos de bloque en ONTAP y las prácticas de
 link:https://www.netapp.com/pdf.html?item=/media/10681-tr4684.pdf["TR-4684: Implementación y configuración de SAN modernas con NVMe sobre entramados (NVMe-oF)"^]
 Descubra cómo implementar y configurar los transportes NVMe over Fabrics (NVMe over Fibre Channel y NVMe over TCP). Los temas incluyen el diseño, la implementación, la configuración, directrices de gestión y prácticas recomendadas para crear soluciones SAN modernas de alto rendimiento y altamente disponibles que utilicen protocolos y transportes NVMe.
 
-link:https://www.netapp.com/pdf.html?item=/media/10379-tr4515.pdf["TR-4515: Sistemas de cabinas All SAN (ASA) de ONTAP AFF"^]
-Descubra los sistemas de cabinas All SAN (ASA) de NetApp AFF y cómo implementar según prácticas recomendadas para configuraciones SAN vitales para el negocio y siempre disponibles.
-
 link:https://www.netapp.com/pdf.html?item=/media/85671-tr-4968.pdf["TR-4968: Integridad y disponibilidad de datos de cabinas All-SAN de NetApp"^]
 Descubra cómo funcionan las distintas funciones de protección e integridad de datos de un sistema de cabina All SAN para conseguir el máximo tiempo de actividad de las aplicaciones, además de las prácticas recomendadas para diseñar, implementar y gestionar una red SAN.
 

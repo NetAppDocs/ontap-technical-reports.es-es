@@ -50,6 +50,9 @@ Aprenda a implementar con éxito Microsoft Exchange Server en un almacenamiento 
 
 == SnapCenter para SAP HANA
 
+link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
+SnapCenter es una plataforma escalable y unificada destinada a la protección de datos de manera coherente con las aplicaciones para SAP HANA y otras bases de datos. SnapCenter proporciona control y supervisión centralizados, a la vez que delega la capacidad para que los usuarios gestionen trabajos de backup, restauración y clonado específicos de aplicaciones. Con SnapCenter, los administradores de bases de datos y almacenamiento conocen una única herramienta para gestionar los backups, las restauraciones de datos y las operaciones de clonado para diferentes aplicaciones y bases de datos.
+
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html["TR-4926: SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación de datos con SnapCenter"]
 Obtén más información sobre las prácticas recomendadas para la protección de datos de SAP HANA en Amazon FSx para NetApp ONTAP y SnapCenter. Los temas incluyen conceptos de SnapCenter, recomendaciones de configuración y flujos de trabajo de operaciones, incluidas la configuración, las operaciones de backup, y las operaciones de restauración y recuperación.
 
