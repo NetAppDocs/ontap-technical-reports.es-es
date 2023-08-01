@@ -14,7 +14,7 @@ summary: Estos informes técnicos ofrecen una visión general de las aplicacione
 
 
 [role="lead"]
-ONTAP es la base para la gestión y la protección de datos de numerosas tecnologías de aplicaciones y bases de datos empresariales. Los siguientes informes técnicos ofrecen orientación sobre las prácticas recomendadas de NetApp y los procedimientos de implementación para Microsoft SQL Server, MySQL, Oracle y PostgreSQL.
+ONTAP es la base para la gestión y la protección de datos de numerosas tecnologías de aplicaciones y bases de datos empresariales. Los siguientes informes técnicos ofrecen orientación sobre las prácticas recomendadas de NetApp y los procedimientos de implementación para Microsoft SQL Server, MySQL, Oracle, PostgreSQL y SAP HANA.
 
 
 
