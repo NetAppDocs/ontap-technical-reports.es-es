@@ -476,6 +476,6 @@ Libelle SystemCopy es una solución de software basada en marcos para crear copi
 <block ref="4d19e06382f392d0f1a50df789d77c13" category="inline-link-macro-rx"></block>
 <block ref="fe4ac88b6b3f1cb9f1dc6d5d4b5086ee" category="inline-link-macro-rx"></block></block>
   <block id="5bde4271a0d37b365d828370d9f295ea" category="inline-link-macro">TR-4976: Rendimiento de Microsoft SQL Server virtualizado en sistemas NetApp AFF A-Series y C-Series</block>
-  <block id="44453345ffedbe1014fb3f8c356ab916" category="paragraph"><block ref="156ab091613d6163254f8cebcd80c3dc" category="inline-link-macro-rx"></block>
-Conozca el rendimiento cuando ejecute Microsoft SQL Server en sistemas NetApp AFF ASeries y AFF C-Series, así como obtenga orientación sobre cómo seleccionar el sistema adecuado para sus necesidades de almacenamiento en función del uso de la carga de trabajo.</block>
+  <block id="b6018356ef7ac30cce209c17c680d305" category="paragraph"><block ref="156ab091613d6163254f8cebcd80c3dc" category="inline-link-macro-rx"></block>
+Conozca las características de rendimiento de Microsoft SQL Server mediante los sistemas de NetApp AFF A-Series y C-Series, así como orientación sobre cómo seleccionar el sistema adecuado en función de la carga de trabajo.</block>
 </blocks>
