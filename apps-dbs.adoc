@@ -20,6 +20,9 @@ ONTAP es la base para la gestión y la protección de datos de numerosas tecnolo
 
 == Microsoft SQL Server
 
+link:https://www.netapp.com/pdf.html?item=/media/88704-tr-4976-virtualized-microsoft-sql-server-performance-on-netapp-aff-a-series-and-c-series.pdf["TR-4976: Rendimiento de Microsoft SQL Server virtualizado en sistemas NetApp AFF A-Series y C-Series"^]
+Conozca el rendimiento cuando ejecute Microsoft SQL Server en sistemas NetApp AFF ASeries y AFF C-Series, así como obtenga orientación sobre cómo seleccionar el sistema adecuado para sus necesidades de almacenamiento en función del uso de la carga de trabajo.
+
 link:https://www.netapp.com/pdf.html?item=/media/8585-tr4590.pdf["TR-4590: Guía de prácticas recomendadas para Microsoft SQL Server con ONTAP"^]
 Obtenga más información sobre cómo los administradores de almacenamiento y de bases de datos pueden implementar correctamente Microsoft SQL Server en sistemas de almacenamiento ONTAP.
 
