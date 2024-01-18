@@ -443,8 +443,6 @@ Obtenga más información sobre cómo los administradores de almacenamiento y de
 MySQL y sus variantes, como MariaDB y Percona, son ampliamente utilizados en muchas aplicaciones empresariales. Estas aplicaciones van desde sitios de redes sociales globales y sistemas de comercio electrónico masivos hasta sistemas de alojamiento SMB que contienen miles de instancias de bases de datos. Conozca los requisitos de configuración y las instrucciones sobre el ajuste y la configuración del almacenamiento para implementar MySQL en ONTAP.</block>
   <block id="f5c54c33c88e0585ee80e87ca3197073" category="paragraph"><block ref="4342e369cb6f1d964722ca0d02f1386e" category="inline-link-macro-rx"></block>
 Obtenga más información sobre las prácticas recomendadas que permiten a los administradores de almacenamiento y bases de datos implementar Oracle con éxito en el almacenamiento de ONTAP.</block>
-  <block id="d9aed574544bc03e259a4405706be41b" category="paragraph"><block ref="c655069b4f1dd03de49e67de429d75a7" category="inline-link-macro-rx"></block>
-Obtenga más información sobre las prácticas recomendadas que permiten a los administradores de almacenamiento y de bases de datos realizar correctamente el backup, la recuperación, la replicación y proporcionar recuperación ante desastres a Oracle en almacenamiento de ONTAP.</block>
   <block id="7f682b39f7484c77db73063e07feb42c" category="paragraph"><block ref="a2a9fdf9b575841ff3ebbf6a46a0d6a8" category="inline-link-macro-rx"></block>
 Descubra las prácticas recomendadas, los procedimientos de prueba y otras consideraciones para operar bases de datos de Oracle en una continuidad empresarial de MetroCluster y SnapMirror.</block>
   <block id="217012d66e394711c10af45660913535" category="paragraph"><block ref="219a1452b62030a0afffbbfaf92a0a13" category="inline-link-macro-rx"></block>
@@ -461,4 +459,6 @@ ONTAP ha sido una solución de almacenamiento líder para entornos VMware vSpher
 Este documento describe las técnicas y la tecnología empleadas para proteger las herramientas de ONTAP para VMware vSphere 9.X de las amenazas existentes y emergentes en entornos de productos.</block>
   <block id="b02eab33effe45ad95bb024ee01bf111" category="paragraph"><block ref="2d9c6af5124ecdcd73f23abea0e29951" category="inline-link-macro-rx"></block>
 Este documento describe las técnicas y la tecnología utilizadas para proteger el complemento NetApp SnapCenter para VMware vSphere 4.X de las amenazas existentes y emergentes en entornos de productos.</block>
+  <block id="e74dea5ebe0bf602183d15a978202e4a" category="paragraph"><block ref="ccbfbdd26305051b6ddb45fe28dfc4cd" category="inline-link-macro-rx"></block>
+Obtenga más información sobre las prácticas recomendadas que permiten a los administradores de almacenamiento y de bases de datos realizar correctamente el backup, la recuperación, la replicación y proporcionar recuperación ante desastres a Oracle en almacenamiento de ONTAP.</block>
 </blocks>

@@ -55,7 +55,7 @@ ONTAP está diseñado para bases de datos de Oracle. Durante décadas, ONTAP se 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-overview.html["Bases de datos de Oracle en ONTAP"]
 Obtenga más información sobre las prácticas recomendadas que permiten a los administradores de almacenamiento y bases de datos implementar Oracle con éxito en el almacenamiento de ONTAP.
 
-link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dp-introduction.html["Protección de datos de Oracle con ONTAP"]
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dp-overview.html["Protección de datos de Oracle con ONTAP"]
 Obtenga más información sobre las prácticas recomendadas que permiten a los administradores de almacenamiento y de bases de datos realizar correctamente el backup, la recuperación, la replicación y proporcionar recuperación ante desastres a Oracle en almacenamiento de ONTAP.
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/oracle/oracle-dr-overview.html["Recuperación ante desastres de Oracle con ONTAP"]
