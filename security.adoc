@@ -57,6 +57,13 @@ Descubra cómo implementar una multitenencia segura mediante máquinas virtuales
 
 
 
+== Registro
+
+link:https://www.netapp.com/pdf.html?item=/media/103610-tr-4303i-0514-logging-in-clustered-dot.pdf["TR-4303: Inicio de sesión en ONTAP"^]
+Aprenda a definir los diferentes registros generados por el ONTAP, las capacidades ofrecidas y cómo ver y acceder a los registros.
+
+
+
 == Estándares
 
 link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401.pdf["TR-4401: PCI-DSS 4,0 y ONTAP"^]
