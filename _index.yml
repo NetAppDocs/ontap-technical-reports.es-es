@@ -91,7 +91,7 @@ indexpage:
     - title: Guías de refuerzo de seguridad
       url: security-hardening-guides.html
     - title: La solución de NetApp para ransomware
-      url: security.html
+      url: https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html
     - title: NetApp y Zero Trust
       url: https://docs.netapp.com/us-en/ontap/zero-trust/zero-trust-overview.html
     - title: ALMACENAMIENTO WORM conforme a la normativa con NetApp SnapLock
