@@ -18,9 +18,15 @@ ONTAP continúa evolucionando, con la seguridad como parte integral de la soluci
 
 [NOTE]
 ====
-Estos informes técnicos se amplían en la link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html["Seguridad y cifrado de datos ONTAP"] documentación de productos.
+Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap/security-encryption/index.html["Seguridad y cifrado de datos ONTAP"^]la documentación del producto.
 
 ====
+
+
+== Ciberalmacén de ONTAP
+
+link:https://docs.netapp.com/us-en/netapp-solutions/cyber-vault/ontap-cyber-vault-overview.html["Ciberalmacén de ONTAP"^] El ciberalmacén basado en ONTAP de NetApp ofrece a las organizaciones una solución completa y flexible para proteger sus activos de datos más importantes. Gracias a la separación lógica con metodologías de refuerzo sólidas, ONTAP permite crear entornos de almacenamiento aislados y seguros que son resilientes frente a ciberamenazas en constante evolución. Con ONTAP, puede garantizar la confidencialidad, la integridad y la disponibilidad de sus datos y mantener la agilidad y la eficiencia de su infraestructura de almacenamiento.
+
 
 
 == Ransomware

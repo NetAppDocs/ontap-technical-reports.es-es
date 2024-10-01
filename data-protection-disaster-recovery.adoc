@@ -44,5 +44,10 @@ Obtenga información sobre una configuración de recuperación ante desastres de
 
 == Aplicaciones e infraestructura con SnapMirror
 
-link:link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-srm-overview.html["TR-4900: VMware Site Recovery Manager con ONTAP"]
-ONTAP ha sido una solución de almacenamiento líder para entornos VMware vSphere desde su introducción en el centro de datos moderno en 2002, y continúa añadiendo funcionalidades innovadoras para simplificar la gestión y reducir los costes. Obtenga información sobre la solución ONTAP recomendada para VMware Site Recovery Manager (SRM), el software de recuperación ante desastres (DR) líder del sector de VMware, que incluye la información de producto más reciente y las prácticas recomendadas para simplificar la puesta en marcha, reducir el riesgo y simplificar la gestión continua.
+link:https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-srm-overview.html["TR-4900: VMware Site Recovery Manager con ONTAP"] ONTAP ha sido una solución de almacenamiento líder para entornos VMware vSphere desde su introducción en el centro de datos moderno en 2002, y continúa añadiendo funcionalidades innovadoras para simplificar la gestión y reducir los costes. Obtenga información sobre la solución ONTAP recomendada para VMware Site Recovery Manager (SRM), el software de recuperación ante desastres (DR) líder del sector de VMware, que incluye la información de producto más reciente y las prácticas recomendadas para simplificar la puesta en marcha, reducir el riesgo y simplificar la gestión continua.
+
+
+
+== Ciberalmacén de ONTAP
+
+link:https://docs.netapp.com/us-en/netapp-solutions/cyber-vault/ontap-cyber-vault-overview.html["Ciberalmacén de ONTAP"^] El ciberalmacén basado en ONTAP de NetApp ofrece a las organizaciones una solución completa y flexible para proteger sus activos de datos más importantes. Gracias a la separación lógica con metodologías de refuerzo sólidas, ONTAP permite crear entornos de almacenamiento aislados y seguros que son resilientes frente a ciberamenazas en constante evolución. Con ONTAP, puede garantizar la confidencialidad, la integridad y la disponibilidad de sus datos y mantener la agilidad y la eficiencia de su infraestructura de almacenamiento.
