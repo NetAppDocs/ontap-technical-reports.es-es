@@ -10,10 +10,11 @@ summary: Estos informes técnicos ofrecen una descripción general de la organiz
 :nofooter: 
 :icons: font
 :linkattrs: 
+:imagesdir: ./media/
 
 
 [role="lead"]
-Con la solución de organización en niveles de datos de FabricPool, la experiencia general de usuario de las empresas con sistemas flash mejora y evita los inconvenientes de volver a diseñar aplicaciones para mejorar la eficiencia del almacenamiento. FabricPool reduce el espacio de almacenamiento y los costes asociados del entorno de un sistema. Los datos activos permanecen en SSD de alto rendimiento. Los datos inactivos se organizan en niveles en un almacenamiento de objetos de bajo coste y conservan las eficiencias del almacenamiento.
+Con la solución de organización en niveles de datos de FabricPool, la experiencia general de las empresas con los sistemas flash mejora y evita los inconvenientes de volver a diseñar aplicaciones para mejorar la eficiencia del almacenamiento. FabricPool reduce el espacio de almacenamiento y los costes asociados de un entorno de sistema. Los datos activos permanecen en SSD de alto rendimiento. Los datos inactivos se organizan en niveles en un almacenamiento de objetos de bajo coste y conservan las eficiencias del almacenamiento.
 
 [NOTE]
 ====
