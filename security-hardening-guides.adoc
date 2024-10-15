@@ -40,3 +40,5 @@ Aprenda a configurar NetApp Active IQ Unified Manager para ayudar a las organiza
 
 link:https://www.netapp.com/pdf.html?item=/media/78941-tr-4945.pdf["TR-4945: Guía de refuerzo de la seguridad para SDK de capacidad de gestión de NetApp"^]
 Aprenda a configurar el SDK de capacidad de gestión de NetApp (NMSDK) para ayudar a las organizaciones a cumplir los objetivos de seguridad prescritos para la confidencialidad, la integridad y la disponibilidad de los sistemas de información.
+
+link:https://docs.netapp.com/us-en/ontap-metrocluster/tiebreaker/install_security.html["Guía de refuerzo de seguridad para host y base de datos de MetroCluster tiebreaker"^] Aprenda a configurar el host y la base de datos de NetApp MetroCluster tiebreaker para ayudar a las organizaciones a cumplir los objetivos de seguridad prescritos para la confidencialidad, la integridad y la disponibilidad de los sistemas de información.
