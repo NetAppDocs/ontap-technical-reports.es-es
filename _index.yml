@@ -57,7 +57,7 @@ indexpage:
         ONTAP
       url: nas.html
     - title: S3 en prácticas recomendadas de ONTAP
-      url: nas.html
+      url: https://docs.netapp.com/us-en/ontap/s3-config/index.html
     - title: Mejores prácticas de servicios de nombres
       url: nas.html
     - title: Kerberos NFS en ONTAP
