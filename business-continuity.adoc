@@ -1,7 +1,7 @@
 ---
+permalink: business-continuity.html 
 sidebar: sidebar 
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices, SM-BC, SnapMirror Business Continuity 
-permalink: business-continuity.html 
 summary: Estos informes técnicos ofrecen una descripción general de la continuidad del negocio en NetApp ONTAP además de prácticas recomendadas 
 ---
 = Informes técnicos sobre continuidad empresarial
@@ -18,7 +18,7 @@ NetApp ofrece una amplia gama de soluciones que racionalizan dónde residen los 
 
 [NOTE]
 ====
-Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap/smbc/index.html["Sincronización activa de SnapMirror de ONTAP"] la documentación de y link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html["ONTAP MetroCluster"] del producto.
+Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap/smbc/index.html["Sincronización activa de SnapMirror de ONTAP"^] la documentación de y link:https://docs.netapp.com/us-en/ontap-metrocluster/index.html["ONTAP MetroCluster"^] del producto.
 
 ====
 
@@ -34,8 +34,8 @@ link:https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["TR-4
 link:https://www.netapp.com/pdf.html?item=/media/13480-tr4705.pdf["TR-4705: Arquitectura y diseño de la solución NetApp MetroCluster"^]
 Este documento describe los conceptos de diseño y arquitectura de alto nivel para las funciones de MetroCluster en ONTAP.
 
-*MetroCluster IP* link:https://www.netapp.com/pdf.html?item=/media/13481-tr4689pdf.pdf["TR-4689: Dirección IP de NetApp MetroCluster"^] MetroCluster es una solución de almacenamiento disponible continuamente para ONTAP que se ejecuta en sistemas FAS y AFF. MetroCluster IP es un producto de última generación que utiliza un entramado de almacenamiento back-end basado en Ethernet. MetroCluster IP proporciona una configuración altamente redundante para satisfacer las necesidades de las aplicaciones empresariales más importantes. MetroCluster IP se incluye en ONTAP y proporciona conectividad NAS y SAN a los clientes y servidores que utilizan almacenamiento de ONTAP.
+.IP de MetroCluster
+link:https://www.netapp.com/pdf.html?item=/media/13481-tr4689pdf.pdf["TR-4689: Dirección IP de NetApp MetroCluster"^] MetroCluster es una solución de almacenamiento de disponibilidad continua para ONTAP que se ejecuta en sistemas FAS y AFF. MetroCluster IP es un producto de última generación que utiliza un entramado de almacenamiento back-end basado en Ethernet. MetroCluster IP proporciona una configuración altamente redundante para satisfacer las necesidades de las aplicaciones empresariales más importantes. MetroCluster IP se incluye en ONTAP y proporciona conectividad NAS y SAN a los clientes y servidores que utilizan almacenamiento de ONTAP.
 
-*MetroCluster FC*
-link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375.pdf["TR-4375: FC de NetApp MetroCluster"^]
-MetroCluster proporciona una disponibilidad de datos continua en centros de datos separados geográficamente para aplicaciones críticas para la empresa. Obtenga más información sobre las prácticas recomendadas, las decisiones de diseño y las configuraciones compatibles con MetroCluster FC.
+.FC de MetroCluster
+link:https://www.netapp.com/pdf.html?item=/media/13482-tr4375.pdf["TR-4375: FC de NetApp MetroCluster"^] MetroCluster proporciona una disponibilidad de datos continua en centros de datos separados geográficamente para aplicaciones críticas para la empresa. Obtenga más información sobre las prácticas recomendadas, las decisiones de diseño y las configuraciones compatibles con MetroCluster FC.

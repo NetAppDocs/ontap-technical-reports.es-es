@@ -1,10 +1,10 @@
 ---
+permalink: tiering.html 
 sidebar: sidebar 
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
-permalink: tiering.html 
 summary: Estos informes técnicos ofrecen una descripción general de la organización en niveles en NetApp ONTAP, así como prácticas recomendadas. 
 ---
-= Organización en niveles de los informes técnicos
+= Informes técnicos de organización en niveles de ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -18,7 +18,7 @@ Con la solución de organización en niveles de datos de FabricPool, la experien
 
 [NOTE]
 ====
-Estos informes técnicos se amplían en la link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html["ONTAP FabricPool"] documentación de productos.
+Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap/fabricpool/index.html["ONTAP FabricPool"^]la documentación del producto.
 
 ====
 link:https://www.netapp.com/pdf.html?item=/media/17239-tr4598.pdf["TR-4598: Prácticas recomendadas de FabricPool"^]

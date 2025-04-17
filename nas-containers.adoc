@@ -1,10 +1,10 @@
 ---
+permalink: nas-containers.html 
 sidebar: sidebar 
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
-permalink: nas-containers.html 
 summary: Estos informes técnicos ofrecen una descripción general de FlexCache y FlexGroup Volumes en NetApp ONTAP, así como recomendaciones de prácticas recomendadas 
 ---
-= Informes técnicos sobre volúmenes de FlexCache y FlexGroup
+= Informes técnicos sobre volúmenes de ONTAP FlexCache y FlexGroup
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -18,7 +18,7 @@ Las soluciones de almacenamiento conectado a la red (NAS) de NetApp simplifican 
 
 [NOTE]
 ====
-Estos informes técnicos se amplían en la link:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html["Volumen de ONTAP FlexCache"] y.. link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html["Volumen de ONTAP FlexGroup"] documentación de productos.
+Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap/task_nas_flexcache.html["Volumen de ONTAP FlexCache"^] la documentación de y link:https://docs.netapp.com/us-en/ontap/task_nas_provision_flexgroup.html["Volumen de ONTAP FlexGroup"^] del producto.
 
 ====
 

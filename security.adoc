@@ -1,10 +1,10 @@
 ---
-sidebar: sidebar 
-keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MAV, MFA, Ransomware, Security, best practices, best-practices, tamperproof, tamper proof, tamperproof snapshots tamper-proof snapshots 
 permalink: security.html 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, MAV, MFA, Ransomware, Security, best practices, best-practices, tamperproof, tamper proof, tamperproof snapshots tamper-proof snapshots 
+sidebar: sidebar 
 summary: Estos informes técnicos ofrecen una visión general de la seguridad en NetApp ONTAP además de prácticas recomendadas. 
 ---
-= Informes técnicos de seguridad
+= Informes técnicos de seguridad de ONTAP
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -31,7 +31,7 @@ link:https://docs.netapp.com/us-en/netapp-solutions/cyber-vault/ontap-cyber-vaul
 
 == Ransomware
 
-link:https://docs.netapp.com/us-en/ontap/ransomware-solutions/ransomware-overview.html["TR-4572: La solución de NetApp para ransomware"^] Descubre cómo ha evolucionado el ransomware y cómo identificar ataques, evitar la propagación y recuperarte lo más rápido posible con la solución de NetApp para el ransomware. Las directrices y las soluciones proporcionadas en este documento están diseñadas para ayudar a las organizaciones a ofrecer soluciones ciberresilientes y cumplir, al mismo tiempo, los objetivos de seguridad prescritos para la confidencialidad, integridad y disponibilidad de los sistemas de información.
+link:./ransomware-solutions/ransomware-overview.html["TR-4572: La solución de NetApp para ransomware"] Descubre cómo ha evolucionado el ransomware y cómo identificar ataques, evitar la propagación y recuperarte lo más rápido posible con la solución de NetApp para el ransomware. Las directrices y las soluciones proporcionadas en este documento están diseñadas para ayudar a las organizaciones a ofrecer soluciones ciberresilientes y cumplir, al mismo tiempo, los objetivos de seguridad prescritos para la confidencialidad, integridad y disponibilidad de los sistemas de información.
 
 link:https://www.netapp.com/pdf.html?item=/media/6158-tr4526.pdf["TR-4526: ALMACENAMIENTO WORM conforme a la normativa con NetApp SnapLock"^]
 Muchas empresas confían en el uso de un almacenamiento de datos WORM para satisfacer los requisitos de cumplimiento de normativas o simplemente añadir otra capa a su estrategia de protección de datos. Descubra cómo integrar SnapLock, la solución WORM en ONTAP, en entornos que requieran el almacenamiento de datos WORM.
@@ -40,7 +40,7 @@ Muchas empresas confían en el uso de un almacenamiento de datos WORM para satis
 
 == Confianza cero
 
-link:https://docs.netapp.com/us-en/ontap/zero-trust/zero-trust-overview.html["NetApp y Zero Trust"] Zero Trust tradicionalmente ha sido un enfoque centrado en la red del diseño del micronúcleo y el perímetro (MCAP) para proteger los datos, los servicios, las aplicaciones o los activos con controles conocidos como puerta de enlace de segmentación. ONTAP adopta un enfoque centrado en los datos de Zero Trust en el que el sistema de administración del almacenamiento se convierte en la puerta de enlace de segmentación para proteger y supervisar el acceso a los datos de nuestros clientes. En concreto, el motor de confianza cero de FPolicy y el ecosistema de partners de FPolicy se convierten en un centro de control que permite comprender en detalle los patrones de acceso a los datos normales y aberrantes e identificar las amenazas internas.
+link:./zero-trust/zero-trust-overview.html["NetApp y Zero Trust"] Zero Trust tradicionalmente ha sido un enfoque centrado en la red del diseño del micronúcleo y el perímetro (MCAP) para proteger los datos, los servicios, las aplicaciones o los activos con controles conocidos como puerta de enlace de segmentación. ONTAP adopta un enfoque centrado en los datos de Zero Trust en el que el sistema de administración del almacenamiento se convierte en la puerta de enlace de segmentación para proteger y supervisar el acceso a los datos de nuestros clientes. En concreto, el motor de confianza cero de FPolicy y el ecosistema de partners de FPolicy se convierten en un centro de control que permite comprender en detalle los patrones de acceso a los datos normales y aberrantes e identificar las amenazas internas.
 
 
 
@@ -65,3 +65,9 @@ Descubra cómo implementar una multitenencia segura mediante máquinas virtuales
 
 link:https://www.netapp.com/pdf.html?item=/media/17180-tr4401.pdf["TR-4401: PCI-DSS 4,0 y ONTAP"^]
 Aprenda cómo validar un sistema con el estándar PCI DSS 4,0 y cumplir con los requisitos de los controles que aplica a un sistema NetApp ONTAP.
+
+
+
+== Control de acceso basado en atributos
+
+link:./abac/abac-overview.html["Control de acceso basado en atributos con ONTAP"] Aprenda a configurar las etiquetas de seguridad NFSv4,2 y los atributos extendidos (xattrs) para admitir el control de acceso basado en roles (RBAC) y el control de acceso basado en atributos (ABAC), una estrategia de autorización que define los permisos basados en los atributos del usuario, los recursos y el entorno.

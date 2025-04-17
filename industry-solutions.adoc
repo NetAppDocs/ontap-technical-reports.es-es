@@ -1,7 +1,7 @@
 ---
+permalink: industry-solutions.html 
 sidebar: sidebar 
 keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, best practices, best-practices 
-permalink: industry-solutions.html 
 summary: Estos informes técnicos ofrecen una descripción general de las soluciones del sector con NetApp ONTAP, así como las prácticas recomendadas 
 ---
 = Informes técnicos de soluciones del sector
