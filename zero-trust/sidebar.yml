@@ -1,6 +1,6 @@
 ---
 section: zero-trust
-title: Habilite el modelo de confianza cero
+title: NetApp y Zero Trust
 entries:
 - title: Información general de confianza cero
   url: "/zero-trust/zero-trust-overview.html"
