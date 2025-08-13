@@ -75,7 +75,7 @@ La protección frente al ransomware de NetApp ofrece tranquilidad en un panorama
 
 .Obtenga información sobre otras opciones de protección
 * link:ransomware-active-iq.html["Protección frente al ransomware del asesor digital"]
-* link:ransomware-CI-workload-security.html["Seguridad de carga de trabajo de almacenamiento de Cloud Insights (CISWS)"]
+* link:ransomware-DII-workload-security.html["Data Infrastructure Insights Almacenamiento Carga de trabajo Seguridad"]
 * link:ransomware-fpolicy.html["FPolicy"]
 * link:ransomware-snaplock-tamperproof-snapshots.html["SnapLock y copias Snapshot a prueba de manipulaciones"]
 
