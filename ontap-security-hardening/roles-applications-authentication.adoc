@@ -188,7 +188,7 @@ NOTE:  `autosupport`El rol se asigna a la `autosupport` cuenta predefinida, que 
 `vsadmin-volume`
  a| 
 * Administrar la contraseña local y la información de clave de la cuenta de usuario propia
-* Gestión de volúmenes, incluidos los movimientos de volúmenes
+* Gestionar volúmenes, excepto movimientos de volúmenes
 * Gestión de cuotas, qtrees, snapshots y ficheros
 * Gestionar las LUN
 * Configurar protocolos: NFS, SMB, iSCSI, FC, FCoE y NVMe/FC y NVMe/TCP
