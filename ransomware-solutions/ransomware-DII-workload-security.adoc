@@ -11,7 +11,7 @@ summary: La protección frente al ransomware de NetApp incluye seguridad de carg
 [role="lead"]
 Storage Workload Security (SWS) es una característica de NetApp Data Infrastructure Insights que mejora enormemente la postura de seguridad, la capacidad de recuperación y la responsabilidad de un entorno ONTAP .  SWS adopta un enfoque centrado en el usuario y rastrea toda la actividad de archivos de cada usuario autenticado en el entorno.  Utiliza análisis avanzados para establecer patrones de acceso normales y estacionales para cada usuario.  Estos patrones se utilizan para identificar rápidamente comportamientos sospechosos sin necesidad de firmas de ransomware.
 
-Cuando SWS detecta un posible ransomware, eliminación de datos o ataque de exfiltración, puede tomar acciones automáticas como:
+Cuando SWS detecta un posible ransomware o la eliminación de datos, puede tomar acciones automáticas como:
 
 * Tome una copia Snapshot del volumen afectado.
 * Bloquee la cuenta de usuario y la dirección IP sospechosa de actividad maliciosa.
