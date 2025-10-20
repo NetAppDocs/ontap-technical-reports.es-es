@@ -1,7 +1,7 @@
 ---
 permalink: zero-trust/zero-trust-cloud-deployments.html 
 sidebar: sidebar 
-keywords: tr-4829, zero trust, netapp, cloud, deployments, hybrid, amazon web services, aws, microsoft azure, google cloud platform, gcp 
+keywords: tr-4829, zero trust, netapp, cloud, deployments, hybrid, amazon web services, aws, microsoft azure, google cloud platform, gcp, GCNV, Google Cloud, Google Cloud NetApp Volumes 
 summary: Las opciones de NetApp llevan los sistemas de gestión de datos en las instalaciones al cloud híbrido gracias a proveedores de cloud líderes que admiten controles de seguridad de confianza cero 
 ---
 = Puesta en marcha de cloud híbrido y confianza cero
@@ -11,8 +11,8 @@ summary: Las opciones de NetApp llevan los sistemas de gestión de datos en las 
 
 
 [role="lead"]
-NetApp es un referente en materia de datos para el cloud híbrido. NetApp ofrece varias opciones para ampliar los sistemas de gestión de datos en las instalaciones al cloud híbrido con Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP) y otros proveedores líderes de cloud. Las soluciones de cloud híbrido de NetApp admiten los mismos controles de seguridad de confianza cero que están disponibles con los sistemas ONTAP en las instalaciones y el almacenamiento definido por software de ONTAP Select.
+NetApp es la autoridad de datos para la nube híbrida. NetApp ofrece una variedad de opciones para ampliar los sistemas de gestión de datos locales a la nube híbrida con Amazon Web Services (AWS), Microsoft Azure, Google Cloud y otros proveedores de nube líderes. Las soluciones de nube híbrida de NetApp admiten los mismos controles de seguridad Zero Trust que están disponibles con los sistemas ONTAP locales y el almacenamiento definido por software ONTAP Select .
 
-Puede ampliar fácilmente la capacidad en clouds públicos sin tener que limitarse a gastos de capital típicas gracias a NetApp Cloud Volumes Service, el primer servicio de archivos nativo en cloud para la gran empresa para AWS y GCP, y Azure NetApp Files para Microsoft Azure. Estos servicios de datos en el cloud son ideales para cargas de trabajo con un gran volumen de datos como las de análisis y DevOps, y combinan el almacenamiento elástico bajo demanda como servicio de NetApp con la gestión de datos de ONTAP en una oferta totalmente gestionada.
+Puede ampliar fácilmente la capacidad en nubes públicas sin las restricciones típicas de CAPEX mediante el uso de servicios de archivos nativos de la nube de clase empresarial para AWS (FSxN), Google Cloud (GCNV) y Azure NetApp Files para Microsoft Azure. Ideales para cargas de trabajo intensivas en datos, como análisis y DevOps, estos servicios de datos en la nube combinan almacenamiento elástico bajo demanda como servicio de NetApp con gestión de datos ONTAP en una oferta completamente administrada.
 
-Para aquellos que busquen servicios de datos avanzados para servicios de almacenamiento de objetos o basado en bloques de cloud como AWS EBS y S3 o el almacenamiento de Azure, Cloud Volumes ONTAP proporciona la gestión de datos entre su entorno local y el cloud público con una única vista común. Al ejecutarse en AWS o Azure como instancia bajo demanda, Cloud Volumes ONTAP proporciona la eficiencia del almacenamiento, la disponibilidad y la escalabilidad del software ONTAP. ONTAP permite el traslado de datos entre sus sistemas ONTAP locales y los entornos de almacenamiento AWS o Azure con el software de replicación de datos SnapMirror de NetApp.
+ONTAP permite el movimiento de datos entre sus sistemas ONTAP locales y el entorno de almacenamiento de AWS, Google Cloud o Azure con el software de replicación de datos SnapMirror de NetApp .
