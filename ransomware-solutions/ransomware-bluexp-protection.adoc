@@ -2,22 +2,22 @@
 sidebar: sidebar 
 permalink: ransomware-solutions/ransomware-bluexp-protection.html 
 keywords: tr-4572, technical report, ransomware, protect, protection, netapp ransomware protection, netapp tr, ontap tr 
-summary: La protección frente al ransomware de NetApp incluye BlueXP , un único plano de control para una defensa frente al ransomware completa y centrada en las cargas de trabajo. 
+summary: 'Protección contra ransomware de NetApp: un único plano de control para una defensa integral contra ransomware centrada en la carga de trabajo.' 
 ---
-= Resiliencia global con protección frente al ransomware de BlueXP
+= Resiliencia integral con protección contra ransomware de NetApp
 :allow-uri-read: 
 
 
 [role="lead"]
-Es importante que la detección de ransomware se produzca lo antes posible, de modo que pueda prevenir la propagación y evitar costosos tiempos de inactividad. Sin embargo, una estrategia de detección de ransomware efectiva debería incluir más que una única capa de protección. La protección contra ransomware de NetApp adopta un enfoque integral que incluye funcionalidades integradas en tiempo real que se extienden a los servicios de datos mediante BlueXP  y una solución aislada en capas para el almacenamiento cibernético.
+Es importante que la detección de ransomware se produzca lo antes posible para poder prevenir su propagación y evitar tiempos de inactividad costosos.  Sin embargo, una estrategia eficaz de detección de ransomware debe incluir más de una sola capa de protección.  La protección contra ransomware de NetApp adopta un enfoque integral que incluye capacidades en tiempo real en el dispositivo que se extienden a los servicios de datos mediante la NetApp Console y una solución aislada y en capas para el almacenamiento cibernético.
 
 
 
-== Protección contra ransomware de BlueXP
+== Protección contra ransomware de NetApp
 
-BlueXP  es un único plano de control para orquestar de forma inteligente una defensa completa frente al ransomware centrada en las cargas de trabajo. La protección frente a ransomware de BlueXP  reúne las potentes funciones de ciberresiliencia de ONTAP, como ARP, FPolicy e copias Snapshot a prueba de manipulaciones y servicios de datos de BlueXP , como el backup y recuperación de datos de BlueXP . También agrega recomendaciones y directrices con flujos de trabajo automatizados para ofrecer una defensa integral a través de una única interfaz de usuario. Opera en el nivel de carga de trabajo para garantizar que las aplicaciones que ejecutan su empresa estén protegidas y se puedan recuperar lo más rápido posible en caso de ataque.
+La NetApp Console es un único plano de control para orquestar de forma inteligente una defensa integral contra ransomware centrada en la carga de trabajo.  La protección contra ransomware de NetApp reúne las potentes funciones de resiliencia cibernética de ONTAP, como ARP, FPolicy e instantáneas a prueba de manipulaciones, y los servicios de datos de NetApp , como NetApp Backup and Recovery.  También agrega recomendaciones y orientación con flujos de trabajo automatizados para brindar una defensa de extremo a extremo a través de una única interfaz de usuario.  Opera a nivel de carga de trabajo para garantizar que las aplicaciones que ejecutan su negocio estén protegidas y puedan recuperarse lo más rápido posible en caso de un ataque.
 
-image:ransomware-solution-dashboard2.png["La protección frente al ransomware de BlueXP  es la inteligencia basada en IA y la ayuda necesarias para minimizar la pérdida de datos en las cargas de trabajo y recuperarse rápidamente. Esta imagen muestra la interfaz de usuario de BlueXP ."]
+image:ransomware-solution-dashboard2.png["NetApp Ransomware Protection es inteligencia basada en IA y asistencia necesaria para minimizar la pérdida de datos de la carga de trabajo y recuperarse rápidamente.  Esta imagen muestra la interfaz de usuario de la NetApp Console ."]
 
 .Beneficios para el cliente:
 * La preparación asistida contra el ransomware reduce la sobrecarga operativa y mejora la eficacia
@@ -25,7 +25,7 @@ image:ransomware-solution-dashboard2.png["La protección frente al ransomware de
 * La restauración guiada coherente con las aplicaciones permite recuperar cargas de trabajo de forma más fácil y en unos minutos
 
 
-https://www.netapp.com/bluexp/ransomware-protection/["Protección contra ransomware de BlueXP"^] Hace que estas funciones del NIST sean más fáciles de lograr:
+https://www.netapp.com/cyber-resilience/ransomware-protection/["Protección contra ransomware de NetApp"^]hace que estas funciones del NIST sean más fáciles de lograr:
 
 * Automáticamente *Descubra* y priorice los datos en el almacenamiento de NetApp *con un enfoque en las principales cargas de trabajo basadas en aplicaciones*.
 * *Protección con un solo clic* de copia de seguridad de datos de carga de trabajo superior, configuración inmutable, segura, bloqueo de archivos maliciosos y diferentes dominios de seguridad.
