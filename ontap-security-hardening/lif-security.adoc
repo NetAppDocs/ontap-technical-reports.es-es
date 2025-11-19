@@ -53,4 +53,6 @@ Los roles de LIF pueden ser los siguientes:
 
 
 ====
-Obtenga más información sobre la protección de las LIF, consulte el link:https://docs.netapp.com/us-en/ontap/networking/configure_firewall_policies_for_lifs.html["Configurar políticas de firewall para LIF"^].
+Para obtener más información sobre cómo proteger los LIF, consulte link:https://docs.netapp.com/us-en/ontap/networking/configure_firewall_policies_for_lifs.html["Configurar políticas de firewall para LIF"^]. Esta página también proporciona detalles sobre las políticas de servicio LIF a partir de ONTAP 9.10.1.
+
+Para obtener más información sobre cómo crear una nueva política de servicio, consulte la `network interface service-policy create` comando en el link:https://docs.netapp.com/us-en/ontap-cli/network-interface-service-policy-create.html["Referencia de comandos."^]
