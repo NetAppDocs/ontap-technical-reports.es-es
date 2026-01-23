@@ -13,7 +13,7 @@ summary: 'Debe habilitar la auditoría de CIFS para generar eventos de auditorí
 [role="lead"]
 Los sistemas de archivos NAS ocupan un espacio más presente en el panorama de amenazas actual, las funciones de auditoría son cruciales para respaldar la visibilidad.
 
-La seguridad requiere validación. ONTAP 9 ofrece más eventos y detalles de auditoría en toda la solución. Dado que los sistemas de archivos NAS ocupan un espacio cada vez mayor en el panorama de amenazas actual, las funciones de auditoría son cruciales para respaldar la visibilidad. Gracias a las funcionalidades de auditoría mejoradas que ofrece ONTAP 9, los detalles de auditoría CIFS son más abundantes que nunca. Los detalles clave, incluidos los siguientes, se registran con eventos creados:
+La seguridad requiere validación. ONTAP proporciona más eventos y detalles de auditoría en toda la solución. Como los sistemas de archivos NAS ocupan un espacio cada vez mayor en el panorama de amenazas actual, las funciones de auditoría son fundamentales para apoyar la visibilidad. Gracias a la capacidad de auditoría mejorada en ONTAP, los detalles de auditoría de CIFS son más abundantes que nunca. Los detalles clave, incluidos los siguientes, se registran con los eventos creados:
 
 * Acceso a archivos, carpetas y recursos compartidos
 * Archivos creados, modificados o eliminados
@@ -59,6 +59,9 @@ ONTAP incluye la capacidad de las cuentas de administrador de acceder a archivos
 === Crear rol de API de REST sin acceso
 
 Puede evitar que los administradores de ONTAP utilicen las API DE REST para acceder a los archivos mediante la creación de un rol de API DE REST que no tiene acceso a volúmenes de ONTAP mediante REST. Para provisionar este rol, realice los siguientes pasos.
+
+
+NOTE: La API de REST /api/storage/volumes se utiliza para algo más que el acceso a archivos. Es utilizada por System Manager y otras interfaces GUI para crear, ver y modificar volúmenes.
 
 .Pasos
 . Crear un nuevo rol DE REST que no tenga acceso a los volúmenes de almacenamiento, pero que tenga acceso a la API de REST.

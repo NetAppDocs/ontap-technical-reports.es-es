@@ -18,9 +18,9 @@ Hay dos cuentas administrativas predeterminadas `admin` : Y `diag`.
 Las cuentas huérfanas son un vector de seguridad importante que a menudo conduce a vulnerabilidades, incluida la escalada de privilegios. Se trata de cuentas innecesarias y no utilizadas que permanecen en el repositorio de cuentas de usuario. Son principalmente cuentas predeterminadas que nunca se usaron o para las que las contraseñas nunca se actualizaron o cambiaron. Para solucionar este problema, ONTAP admite la eliminación y el cambio de nombre de las cuentas.
 
 
-NOTE: ONTAP no puede eliminar ni cambiar el nombre de las cuentas integradas. Sin embargo, NetApp recomienda bloquear cualquier cuenta incorporada innecesaria con el comando lock.
+NOTE: No puedes eliminar ni renombrar cuentas integradas. Si un administrador elimina la cuenta, al reiniciar, la cuenta integrada se volverá a crear. *NetApp recomienda* bloquear cualquier cuenta integrada que no necesites con el comando lock.
 
-Aunque las cuentas huérfanas son un problema de seguridad importante, NetApp recomienda probar el efecto de eliminar cuentas del repositorio de cuentas local.
+Aunque las cuentas huérfanas son un problema de seguridad importante, *NetApp recomienda encarecidamente* probar el efecto de eliminar cuentas del repositorio de cuentas local.
 
 
 
@@ -32,7 +32,7 @@ Para mostrar las cuentas locales, ejecute `security login show` el comando.
 ----
 cluster1::*> security login show -vserver cluster1
 
-Vserver: cluster1
+vserver: cluster1
                              Authentication             Acct   Is-Nsswitch
 User/Group Name  Application Method    Role Name        Locked Group
 ---------------- ----------- --------- ---------------- ------ -----------
