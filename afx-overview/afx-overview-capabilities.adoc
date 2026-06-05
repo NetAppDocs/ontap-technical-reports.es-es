@@ -1,0 +1,99 @@
+---
+sidebar: sidebar 
+permalink: afx-overview/afx-overview-capabilities.html 
+keywords: netapp afx, networking, security, data protection, nondisruptive, volumes 
+summary: NetApp AFX admite la misma pila de red, funciones de seguridad, tecnologías de protección de datos, operaciones no disruptivas y tipos de volumen que ONTAP unificado, con algunos ajustes. 
+---
+= Redes, seguridad y operaciones
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx-overview/
+
+
+[role="lead"]
+NetApp AFX admite la misma pila de red, funciones de seguridad, tecnologías de protección de datos, operaciones no disruptivas y tipos de volumen que ONTAP unificado, con algunos ajustes exclusivos de la arquitectura desagregada.
+
+
+
+== Redes
+
+La pila de red en NetApp AFX es idéntica a la de ONTAP unificado.
+
+* Las LIF de datos se siguen utilizando para presentar direcciones de red a servicios internos y externos.
+* Cada nodo tiene su propio conjunto de puertos físicos y virtuales.
+* VLANs, ifgroups y BGP siguen siendo compatibles.
+* Los LIF pueden seguir conmutando por error entre nodos físicos y puertos del clúster.
+* Los IPspaces/dominios de difusión siguen estando configurados igual.
+* Cada SVM puede tener su propia red de datos dedicada.
+* Las redes de gestión pueden segmentarse de las redes de datos.
+* Las redes de datos de los clientes no cambian fuera de la nueva incorporación de la compatibilidad con redes de 400GB.
+* Los conmutadores de clúster del backend se siguen configurando a través de un archivo de "golden configuration" proporcionado por NetApp.
+
+
+Algunas diferencias clave de la red son:
+
+* Los puertos de red del clúster backend ahora solo admiten conexiones de 100GB a los conmutadores del clúster.
+* Dado que los conmutadores del clúster tienen una capacidad de 400GB, las conexiones del nodo backend utilizan 4 cables breakout de 100GB para reducir el número de puertos usados en los conmutadores.
+* La NVRAM ahora se refleja entre pares de HA a través de la red de clúster de backend mediante una nueva configuración de VLAN de HA en los switches.
+* Se añade por defecto una nueva red DCN para el AI Data Engine. Estas direcciones IP se generan automáticamente y pueden cambiarse según sea necesario.
+
+
+
+
+== Seguridad
+
+NetApp AFX ejecuta ONTAP, lo que significa que utiliza la misma seguridad que ONTAP. Todos los criptomódulos son idénticos, lo que significa que las certificaciones de seguridad serán idénticas una vez que se completen los procesos de certificación. NetApp AFX también aprovecha el mismo soporte para cifrados de seguridad que ONTAP unificado.
+
+Además, NetApp AFX es compatible con muchas de las funciones de seguridad proporcionadas por unified ONTAP, incluidas (entre otras):
+
+* Protección autónoma de ransomware
+* Multi-tenancy seguro
+* Cifrado en reposo (cifrado de volumen) y en vuelo (TLS 1.3)
+* Unidades de autocifrado (SED)
+* Autenticación y cifrado Kerberos para NFS y SMB
+* Verificación de varios administradores
+* SnapLock
+
+
+Para obtener información sobre las certificaciones que ha recibido ONTAP unificado (así como otra información sobre el refuerzo de la seguridad), consulta:
+
+* link:https://security.netapp.com/certifications["NetApp Seguridad de productos"^]
+* link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/security-hardening-overview.html["Información general sobre el refuerzo de la seguridad de ONTAP"^]
+
+
+
+
+== Instantáneas y protección de datos
+
+NetApp AFX aprovecha las mismas tecnologías de instantáneas y replicación que ONTAP unificado, sin grandes cambios en el funcionamiento de estas funciones. De hecho, AFX puede replicar desde y hacia sistemas ONTAP unificado con el mismo link:https://docs.netapp.com/us-en/ontap/data-protection/compatible-ontap-versions-snapmirror-concept.html["reglas y configuraciones"^] con el que ya estás familiarizado.
+
+La única excepción en AFX para la replicación tiene que ver con los volúmenes de FlexGroup que se replican en un sistema ONTAP unificado. En ese caso, el sistema ONTAP unificado de destino debe ejecutar ONTAP 9.16.1 o posterior para proporcionar soporte de Advanced Capacity Balancing.
+
+
+
+== Operaciones no disruptivas
+
+ONTAP proporciona operaciones no disruptivas, como movimientos de volúmenes, actualizaciones, mantenimiento de clústeres, conmutaciones por error de almacenamiento y más. NetApp AFX ofrece las mismas operaciones no disruptivas, con algunos ajustes.
+
+* Los movimientos de volumen siguen siendo no disruptivos, pero ya no requieren una copia.
+* Las conmutaciones por error de almacenamiento siguen siendo no disruptivas, pero tras la conmutación por error inicial, los volúmenes se reequilibran en todos los nodos supervivientes del clúster.
+* Las migraciones de LIF son idénticas.
+* El mantenimiento y las actualizaciones del hardware son idénticos.
+
+
+
+
+== Tipos de volumen
+
+Unified ONTAP admite varios tipos de volumen diferentes, como:
+
+* FlexVols
+* Volúmenes de FlexGroup
+* FlexCache
+* FlexClone
+* Cubos de objetos
+
+
+NetApp AFX proporciona compatibilidad total para cada uno de estos tipos de volumen, así como interoperabilidad total para volúmenes FlexCache con sistemas ONTAP unificados.
+
+Para más información sobre cómo los volúmenes de FlexGroup se benefician de la arquitectura AFX, consulta link:afx-overview-architecture.html#flexgroup-volume-management-improvements["FlexGroup mejoras en la gestión de volúmenes"].

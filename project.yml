@@ -1,16 +1,16 @@
 ---
 settings:
-  name: ONTAP Technical Reports
+  name: NetApp Technical Reports
   search: ontap-technical-reports, ontap-apps-dbs, netapp-solutions-sap
   internal:
-    pdf_enabled: true
+    pdf_enabled: false
   prod:
     pdf_enabled: true
     harmony_enabled: false
   langs: es-es,us-en,de-de,fr-fr,it-it,pt-br,ja-jp,ko-kr,zh-cn,zh-tw
 sidebar:
   entries:
-  - title: Informes técnicos de ONTAP
+  - title: NetApp Informes técnicos
     url: "/index.html"
   - title: Aplicaciones y bases de datos
     url: "/apps-dbs.html"
@@ -38,6 +38,10 @@ sidebar:
     - title: Descripción general
       url: "/security-hardening-guides.html"
     - section: ontap-security-hardening
+  - title: Sistemas de almacenamiento
+    entries:
+    - title: AFX
+      section: afx-overview
   - title: SnapCenter
     url: "/snapcenter.html"
   - title: Organización en niveles

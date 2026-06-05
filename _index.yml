@@ -1,15 +1,15 @@
 ---
 indexpage:
-  title: Informes técnicos de ONTAP
-  summary: Los informes técnicos de ONTAP proporcionan contexto adicional para planificar
-    y optimizar puestas en marcha de ONTAP en diferentes ecosistemas o con distintos
-    protocolos. Algunos informes técnicos de ONTAP proporcionan el contexto arquitectónico
-    y las prácticas recomendadas para las funciones y funcionalidades de ONTAP.
+  title: NetApp Informes técnicos
+  summary: NetApp los informes técnicos proporcionan contexto adicional para la planificación
+    y optimización de despliegues en diferentes ecosistemas o con diferentes protocolos.
+    Algunos informes técnicos de ONTAP proporcionan contexto arquitectónico y prácticas
+    recomendadas para las funciones y capacidades de ONTAP.
   keywords: ONTAP 9, ONTAP, Technical Reports, TR
-  lead: Los informes técnicos de ONTAP proporcionan contexto adicional para planificar
-    y optimizar puestas en marcha de ONTAP en diferentes ecosistemas o con distintos
-    protocolos. Algunos informes técnicos de ONTAP proporcionan el contexto arquitectónico
-    y las prácticas recomendadas para las funciones y funcionalidades de ONTAP.
+  lead: NetApp los informes técnicos proporcionan contexto adicional para la planificación
+    y optimización de despliegues en diferentes ecosistemas o con diferentes protocolos.
+    Algunos informes técnicos de ONTAP proporcionan contexto arquitectónico y prácticas
+    recomendadas para las funciones y capacidades de ONTAP.
   tiles:
   - title: Aplicaciones y bases de datos
     links:

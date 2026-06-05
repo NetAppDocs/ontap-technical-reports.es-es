@@ -1,0 +1,211 @@
+---
+sidebar: sidebar 
+permalink: afx-overview/afx-overview-limits.html 
+keywords: netapp afx, maximums, minimums, limits, capacity, nodes, volumes 
+summary: Esta página cubre los máximos y mínimos de un cluster NetApp AFX en comparación con ONTAP unificado. 
+---
+= Máximos y límites
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx-overview/
+
+
+[role="lead"]
+La siguiente sección cubre los máximos y mínimos de un clúster NetApp AFX en comparación con unified ONTAP.
+
+Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["Hardware Universe"^].
+
+*NetApp máximos y mínimos de AFX*
+
+|===
+| Límite | ONTAP unificado | NetApp AFX 
+
+
+| Recuento de volúmenes (cluster)  a| 
+* 30.000 (en función de la plataforma)
+
+ a| 
+* 30.000
+
+
+
+
+| Tamaño del agregado  a| 
+* 800 TB
+
+ a| 
+* N/A
+
+
+
+
+| Recuento de nodos  a| 
+* 24
+
+ a| 
+* 8 (9.17.1)
+* 32 (9.19.1RC1)
+
+
+
+
+| Capacidad total  a| 
+* Depende del nodo y de la unidad. Consulta link:http://hwu.netapp.com["hwu.netapp.com"^] para más detalles.
+
+ a| 
+* 2PB (9.17.1)
+* 3PB (9.18.1RC1)
+* 16PB (versión 9.18.1GA)
+* 20PB (9.19.1RC0)
+* 32PB (9.19.1RC1)
+
+
+
+
+| Número de estantes compatibles  a| 
+* 8 por par de HA
+* 192 por clúster
+
+ a| 
+* 12 por clúster (9.18.1GA)
+* 17 por clúster (9.19.1RC0)
+* 25 por clúster (9.19.1RC1) (sin limitación de pares de HA)
+
+
+
+
+| Recuento total de unidades compatibles  a| 
+* 240 por par de HA
+* 2880 (24 nodos)
+
+ a| 
+* 288 por clúster (basado en los límites de recuento de estantes; sin limitación de pares de HA)
+* 408 por clúster (9.19.1RC0)
+* 600 por clúster (9.19.1RC1)
+
+
+
+
+| Tamaño del volumen  a| 
+* 300 TB (FlexVol)
+* 60PB (FlexGroup)
+
+ a| 
+* 300 TB (FlexVol)
+* 60 PB (FlexGroup)*
+
+
+
+
+| Máximo de archivos por volumen  a| 
+* 2 mil millones (FlexVol)
+* 400 mil millones (FlexGroup)
+
+ a| 
+* 2 mil millones (FlexVol)
+* 400 mil millones (FlexGroup)
+
+
+
+
+| Máximo de archivos por directorio (valor por defecto 320MB maxdirsize)  a| 
+* ~4 millones (FlexVol)
+* ~2 millones (FlexGroup)
+
+ a| 
+* ~4 millones (FlexVol)
+* ~2 millones (FlexGroup)
+
+
+
+
+| SnapMirror transferencias simultáneas  a| 
+* 250
+
+ a| 
+* 250
+
+
+
+
+| Número de qtrees  a| 
+* 4096
+
+ a| 
+* 4096
+
+
+
+
+| Máximo de conexiones TCP por nodo  a| 
+* 100.000
+
+ a| 
+* 100.000
+
+
+
+
+| Número máximo de bloqueos por nodo  a| 
+* 3 millones
+
+ a| 
+* 3 millones
+
+
+
+
+| Número máximo de interfaces de datos (clúster)  a| 
+* 4096
+
+ a| 
+* 4096
+
+
+
+
+| Recuento máximo de constituyentes – FlexGroup  a| 
+* 200
+
+ a| 
+* 200
+* 512 en 9.19.1 RC1
+
+
+
+
+| Número máximo de LIF intercluster  a| 
+* 8
+
+ a| 
+* 8
+
+
+
+
+| Número máximo de espacios IP  a| 
+* 512
+
+ a| 
+* 512
+
+
+
+
+| Número máximo de FlexCache por origen  a| 
+* 100
+
+ a| 
+* 100
+
+
+
+
+| Número máximo de FlexCache (nodo)  a| 
+* 400
+
+ a| 
+* 400
+
+
+|===
