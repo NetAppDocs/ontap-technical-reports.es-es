@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar 
-permalink: afx-overview/afx-overview-learn-about.html 
+permalink: afx/afx-learn-about.html 
 keywords: netapp afx, ontap, disaggregated architecture, overview, key terms 
 summary: NetApp AFX ofrece una arquitectura desagregada para cargas de trabajo NAS y de objetos, sin dejar de proporcionar el software ONTAP con multitud de funciones que ya conoces y amas. 
 ---
 = NetApp visión general de AFX: aprende sobre NetApp AFX
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 
 [role="lead"]

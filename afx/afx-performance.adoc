@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar 
-permalink: afx-overview/afx-overview-performance.html 
+permalink: afx/afx-performance.html 
 keywords: netapp afx, performance, nfsv4, benchmarks, read-ahead, throughput 
 summary: NetApp AFX se creó pensando en el rendimiento y la escalabilidad, específicamente orientado a cargas de trabajo que requieren un alto rendimiento de lectura y escritura. 
 ---
 = Rendimiento
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 
 [role="lead"]
@@ -36,7 +36,7 @@ NOTE: Para conocer las estimaciones de rendimiento más actualizadas, consulta a
 
 == Rendimiento por estante
 
-Cada estantería contiene módulos de estantería de alto rendimiento con 16 puertos Ethernet de 100 GB que aprovechan la comunicación RoCEv2 para una interacción de almacenamiento de ancho de banda elevado con los nodos de computación del clúster. Al igual que cualquier recurso físico, estas estanterías tienen máximos que se pueden alcanzar, especialmente porque NetApp AFX puede presentar múltiples nodos apuntando al mismo conjunto de discos. La siguiente tabla muestra el rendimiento máximo estimado de lectura y escritura para una sola estantería con unidades TLC y QLC. Para obtener más información sobre las diferencias entre TLC y QLC, consulta link:afx-overview-hardware.html#tlc-vs-qlc["TLC frente a QLC"].
+Cada estantería contiene módulos de estantería de alto rendimiento con 16 puertos Ethernet de 100 GB que aprovechan la comunicación RoCEv2 para una interacción de almacenamiento de ancho de banda elevado con los nodos de computación del clúster. Al igual que cualquier recurso físico, estas estanterías tienen máximos que se pueden alcanzar, especialmente porque NetApp AFX puede presentar múltiples nodos apuntando al mismo conjunto de discos. La siguiente tabla muestra el rendimiento máximo estimado de lectura y escritura para una sola estantería con unidades TLC y QLC. Para obtener más información sobre las diferencias entre TLC y QLC, consulta link:afx-hardware.html#tlc-vs-qlc["TLC frente a QLC"].
 
 *Estimaciones de rendimiento por estantería*
 

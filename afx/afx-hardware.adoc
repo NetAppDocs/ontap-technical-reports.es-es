@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar 
-permalink: afx-overview/afx-overview-hardware.html 
+permalink: afx/afx-hardware.html 
 keywords: netapp afx, hardware, nodes, shelves, switches, disks, nvme 
 summary: Esta página contiene información detallada sobre el hardware del clúster NetApp AFX, incluidos nodos, estantes, conmutadores y tipos de disco compatibles. 
 ---
 = Detalles del hardware
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 
 [role="lead"]
@@ -100,6 +100,6 @@ NetApp AFX puede aprovechar tanto los tipos de flash TLC como QLC. Las unidades 
 
 Todas las unidades que se utilizan con NetApp AFX son unidades calificadas por su rendimiento, y tanto QLC como TLC tendrán un rendimiento casi idéntico para el tráfico de lectura. QLC se queda un poco atrás en el rendimiento de escritura en comparación con TLC y puede experimentar un poco más de nivelación de desgaste con cargas de trabajo con muchas escrituras.
 
-Para conocer las cifras de rendimiento, consulta link:afx-overview-performance.html#per-shelf-performance["Rendimiento por estante"].
+Para conocer las cifras de rendimiento, consulta link:afx-performance.html#per-shelf-performance["Rendimiento por estante"].
 
 A la hora de elegir el tipo de unidad que se va a utilizar, ten en cuenta las cargas de trabajo que albergará el almacenamiento y las compensaciones entre rendimiento y densidad de capacidad.

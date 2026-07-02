@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar 
-permalink: afx-overview/afx-overview-architecture.html 
+permalink: afx/afx-architecture.html 
 keywords: netapp afx, architecture, storage availability zone, nvram, raid, disaggregated 
 summary: NetApp AFX introduce diferencias arquitectónicas significativas respecto a ONTAP unificado en cómo se presenta el almacenamiento, cómo interactúan los nodos con los discos y cómo se gestiona la capacidad. 
 ---
 = Cómo la arquitectura NetApp AFX difiere de ONTAP unificado
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 
 [role="lead"]

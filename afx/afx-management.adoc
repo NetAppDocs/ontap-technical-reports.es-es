@@ -1,13 +1,13 @@
 ---
 sidebar: sidebar 
-permalink: afx-overview/afx-overview-management.html 
+permalink: afx/afx-management.html 
 keywords: netapp afx, cli, system manager, rest api, management tools, gui 
 summary: Aunque existen algunas diferencias arquitectónicas bastante importantes en la forma en que se presenta el almacenamiento en NetApp AFX, el conjunto de funciones y la forma en que se gestiona ONTAP prácticamente no ha cambiado. 
 ---
 = Herramientas de gestión
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/afx-overview/
+:imagesdir: ../media/afx/
 
 
 [role="lead"]
