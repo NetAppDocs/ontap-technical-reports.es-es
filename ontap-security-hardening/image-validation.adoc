@@ -15,6 +15,7 @@ ONTAP proporciona mecanismos para garantizar que la imagen ONTAP sea válida dur
 
 
 
+[[upgrade-image-validation]]
 == Renovación de la validación de imágenes
 
 La firma de código ayuda a verificar que las imágenes ONTAP que se instalan mediante actualizaciones de imágenes no disruptivas o actualizaciones de imágenes, CLI o API de ONTAP automatizadas y no disruptivas se producen de forma auténtica mediante NetApp y no se han alterado. La validación de imágenes de actualización se introdujo en ONTAP 9,3.
@@ -23,6 +24,7 @@ Esta función es una mejora de la seguridad sin intervención para la actualizac
 
 
 
+[[boot-time-image-validation]]
 == Validación de imagen en tiempo de arranque
 
 A partir de ONTAP 9,4, el arranque seguro de la interfaz de firmware extensible unificada (UEFI) está habilitado para los sistemas NetApp AFF A800, AFF A220, FAS2750 y FAS2720 y los sistemas de próxima generación subsiguientes que utilizan BIOS UEFI.

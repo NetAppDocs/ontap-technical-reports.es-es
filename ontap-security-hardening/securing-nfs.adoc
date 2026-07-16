@@ -41,6 +41,7 @@ El tipo de seguridad determina el nivel de acceso que recibe un cliente. Los tre
 
 
 
+[[rules-for-access-level-parameters-in-export-rules]]
 == Reglas para parámetros de nivel de acceso en reglas de exportación
 
 [cols="2a,2a"]
@@ -91,6 +92,7 @@ Estos tipos de seguridad no son válidos para su uso con el `-superuser` paráme
 
 
 
+[[rules-for-access-parameter-outcomes]]
 == Reglas para los resultados de los parámetros de acceso
 
 [cols="50%,50%"]
@@ -113,6 +115,7 @@ NOTE: Esta restricción no se aplica al `-superuser` parámetro porque este par�
 |===
 
 
+[[kerberos-5-and-krb5p]]
 == Kerberos 5 y Krb5p
 
 A partir de ONTAP 9, se admite la autenticación Kerberos 5 con servicio de privacidad (krb5p). El modo de autenticación krbp5 es seguro y protege contra la manipulación y la escucha de datos empleando sumas de comprobación para cifrar todo el tráfico entre cliente y servidor. La solución ONTAP es compatible con el cifrado AES de 128 bits y 256 bits para Kerberos. El servicio de privacidad incluye la verificación de la integridad de los datos recibidos, la autenticación de los usuarios y el cifrado de los datos antes de la transmisión.

@@ -18,6 +18,7 @@ ONTAP es la base para la gestión y la protección de datos de numerosas tecnolo
 
 
 
+[[microsoft-sql-server]]
 == Microsoft SQL Server
 
 SQL Server es la base de la plataforma de datos de Microsoft y ofrece rendimiento de misión crítica con tecnologías en memoria y información más rápida sobre cualquier dato, ya sea en las instalaciones o en el cloud.
@@ -35,6 +36,7 @@ Descubre cómo implementar correctamente Microsoft SQL Server en almacenamiento 
 
 
 
+[[mysql]]
 == MySQL
 
 Este documento describe los requisitos de configuración y proporciona orientación sobre el ajuste y la configuración del almacenamiento para poner en marcha MySQL en ONTAP.
@@ -46,6 +48,7 @@ NOTE: Esta documentación sustituye al informe técnico publicado previamente _T
 
 
 
+[[oracle]]
 == Oracle
 
 ONTAP está diseñado para bases de datos de Oracle. Durante décadas, ONTAP se ha optimizado para las demandas específicas de las I/O de las bases de datos relacionales y se crearon varias funciones de ONTAP específicamente para satisfacer las necesidades de las bases de datos de Oracle e incluso a petición de la misma Oracle Inc.
@@ -77,6 +80,7 @@ Obtenga más información sobre las prácticas recomendadas por la solución sob
 
 
 
+[[postgresql]]
 == PostgreSQL
 
 PostgreSQL viene con variantes que incluyen PostgreSQL, PostgreSQL Plus y EDB Postgres Advanced Server (EPAS). PostgreSQL suele ponerse en marcha como base de datos de back-end para aplicaciones de varios niveles. NetApp ONTAP es una opción excelente para ejecutar bases de datos PostgreSQL en cuanto a su fiabilidad, alto rendimiento y eficacia.
@@ -88,12 +92,14 @@ NOTE: Esta documentación sustituye al informe técnico publicado previamente _T
 
 
 
+[[sap-hana]]
 == SAP HANA
 
 link:https://docs.netapp.com/us-en/netapp-solutions-sap/["Soluciones de bases de datos SAP HANA en ONTAP"^] Las mejores prácticas para configurar, gestionar y automatizar soluciones SAP se pueden encontrar en la página de soluciones SAP de NetApp.
 
 
 
+[[epic]]
 == Épica
 
 link:https://docs.netapp.com/us-en/ontap-apps-dbs/epic/epic-overview.html["Epic en las mejores prácticas de ONTAP"^] Una guía para comprender las prácticas recomendadas para la puesta en marcha de Epic en las instalaciones y en el cloud, además de cumplir los estándares de configuración para una puesta en marcha adecuada en ONTAP.

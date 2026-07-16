@@ -23,6 +23,7 @@ Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap
 ====
 
 
+[[hardening-guides]]
 == Guías de refuerzo
 
 link:./ontap-security-hardening/security-hardening-overview.html["TR-4569: Guía de refuerzo de la seguridad para NetApp ONTAP"] Aprenda a configurar NetApp ONTAP para ayudar a las organizaciones a cumplir los objetivos de seguridad prescritos para la confidencialidad, la integridad y la disponibilidad de los sistemas de información.

@@ -15,6 +15,7 @@ Asegure la integridad de la auditoría de eventos descargando eventos de ONTAP e
 
 
 
+[[send-out-syslog]]
 == Enviar syslog
 
 La información de registro y auditoría es muy valiosa para las organizaciones desde el punto de vista del soporte y la disponibilidad. Además, la información y los detalles que contienen los registros (syslog) y los informes y resultados de auditorías suelen ser de carácter confidencial. Para mantener los controles y la política de seguridad, es imprescindible que las organizaciones gestionen los datos de registro y auditoría de forma segura.
@@ -23,6 +24,7 @@ Descargar la información de syslog es necesario para limitar el alcance o la hu
 
 
 
+[[create-a-log-forwarding-destination]]
 === Cree un destino de reenvío de logs
 
 Utilice `cluster log-forwarding create` el comando para crear destinos de reenvío de registros para el registro remoto.
@@ -82,6 +84,7 @@ NOTE: NetApp recomienda el uso `cluster log-forwarding` del comando para forzar 
 
 
 
+[[event-notification]]
 == Notificación de eventos
 
 Proteger la información y los datos que salen de un sistema es vital para mantener y gestionar la política de seguridad del sistema. Los eventos generados por la solución de ONTAP ofrecen una gran cantidad de información acerca de qué se encuentra la solución, la información procesada y mucho más. La vitalidad de estos datos destaca la necesidad de gestionarlos y migrarlos de forma segura.

@@ -24,6 +24,7 @@ La seguridad requiere validación. ONTAP proporciona más eventos y detalles de 
 
 
 
+[[create-an-audit-configuration]]
 == Cree una configuración de auditoría
 
 Debe habilitar la auditoría de CIFS para generar eventos de auditoría. Utilice `vserver audit create` el comando para crear una configuración de auditoría. De forma predeterminada, el registro de auditoría utiliza un método de rotación según el tamaño. Puede utilizar una opción de rotación basada en el tiempo si se especifica en el campo Parámetros de rotación. Los detalles adicionales de configuración de rotación de auditoría de log incluyen el programa de rotación, los límites de rotación, los días de rotación de la semana y el tamaño de rotación. El siguiente texto proporciona una configuración de ejemplo que representa una configuración de auditoría mediante una rotación mensual basada en el tiempo programada para todos los días de la semana a las 12:30.
@@ -34,6 +35,7 @@ cluster1::> vserver audit create -vserver vs1 -destination /audit_log -rotate-sc
 ----
 
 
+[[cifs-audit-events]]
 == Eventos de auditoría CIFS
 
 Los eventos de auditoría CIFS son los siguientes:
@@ -50,12 +52,14 @@ NOTE: Esta funcionalidad se basa en la función de auditoría del sistema, que p
 
 
 
+[[effect-of-rest-apis-on-nas-auditing]]
 == Efecto de las API de REST en la auditoría NAS
 
 ONTAP incluye la capacidad de las cuentas de administrador de acceder a archivos SMB/CIFS o NFS y manipularlos usando las API de REST. Aunque los administradores de ONTAP solo pueden ejecutar las API de REST, los comandos de la API de REST omiten el registro de auditoría del sistema NAS. Además, los administradores de ONTAP también pueden omitir los permisos de archivos cuando utilizan las API DE REST. Sin embargo, las acciones del administrador con API REST en los archivos se capturan en el registro del historial de comandos del sistema.
 
 
 
+[[create-no-access-rest-api-role]]
 === Crear rol de API de REST sin acceso
 
 Puede evitar que los administradores de ONTAP utilicen las API DE REST para acceder a los archivos mediante la creación de un rol de API DE REST que no tiene acceso a volúmenes de ONTAP mediante REST. Para provisionar este rol, realice los siguientes pasos.

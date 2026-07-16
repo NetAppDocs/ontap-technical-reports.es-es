@@ -18,6 +18,7 @@ Nuestras soluciones de almacenamiento de datos específicas para cada sector, me
 
 
 
+[[eda]]
 == ADE
 
 link:https://www.netapp.com/pdf.html?item=/media/19368-tr-4617.pdf["Mejores prácticas de automatización de diseño electrónico en ONTAP"^]
@@ -25,6 +26,7 @@ Descubre las prácticas recomendadas y los consejos de implementación con NetAp
 
 
 
+[[healthcare]]
 == Sector sanitario
 
 link:https://www.netapp.com/pdf.html?item=/media/17137-tr3928pdf.pdf["Prácticas recomendadas de NetApp para Epic"^]

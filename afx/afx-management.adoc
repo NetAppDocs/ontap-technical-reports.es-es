@@ -15,6 +15,7 @@ Aunque hay algunas diferencias arquitectónicas bastante grandes en la forma en 
 
 
 
+[[management-cli]]
 == Gestión – CLI
 
 En NetApp AFX, la CLI es casi idéntica a lo que ofrece la CLI de ONTAP unificada. Los comandos se siguen ejecutando a nivel de clúster en su mayor parte, aunque todavía se pueden emitir comandos a nivel de nodo. Sigue habiendo directorios de comandos de nivel superior y subcomandos, así como completado de comandos mediante tabulación. Además, funcionan todos los mismos accesos directos de la CLI (por ejemplo, filtrado de contenido mediante `-fields`).
@@ -37,6 +38,7 @@ AFX::>
 ----
 
 
+[[management-gui]]
 == Gestión – GUI
 
 System Manager sigue siendo la interfaz GUI para interactuar con los clústeres AFX de NetApp para la gestión de recursos, y cuando inicies sesión en él por primera vez, probablemente no podrás decir a primera vista que no sigues conectado a un sistema ONTAP unificado.
@@ -59,12 +61,14 @@ image:image41.png["Imagen"]
 
 
 
+[[rest-apis]]
 == API de REST
 
 NetApp AFX también hace un esfuerzo concertado para conservar la mayoría de las llamadas a la API de REST de ONTAP, lo que significa que si has creado un conjunto de herramientas de automatización basadas en la API de REST, deberían poder seguir utilizándose en la mayoría de los casos. Las principales excepciones incluyen agregados, Metrocluster, SAN y algunos contadores de rendimiento. La documentación completa de la API de REST puede encontrarse en el System Manager del clúster NetApp AFX navegando a https://clus_mgmt_ip/docs/api.
 
 
 
+[[off-box-ontap-management-tools]]
 == Herramientas de gestión off-box de ONTAP
 
 NetApp AFX proporciona cierto soporte para herramientas de gestión de ONTAP fuera de la caja, como:

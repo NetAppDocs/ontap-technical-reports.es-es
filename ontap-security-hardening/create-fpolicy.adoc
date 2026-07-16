@@ -56,18 +56,21 @@ vs2.example.com         vs2_pol
 
 
 
+[[fpolicy-enhancements]]
 == Mejoras de FPolicy
 
 ONTAP 9 incluye las mejoras de FPolicy descritas en las siguientes secciones.
 
 
 
+[[filtering-controls]]
 === Controles de filtrado
 
 Hay nuevos filtros disponibles para `SetAttr` y para eliminar notificaciones en las actividades del directorio.
 
 
 
+[[async-resiliency]]
 === Resiliencia asincrónica
 
 Si un servidor de FPolicy que funciona en modo asíncrono experimenta una interrupción de la red, las notificaciones de FPolicy generadas durante la interrupción se almacenan en el nodo de almacenamiento. Cuando el servidor FPolicy vuelve a estar conectado, recibe alertas de las notificaciones almacenadas y pueden recogerlas del nodo de almacenamiento. El tiempo que las notificaciones se pueden almacenar durante una interrupción se puede configurar hasta 10 minutos.

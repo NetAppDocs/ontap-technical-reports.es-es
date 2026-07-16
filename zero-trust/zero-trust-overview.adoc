@@ -16,10 +16,11 @@ Zero Trust tradicionalmente ha sido un enfoque centrado en la red del diseño de
 
 NOTE: A partir de julio de 2024, el contenido del informe técnico _TR-4829: NetApp y confianza cero: Habilitar un modelo de confianza cero_ centrado en los datos, que anteriormente se publicó como PDF, está disponible en docs.netapp.com.
 
-Los datos son los activos más importantes con los que cuenta la organización. Las amenazas internas son la causa del 18% de las violaciones de datos, según el 2022 https://enterprise.verizon.com/resources/reports/dbir/["Informe de investigación de infracciones de datos de Verizon"^]. Las organizaciones pueden aumentar su vigilancia mediante la puesta en marcha de controles de confianza cero (Zero Trust) líderes en el sector en torno a los datos con el software de gestión de datos de NetApp ONTAP.
+Los datos son el activo más importante que tiene tu organización. Las amenazas internas son la causa del 18% de las filtraciones de datos, según el informe de 2022 https://www.verizon.com/business/resources/["Informe de investigación de infracciones de datos de Verizon"^]. Las organizaciones pueden aumentar su vigilancia implementando controles Zero Trust líderes en la industria alrededor de los datos con el software de gestión de datos ONTAP de NetApp.
 
 
 
+[[what-is-zero-trust]]
 == ¿Qué es Zero Trust?
 
 El modelo Zero Trust fue desarrollado por primera vez por John Kindervag en Forrester Research. Prevé la seguridad de la red desde dentro hacia fuera en lugar de desde fuera hacia dentro. El enfoque de confianza cero de dentro hacia fuera identifica el micronúcleo y el perímetro (MCAP). El MCAP es una definición interior de datos, servicios, aplicaciones y activos que debe protegerse mediante un completo conjunto de controles. El concepto de perímetro exterior seguro es obsoleto. Las entidades de confianza que se pueden autenticar correctamente a través del perímetro pueden hacer que la organización sea vulnerable a los ataques. Por definición, las personas con información privilegiada ya se encuentran dentro del perímetro seguro. Los empleados, contratistas y partners son personas con información privilegiada y deben poder operar con los controles adecuados para desempeñar sus funciones dentro de la infraestructura de la organización.
@@ -38,6 +39,7 @@ Para los fines de esta documentación, utilizamos los conceptos y la terminolog�
 
 
 
+[[security-resources]]
 == Recursos de seguridad
 
 Para obtener información sobre la creación de informes sobre vulnerabilidades e incidentes, las respuestas de seguridad de NetApp y la confidencialidad del cliente, consulte la https://www.netapp.com/company/trust-center/security/["Portal de seguridad de NetApp"^].

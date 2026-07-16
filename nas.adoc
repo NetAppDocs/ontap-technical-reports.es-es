@@ -23,6 +23,7 @@ Estos informes técnicos se amplían en link:https://docs.netapp.com/us-en/ontap
 ====
 
 
+[[nfs]]
 == NFS
 
 link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["TR-4067: Prácticas recomendadas y guía de implementación de NFS en ONTAP"^]
@@ -33,6 +34,7 @@ Obtenga información sobre cómo habilitar y usar los atributos extendidos de NF
 
 
 
+[[smb]]
 == SMB
 
 link:https://www.netapp.com/pdf.html?item=/media/17136-tr4740.pdf["TR-4740: Multicanal de SMB 3,0"^]
@@ -40,6 +42,7 @@ Microsoft introdujo Multichannel en el protocolo SMB 3,0 con el objetivo de mejo
 
 
 
+[[multiprotocol]]
 == Multiprotocolo
 
 link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf["TR-4887: Información general y prácticas recomendadas de NAS multiprotocolo en ONTAP"^]
@@ -47,12 +50,14 @@ Descubra cómo funciona el acceso NAS multiprotocolo en ONTAP y las prácticas r
 
 
 
+[[ontap-s3]]
 == ONTAP S3
 
 link:https://docs.netapp.com/us-en/ontap/s3-config/index.html["TR-4814: S3 en mejores prácticas de ONTAP"^] Obtén información sobre las prácticas recomendadas para usar el servicio Simple Storage Service (S3) de Amazon con el software ONTAP, así como las funcionalidades y configuraciones para usar ONTAP como almacén de objetos con aplicaciones S3 nativas o como destino de organización en niveles de FabricPool.
 
 
 
+[[name-services]]
 == Servicios de nombres
 
 link:https://www.netapp.com/pdf.html?item=/media/19370-tr-4523.pdf["TR-4523: Balanceo de carga de DNS en ONTAP"^]
@@ -66,6 +71,7 @@ Aprenda a configurar la gestión de identidades del protocolo ligero de acceso a
 
 
 
+[[nas-security]]
 == Seguridad NAS
 
 link:https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf["TR-4616: Kerberos de NFS en ONTAP"^]

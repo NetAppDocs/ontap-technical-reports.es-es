@@ -24,6 +24,7 @@ Aunque las cuentas huérfanas son un problema de seguridad importante, *NetApp r
 
 
 
+[[list-local-accounts]]
 == Enumerar las cuentas locales
 
 Para mostrar las cuentas locales, ejecute `security login show` el comando.
@@ -47,6 +48,7 @@ autosupport      console     password  autosupport      no     no
 ----
 
 
+[[set-the-diagnostic-diag-account-password]]
 == Establezca la contraseña de la cuenta de diagnóstico (diag)
 
 El sistema de almacenamiento se proporciona una cuenta de diagnóstico llamada `diag` . Puede utilizar `diag` la cuenta para realizar tareas de solución de problemas en la `systemshell`. La `diag` cuenta es la única cuenta que se puede utilizar para acceder al systemshell a través del `diag` comando con privilegios `systemshell`.

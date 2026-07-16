@@ -15,6 +15,7 @@ Además de realizar operaciones y funciones de seguridad integradas, el endureci
 
 
 
+[[commonly-used-protocols-and-ports]]
 == Los protocolos y puertos comúnmente utilizados
 
 [cols="27%,26%,47%"]
@@ -148,6 +149,7 @@ Además de realizar operaciones y funciones de seguridad integradas, el endureci
 |===
 
 
+[[netapp-internal-ports]]
 == Puertos internos de NetApp
 
 [cols="47%,53%"]

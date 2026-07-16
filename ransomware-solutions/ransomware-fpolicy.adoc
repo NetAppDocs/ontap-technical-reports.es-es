@@ -13,6 +13,7 @@ FPolicy bloquea los archivos no deseados para que no se almacenen en su disposit
 
 
 
+[[block-malicious-files-with-fpolicy-native-mode]]
 == Bloquea archivos maliciosos con el modo nativo de FPolicy
 
 El modo nativo de FPolicy de NetApp (una evolución del nombre, Política de archivos) es un marco de bloqueo de extensiones de archivos que le permite bloquear las extensiones de archivos no deseadas para que entren en su entorno. Ha formado parte de ONTAP durante más de una década y es increíblemente útil para ayudarte a protegerte contra el ransomware. Este motor de confianza cero es valioso porque obtienes medidas de seguridad adicionales más allá de los permisos de la lista de control de acceso (ACL).
@@ -30,6 +31,7 @@ El modo nativo de FPolicy se incluye en todas las licencias de ONTAP.
 
 
 
+[[enable-user-and-entity-behavior-analytics-ueba-with-fpolicy-external-mode]]
 == Habilite el análisis de comportamiento de usuarios y entidades (UEBA) con el modo externo de FPolicy
 
 El modo externo de FPolicy es un marco de notificación y control de actividad de archivos que proporciona visibilidad de la actividad de archivos y usuarios. Una solución externa puede utilizar estas notificaciones para realizar análisis basados en IA con el fin de detectar comportamientos maliciosos.

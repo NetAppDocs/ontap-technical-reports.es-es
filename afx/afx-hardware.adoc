@@ -15,12 +15,14 @@ La siguiente sección cubre detalles sobre el hardware del clúster NetApp AFX. 
 
 
 
+[[supported-hardware]]
 == Hardware compatible
 
 Para obtener la información más reciente sobre el hardware compatible con NetApp AFX, consulta link:https://hwu.netapp.com["https://hwu.netapp.com"^].
 
 
 
+[[nodes]]
 == Nodos
 
 NetApp AFX se basan en el modelo de nodos AFF A1K proporcionado para clústeres ONTAP unificados. Estos nodos no tienen disco integrado para almacenamiento y están pensados para ser modulares, para que puedas añadir y quitar nodos fácilmente según los requisitos de rendimiento. Cada nodo utiliza 2U de espacio en rack y aumenta el rendimiento de forma lineal a medida que se añaden a un clúster AFX.
@@ -31,6 +33,7 @@ image:image42.png["Imagen"]
 
 
 
+[[hardware-slots]]
 === Ranuras de hardware
 
 NetApp Los nodos AFX 1K utilizan las siguientes asignaciones de ranura.
@@ -42,6 +45,7 @@ NetApp Los nodos AFX 1K utilizan las siguientes asignaciones de ranura.
 
 
 
+[[shelves]]
 == Bandejas
 
 NetApp Las estanterías AFX utilizan los mismos armarios que los sistemas AFF. La principal diferencia entre las estanterías AFX radica en el módulo utilizado. Los módulos NSM140 proporcionan capacidades de rendimiento mejoradas y ayudan a hacer posible ONTAP desagregado. Algunas consideraciones clave:
@@ -57,6 +61,7 @@ image:image43.png["Imagen"]
 
 
 
+[[switches]]
 == Switches
 
 NetApp AFX sigue haciendo uso de los conmutadores de clúster backend para la comunicación intracluster, como la replicación de bases de datos de clúster, las operaciones de datos remotas, las operaciones de almacenamiento y la duplicación de NVRAM. Funcionalmente, las únicas diferencias entre los conmutadores de clúster unificados de ONTAP y NetApp AFX son:
@@ -72,6 +77,7 @@ image:image44.png["Imagen"]
 
 
 
+[[cluster-switch-connectivity]]
 === Conectividad del conmutador de clúster
 
 NetApp AFX aprovecha en gran medida los conmutadores de clúster backend para muchos de sus principales conceptos arquitectónicos. Por ejemplo, las interfaces de clúster, los adaptadores de almacenamiento, los estantes de almacenamiento y las tarjetas NVRAM se conectan a los conmutadores de clúster. Actualmente, todas estas interfaces solo admiten comunicación de 100GB, mientras que los conmutadores admiten 400GB. Como resultado, las interfaces de 100GB se conectan a las interfaces de 400GB en el switch mediante cables breakout de 4 x 100GB. Este enfoque reduce el número de puertos utilizados en los switches. Por ejemplo, 16 puertos de módulo de estante de almacenamiento de 100GB usarán solo 4 puertos en los switches, mientras que los 8 puertos totales en los nodos usan 2 puertos del switch.
@@ -82,6 +88,7 @@ image:image45.png["Imagen"]
 
 
 
+[[disk-types-and-sizes]]
 == Tipos y tamaños de disco
 
 NetApp AFX actualmente solo admite unidades SSD conectadas NVMe de los siguientes tamaños:
@@ -94,6 +101,7 @@ NetApp AFX actualmente solo admite unidades SSD conectadas NVMe de los siguiente
 
 
 
+[[tlc-vs-qlc]]
 === TLC frente a QLC
 
 NetApp AFX puede aprovechar tanto los tipos de flash TLC como QLC. Las unidades de 7,6 y 15,3 TB son modelos TLC, mientras que las unidades de más de 30,1 TB serán QLC. Independientemente del tipo de soporte, se pueden cumplir los estándares de rendimiento de la certificación NVIDIA SuperPod.

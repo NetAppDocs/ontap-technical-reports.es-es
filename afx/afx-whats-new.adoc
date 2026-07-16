@@ -15,6 +15,7 @@ Esta sección cubre las últimas actualizaciones de NetApp AFX y se actualizará
 
 
 
+[[whats-new-in-the-latest-release-of-netapp-ontap-for-afx]]
 == ¿Cuáles son las novedades de la última versión de NetApp ONTAP para AFX?
 
 Última publicación:
@@ -33,6 +34,7 @@ Nuevas funciones en NetApp AFX:
 
 
 
+[[version-history]]
 == Historial de versiones
 
 |===

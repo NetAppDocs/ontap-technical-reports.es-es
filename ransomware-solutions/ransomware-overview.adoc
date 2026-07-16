@@ -20,6 +20,7 @@ NOTE: A partir de julio de 2024, el contenido del informe técnico _TR-4572: Net
 
 
 
+[[data-is-the-primary-target]]
 == Los datos son el destino principal
 
 Los ciberdelincuentes atacan cada vez más los datos directamente, reconociendo su valor. Si bien la seguridad del perímetro, la red y las aplicaciones son importantes, se pueden omitir. Centrarse en la protección de los datos en su origen, la capa de almacenamiento, proporciona una última línea crucial de defensa. Obtener acceso a los datos de producción, cifrarlos o hacerlos inaccesibles es el objetivo de los ataques de ransomware. Para lograrlo, los atacantes deben haber traspasado ya las defensas existentes implementadas por las organizaciones en la actualidad, desde el perímetro hasta la seguridad de las aplicaciones.
@@ -30,6 +31,7 @@ Desafortunadamente, muchas organizaciones no aprovechan las funcionalidades de s
 
 
 
+[[the-real-cost-of-ransomware]]
 == El coste real del ransomware
 
 El pago del rescate en sí no es el mayor efecto económico en una empresa. Aunque el pago no es insignificante, palidece en comparación con el coste de tiempo de inactividad de sufrir un incidente de ransomware.
@@ -40,6 +42,7 @@ Los costos de los seguros cibernéticos también continúan aumentando dada la p
 
 
 
+[[ransomware-protection-at-the-data-layer]]
 == Protección frente a ransomware en la capa de datos
 
 NetApp entiende que su política de seguridad es amplia y profunda en toda su organización, desde el perímetro hasta el lugar donde residen los datos en la capa de almacenamiento. Su pila de seguridad es compleja y debe proporcionar seguridad en todos los niveles de su pila tecnológica.
@@ -58,6 +61,7 @@ image:ransomware-solution-benefits.png["La cartera de productos de protección f
 
 
 
+[[netapps-ransomware-protection-portfolio]]
 == La cartera de productos de protección frente a ransomware de NetApp
 
 NetApp link:ransomware-protection.html["protección contra ransomware incorporada"]ofrece una defensa en tiempo real, sólida y con múltiples facetas para tus datos cruciales. Los algoritmos avanzados de detección impulsados por IA supervisan continuamente los patrones de datos, identificando rápidamente posibles amenazas de ransomware con una precisión del 99 %. Al reaccionar rápidamente a los ataques, nuestro almacenamiento puede realizar instantáneas rápidamente de los datos y proteger las copias, lo que garantiza una rápida recuperación.
@@ -82,6 +86,7 @@ La protección frente al ransomware de NetApp ofrece tranquilidad en un panorama
 
 
 
+[[ransomware-recovery-guarantee]]
 == Garantía de recuperación frente a ransomware
 
 NetApp ofrece una garantía para restaurar los datos de las instantáneas en caso de que se produzca un ataque de ransomware. Nuestra garantía: Si no podemos ayudarle a restaurar los datos de la snapshot, corregiremos. La garantía está disponible en las nuevas adquisiciones de sistemas AFF A-Series, AFF C-Series, ASA y FAS.

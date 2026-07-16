@@ -13,6 +13,7 @@ El enfoque de NetApp de un ciberalmacén es una arquitectura de referencia cread
 
 
 
+[[cyber-vaulting-with-snaplock-compliance-and-a-logical-air-gap]]
 == Cyber vaulting con SnapLock Compliance y una red desconectada lógica
 
 Una tendencia creciente es que los atacantes destruyan las copias de seguridad y, en algunos casos, incluso las cifren. Es por ello que muchos en el sector de la ciberseguridad recomiendan usar copias de seguridad aisladas como parte de una estrategia general de resiliencia cibernética.
@@ -29,6 +30,7 @@ NetApp lanzó la función SnapLock hace más de 10 años para abordar los requis
 
 
 
+[[tamperproof-snapshots]]
 == Snapshots a prueba de manipulación
 
 Aunque aprovechar SnapLock Compliance como una barrera aérea lógica proporciona la máxima protección a la hora de evitar que los atacantes eliminen sus copias de backup, sí requiere que mueva las copias Snapshot con SnapVault a un volumen secundario habilitado para SnapLock. Por ello, muchos clientes ponen en marcha esta configuración en el almacenamiento secundario en la red. Esto puede prolongar los tiempos de restauración en comparación con la restauración de copias Snapshot de volúmenes primarios en el almacenamiento primario.

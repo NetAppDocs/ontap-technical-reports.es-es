@@ -11,7 +11,7 @@ summary: La protección frente al ransomware de NetApp incluye Digital Advisor, 
 [role="lead"]
 Digital Advisor powered by Active IQ simplifica el cuidado proactivo y la optimización del almacenamiento NetApp con inteligencia procesable para una gestión óptima de datos. Impulsado por datos de telemetría de nuestra base instalada altamente diversa, utiliza técnicas avanzadas de IA y ML para descubrir oportunidades para reducir el riesgo y mejorar el rendimiento y la eficiencia de tu entorno de almacenamiento.
 
-No solo puede https://www.netapp.com/services/support/active-iq/["Asesor digital de NetApp"^] ayudar https://www.netapp.com/blog/fix-security-vulnerabilities-with-active-iq/["eliminar las vulnerabilidades de seguridad"^], sino que también proporciona información y orientación específicas para la protección contra el ransomware. Una tarjeta de bienestar dedicada muestra las acciones necesarias y los riesgos abordados, por lo que puede estar seguro de que sus sistemas cumplen con las recomendaciones de mejores prácticas.
+No solo  https://www.netapp.com/data-services/digital-advisor/["Asesor digital de NetApp"^] puede ayudarte  https://www.netapp.com/blog/fix-security-vulnerabilities-with-active-iq/["eliminar las vulnerabilidades de seguridad"^], sino que también ofrece información y orientación específicas para protegerte contra el ransomware. Una ficha de estado de salud específica muestra las medidas necesarias y los riesgos abordados, para que puedas estar seguro de que tus sistemas cumplen con las recomendaciones de buenas prácticas.
 
 image:ransomware-solution-dashboard.jpg["Supervisión de estado en la consola del asesor digital de NetApp"]
 
@@ -21,4 +21,4 @@ Los riesgos y las acciones rastreadas en la página de bienestar de la defensa c
 * FPolicy no está habilitado para todas las máquinas virtuales de almacenamiento (SVM) configuradas para protocolos NAS.
 
 
-Para ver cómo la protección frente al ransomware está en acción, consulte link:https://www.netapp.com/services/support/active-iq/["Asesor digital"^].
+Para ver cómo funciona la protección contra el ransomware, consulta link:https://www.netapp.com/data-services/digital-advisor/["Asesor digital"^].
