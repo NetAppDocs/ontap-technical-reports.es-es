@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: nfs-tls/nfs-tls-performance.html 
+keywords: nfs, tls, performance, cpu, offload, ktls, connectx, handshake latency 
+summary: TLS añade sobrecarga en la CPU, la memoria y la red. El hardware offload en las NICs CX6-Dx y CX7 reduce significativamente el costo de CPU en estado estable. 
+---
+= Rendimiento
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:toc-position: content
+
+
+[role="lead"]
+TLS añade costes en tres dimensiones de recursos: CPU, memoria y red.
+
+
+
+[[resource-cost-overview]]
+== Resumen de los costes de los recursos
+
+La *CPU* es el principal coste. El apretón de manos TLS 1.3 es un gasto único por conexión que cubre la criptografía asimétrica, el análisis de certificados y el intercambio de claves. Una vez que se establece una conexión, la sobrecarga en estado estable es el cifrado simétrico de registros usando AES-GCM o ChaCha20-Poly1305. En plataformas equipadas con NICs Mellanox ConnectX-6 Dx (CX6-Dx) o ConnectX-7 (CX7), la propia NIC realiza el cifrado y descifrado mediante la descarga de kernel TLS (KTLS), lo que reduce considerablemente el coste de CPU en estado estable.
+
+*El impacto en la memoria* es bajo. TLS añade un estado de sesión por conexión y una caché de configuración de TLS por nodo. El tamaño de la caché está limitado; las entradas caducan según el tiempo de vida (TTL) y se actualizan en segundo plano.
+
+La sobrecarga de *red* es mínima. El formato de registros de TLS 1.3 añade una sobrecarga fija por registro y una etiqueta de autenticación. El apretón de manos añade idas y vueltas solo durante el establecimiento de la conexión, no por cada RPC.
+
+
+
+[[tls-performance-penalty]]
+== Penalización de rendimiento de TLS
+
+En ONTAP existen dos vías distintas para NFS sobre TLS: la vía de descarga por hardware y la vía TLS por software. La vía de descarga por hardware está disponible en plataformas con CX6-Dx o CX7 NICs. La vía TLS por software se utiliza en plataformas sin NICs con capacidad de descarga.
+
+En plataformas con tarjetas de red (NIC) con capacidad de descarga, se observó que el rendimiento se situaba en un margen de aproximadamente un 10 % respecto al NFS en texto plano en una amplia gama de cargas de trabajo. En plataformas sin tarjetas de red con capacidad de descarga, la ruta TLS por software es más sensible a la carga de trabajo y puede mostrar reducciones de rendimiento de aproximadamente un 30 % en comparación con el NFS en texto plano en el peor de los casos. Estas son cifras de caracterización, no especificaciones garantizadas. Tus resultados variarán según el tipo de carga de trabajo, el tamaño de I/O y la cantidad de conexiones. Si mezclas tráfico TLS y no TLS en el mismo nodo, espera también cierto impacto en el rendimiento del tráfico no TLS.
+
+
+
+[[scaling-factors]]
+== Factores de escala
+
+Los siguientes factores aumentan el coste de CPU del TLS o la latencia del apretón de manos:
+
+*Rotación de conexiones.* Cada nueva conexión paga el coste del apretón de manos. Las cargas de trabajo que abren y cierran con frecuencia conexiones TCP con el servidor NFS ven un consumo agregado de CPU por TLS mayor que las cargas de trabajo con conexiones de larga duración.
+
+*Se producen picos de tráfico tras una toma de control o un evento de red.* Las cargas de trabajo en las que muchos clientes se vuelven a conectar simultáneamente, como después de una toma de control de HA, asumen el coste total del apretón de manos TLS 1.3 por conexión. Supervisa `nfs_tls:tls_handshake_average_latency` y planifica el margen de conexión en consecuencia.
+
+*Gran número de identidades de cliente distintas (TLS mutuo).* Las implementaciones de TLS mutuo (mTLS) escalan la carga de CPU del apretón de manos según el número de certificados de cliente únicos que se validan.
+
+*mTLS frente a TLS solo en el servidor.* Al habilitar la autenticación del host (mTLS), se añade la validación del certificado del cliente en el lado del servidor, lo que hace que cada apretón de manos resulte ligeramente más costoso que TLS solo en el servidor. El coste en estado estable por RPC no varía.
+
+*Cambios en la configuración de TLS.* Los cambios frecuentes en la configuración de la interfaz TLS —rotación de certificados, ciclos de activación y desactivación— invalidan la caché de configuración de TLS de cada nodo y obligan a volver a realizar consultas al host de gestión, lo que aumenta brevemente la latencia del apretón de manos.

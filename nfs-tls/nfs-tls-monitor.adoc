@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: nfs-tls/nfs-tls-monitor.html 
+keywords: nfs, tls, monitor, counters, ems, events, statistics, observability 
+summary: NFS sobre TLS expone los contadores de Counter Manager en el objeto nfs_tls y cuatro eventos EMS para supervisar el estado de la conexión y el comportamiento de la aplicación de políticas. 
+---
+= Supervisa NFS sobre TLS
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:toc-position: content
+
+
+[role="lead"]
+NFS sobre TLS expone los contadores de Counter Manager en el  `nfs_tls` objeto y cuatro eventos EMS que puedes usar para supervisar la salud de la conexión y el comportamiento de la aplicación de políticas.
+
+
+
+[[counter-manager-counters]]
+== Contadores de Counter Manager
+
+Todos los contadores del gestor de contadores NFS sobre TLS se encuentran en el objeto de ámbito de administración `nfs_tls`. Míralos con `statistics show -object nfs_tls`. Usa `-counter <name>` para filtrar a un solo contador, o `-instance` para limitarlo a una fila específica de SVM o nodo.
+
+*Contadores de identificador/etiqueta (cadena):*
+
+* `nfs_tls:instance_name`--nombre de la instancia (nombre de la SVM constituyente) para la fila.
+* `nfs_tls:instance_uuid`--UUID de la instancia para la fila (identificador del SVM constituyente).
+* `nfs_tls:vserver_id`--Etiqueta de identificador SVM para una fila agregada.
+* `nfs_tls:vserver_name`--Etiqueta con el nombre del SVM para una fila agregada.
+* `nfs_tls:node_name`--Etiqueta del nombre de nodo para una fila agregada.
+
+
+*Contadores de volumen de conexiones (tasa):*
+
+* `nfs_tls:tls_total_connection_requests`--Total de solicitudes de conexión NFS-over-TLS procesadas (correctas + fallidas).
+* `nfs_tls:tls_connection_success`--conexiones NFS sobre TLS exitosas.
+* `nfs_tls:tls_disabled_connection_failures`--conexiones rechazadas porque NFS sobre TLS está desactivado en el SVM.
+* `nfs_tls:tls_connection_handshake_failures`--conexiones que fallaron durante el apretón de manos TLS.
+* `nfs_tls:tls_configuration_not_found`--Se rechazaron los intentos de conexión porque no existe ninguna configuración TLS para el par SVM/LIF.
+* `nfs_tls:tls_connection_mismatch`--conexiones que fallaron porque el identificador de conexión en memoria no coincidía con la conexión observada durante la finalización del apretón de manos.
+
+
+*Contador de latencia (media):*
+
+* `nfs_tls:tls_handshake_average_latency`--latencia media del apretón de manos TLS en microsegundos. Contador base: `tls_connection_success`.
+
+
+
+
+[[event-management-system-ems-messages]]
+== Mensajes del Sistema de Gestión de Eventos (EMS)
+
+El servidor NFS emite cuatro eventos EMS visibles para el usuario en la ruta de datos de NFS sobre TLS. Consúltalos con `event log show`.
+
+`Nblade.TLSConfigError`:: Gravedad `ERR`, con límite de frecuencia de 10 minutos. Se activa cuando un cliente intenta NFS sobre TLS en un SVM/LIF que no tiene configuración TLS. Campos registrados: dirección IP del cliente, nombre del SVM, dirección IP del LIF. Para solucionarlo, habilita la configuración con `vserver nfs tls interface enable`.
+`Nblade.TLSHandshakeFailed`:: Gravedad `ERR`, con límite de frecuencia de 10 minutos. Se activa cuando falla el apretón de manos TLS entre el cliente y el servidor. Campos registrados: nombre del SVM, dirección IP de la LIF, dirección IP del cliente (remota), UUID del certificado del servidor. Para resolverlo, verifica la configuración de TLS en la LIF y revisa el estado de la red. Si el problema persiste, contacta con el soporte de NetApp.
+`Nblade.NfsTlsDisabled`:: Gravedad `ALERT`, con límite de frecuencia de 24 horas. Se activa cuando un cliente intenta NFS sobre TLS en un SVM donde la función está deshabilitada. Campos registrados: nombre del SVM.
+`Nblade.nfsTLSAccessErr`:: Gravedad `ERR`. Se activa cuando un cliente que cumple una regla de export-policy con `-allow-nfs-tls-only true` intenta montar o acceder a la ruta NFS sin TLS. Usa este evento para confirmar que los clientes que no usan TLS están siendo bloqueados como se espera.
+

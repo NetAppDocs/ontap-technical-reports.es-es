@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: nfs-tls/nfs-tls-overview.html 
+keywords: nfs, tls, encryption, ontap, rfc9289, in-transit, prerequisites, requirements 
+summary: ONTAP 9.19.1 introduce NFS nativo sobre TLS, lo que permite el cifrado en tránsito del tráfico RPC de NFS según la norma RFC 9289 sin necesidad de Kerberos ni IPsec. 
+---
+= Descripción general de NFS sobre TLS
+:toc: macro
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toc: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:toc-position: content
+
+
+[role="lead"]
+ONTAP 9.19.1 introduce NFS sobre TLS, la tan esperada «solución sencilla» para cifrar tu tráfico NFS.
+
+Antes de esta función, cifrar tu carga útil de NFS en tránsito se limitaba a IPsec o Kerberos. Aunque ambos son eficaces, la configuración era engorrosa y las penalizaciones de rendimiento podían ser muy altas. Ambos métodos eran soluciones 'añadidas', es decir, soluciones no definidas en un RFC específicamente para NFS. link:https://www.rfc-editor.org/rfc/rfc9289.html["RFC 9289"], titulado "Toward Remote Procedure Call Encryption by Default", cambió eso. Ahora NFSv3 y NFSv4.x pueden cifrar el tráfico RPC de NFS en tránsito usando TLS 1.3. No se requiere Kerberos. No se requiere IPsec.
+
+
+
+[[prerequisites]]
+== Prerrequisitos
+
+Para utilizar ONTAP NFS sobre TLS, debes cumplir los siguientes requisitos.
+
+* ...que estén ejecutando ONTAP 9.19.1
++
+** Las personalidades de ONTAP cloud no son compatibles por el momento
+
+
+* ...cuentan con licencia de NFS
+* ...tener un cliente de NFS que se encuentre en el link:https://imt.netapp.com["Matriz de interoperabilidad de NetApp"]
+
+
+
+
+[[what-it-doesnt-do]]
+== Lo que no hace
+
+NFS sobre TLS protege la capa de transporte; no cambia cómo NFS autentica a los usuarios.
+
+*Autenticación de usuarios basada en certificados.* NFS sobre TLS *no ofrece un nuevo mecanismo de autenticación de usuarios*. Todavía necesitas `auth_sys` o `krb5` para la autenticación de usuarios. Aún puedes usar `krb5i` y `krb5p`, pero TLS hace que sus protecciones de integridad y privacidad sean redundantes, y de todas formas tendrás el impacto en el rendimiento.

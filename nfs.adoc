@@ -1,0 +1,36 @@
+---
+permalink: nfs.html 
+sidebar: sidebar 
+keywords: Technical Reports, TR, NetApp TR, ONTAP TR, ONTAP, ONTAP 9, NAS, best practices, best-practices 
+summary: Estos informes técnicos ofrecen una visión general de NFS ONTAP, así como prácticas recomendadas. 
+---
+= Informes técnicos sobre NFS de ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+NetApp NFS simplifica la gestión de datos y te ayuda a seguir el ritmo del crecimiento mientras optimizas los costes.
+
+
+
+[[nfs]]
+== NFS
+
+link:https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["TR-4067: Prácticas recomendadas y guía de implementación de NFS en ONTAP"^]
+Descubra conceptos básicos, información de soporte, consejos de configuración y prácticas recomendadas para NFS en ONTAP.
+
+link:https://www.netapp.com/pdf.html?item=/media/84595-tr-4962.pdf["TR-4962: NFSv4,2 atributos extendidos"^]
+Obtenga información sobre cómo habilitar y usar los atributos extendidos de NFSv4,2 en ONTAP 9.12.1 y versiones posteriores.
+
+
+
+[[multiprotocol]]
+== Multiprotocolo
+
+link:https://www.netapp.com/pdf.html?item=/media/27436-tr-4887.pdf["TR-4887: Información general y prácticas recomendadas de NAS multiprotocolo en ONTAP"^]
+Descubra cómo funciona el acceso NAS multiprotocolo en ONTAP y las prácticas recomendadas para entornos multiprotocolo.
