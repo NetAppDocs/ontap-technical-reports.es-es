@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: afx/afx-related-info.html 
 keywords: netapp afx, resources, documentation, links, data sheet 
-summary: Revisa los siguientes recursos para aprender más sobre NetApp AFX. 
+summary: Consulta los siguientes recursos para obtener más información sobre NetApp AFX 
 ---
 = Dónde encontrar información adicional
 :allow-uri-read: 
@@ -13,9 +13,9 @@ summary: Revisa los siguientes recursos para aprender más sobre NetApp AFX.
 [role="lead"]
 Para saber más sobre la información que se describe en este documento, consulta los siguientes documentos y/o sitios web:
 
-* Hardware universe link:https://hwu.netapp.com/["https://hwu.netapp.com/"^]
-* NetApp página de producto AFX https://www.netapp.com/afx/[]
-* NetApp AFX: infraestructura de datos de IA escalable y segura link:https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/["https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/"^]
-* ¿Decidirse entre NFSv3 o NFSv4.x? La elección está cada vez más clara… link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer["https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer"^]
-* NetApp Hoja de datos AFX link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf["https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf"^]
+* link:https://hwu.netapp.com/["Hardware Universe"]
+* link:https://www.netapp.com/afx/["Página del producto AFX"]
+* link:https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/["Creación de la empresa impulsada por la IA: por qué la infraestructura importa"]
+* link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer/ba-p/465963["Blog: cómo elegir entre NFSv3 y NFSv4.X"]
+* link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf["Ficha técnica de AFX"]
 
