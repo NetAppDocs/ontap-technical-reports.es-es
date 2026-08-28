@@ -34,7 +34,7 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
 * 800 TB
 
  a| 
-* N/A
+* N/A (sin agregados físicos)
 
 
 
@@ -44,7 +44,7 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
 
  a| 
 * 8 (9.17.1)
-* 32 (9.19.1RC1)
+* 32 (9.19.1GA)
 
 
 
@@ -57,7 +57,7 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
 * 3PB (9.18.1RC1)
 * 16PB (versión 9.18.1GA)
 * 20PB (9.19.1RC0)
-* 32PB (9.19.1RC1)
+* 32PB (9.19.1GA)
 
 
 
@@ -69,7 +69,7 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
  a| 
 * 12 por clúster (9.18.1GA)
 * 17 por clúster (9.19.1RC0)
-* 25 por clúster (9.19.1RC1) (sin limitación de pares de HA)
+* 27 por clúster (9.19.1GA) (sin limitación de pares de HA)
 
 
 
@@ -81,7 +81,7 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
  a| 
 * 288 por clúster (basado en los límites de recuento de estantes; sin limitación de pares de HA)
 * 408 por clúster (9.19.1RC0)
-* 600 por clúster (9.19.1RC1)
+* 648 por clúster (9.19.1GA)
 
 
 
@@ -92,7 +92,18 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
 
  a| 
 * 300 TB (FlexVol)
-* 60 PB (FlexGroup)*
+* 60 PB (FlexGroup - anterior a 9.19.1)*
+* ~153PB (FlexGroup - 9.19.1 y posteriores)*
+
+
+
+
+| Cantidad máxima de componentes de FlexGroup  a| 
+* 200
+
+ a| 
+* 200 (9.18.1 y versiones anteriores)
+* 512 (9.19.1GA)
 
 
 
@@ -104,6 +115,7 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
  a| 
 * 2 mil millones (FlexVol)
 * 400 mil millones (FlexGroup)
+* 1 billón (FlexGroup - 9.19.1GA y versiones posteriores)
 
 
 
@@ -164,16 +176,6 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
 
 
 
-| Recuento máximo de constituyentes – FlexGroup  a| 
-* 200
-
- a| 
-* 200
-* 512 en 9.19.1 RC1
-
-
-
-
 | Número máximo de LIF intercluster  a| 
 * 8
 
@@ -208,4 +210,13 @@ Para conocer los límites más recientes, consulta link:http://hwu.netapp.com/["
 * 400
 
 
+|===
+[role="small"]
+_* El tamaño máximo de FlexGroup se limitará a 32 PB de tamaño físico._
+
+[cols="1,1"]
+|===
+
+
+| link:afx-hardware.html["Anterior"] | link:afx-related-info.html["Siguiente: información relacionada"] 
 |===

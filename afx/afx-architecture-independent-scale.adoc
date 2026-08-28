@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: afx/afx-architecture-independent-scale.html 
+keywords: netapp afx, independent scale, linear scale, compute, capacity, performance 
+summary: Descubre cómo NetApp AFX escala de forma independiente la potencia de cálculo y la capacidad, al tiempo que ofrece un rendimiento lineal por nodo. 
+---
+= Escala lineal independiente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx/
+
+
+[role="lead"]
+La arquitectura AFX desagregada de NetApp permite que la capacidad y los recursos de computación se amplíen de forma independiente y que el rendimiento de los nodos se amplíe de forma lineal.
+
+
+
+[[independent-scale-of-capacity-and-compute-nodes]]
+== Escalado independiente de capacidad y nodos de cómputo
+
+Con los recursos de hardware desacoplados en la arquitectura NetApp AFX, los nodos ya no necesitan que se añadan discos asociados unos junto a otros. Cuando un clúster se está quedando sin recursos relacionados con el rendimiento, como RAM, CPU o el rendimiento de red, solo es necesario añadir nodos de almacenamiento al clúster y se puede aprovechar la Storage Availability Zone existente. Por el contrario, si lo que se necesita es capacidad, solo habría que añadir shelves a la mezcla. Esta flexibilidad asegura que solo compres los recursos que vas a necesitar, evitando así el sobreaprovisionamiento.
+
+*NetApp AFX – escala independiente*
+
+image:image12.png["Imagen"]
+
+
+
+[[linear-scaling-of-node-performance]]
+== Escalado lineal del rendimiento de los nodos
+
+A medida que se añaden nodos a un clúster AFX, se introducen más CPU, RAM y recursos de red en la carga de trabajo. A medida que estos recursos se incorporan al entorno, los aumentos de rendimiento son lineales por naturaleza. El gráfico siguiente muestra cómo aumentaría ese rendimiento a medida que se añaden nodos.
+
+*Aumento lineal del rendimiento al añadir nodos AFX a NetApp*
+
+image:image13.png["Imagen"]
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture-nvram-ha.html["Anterior: NVRAM replicada y comportamiento de la conmutación por error en alta disponibilidad (HA)"] | link:afx-architecture-raid.html["Siguiente: cambios en RAID"] 
+|===

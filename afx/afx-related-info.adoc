@@ -14,8 +14,17 @@ summary: Consulta los siguientes recursos para obtener más información sobre N
 Para saber más sobre la información que se describe en este documento, consulta los siguientes documentos y/o sitios web:
 
 * link:https://hwu.netapp.com/["Hardware Universe"]
+* link:https://docs.netapp.com/us-en/ontap-afx/index.html["Documentación de AFX"]
+* link:https://docs.netapp.com/us-en/ontap-afx/release-notes/whats-new-9191.html["Novedades de ONTAP 9.19.1 para los sistemas de almacenamiento AFX"]
 * link:https://www.netapp.com/afx/["Página del producto AFX"]
 * link:https://www.netapp.com/blog/afx-scalable-secure-ai-data-infrastructure/["Creación de la empresa impulsada por la IA: por qué la infraestructura importa"]
 * link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Deciding-between-NFSv3-or-NFSv4-x-The-choice-is-getting-clearer/ba-p/465963["Blog: cómo elegir entre NFSv3 y NFSv4.X"]
 * link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf["Ficha técnica de AFX"]
 
+
+[cols="1,1"]
+|===
+
+
+| link:afx-limits.html["Anterior"] |  
+|===

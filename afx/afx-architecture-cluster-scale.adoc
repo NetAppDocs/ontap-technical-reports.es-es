@@ -1,0 +1,69 @@
+---
+sidebar: sidebar 
+permalink: afx/afx-architecture-cluster-scale.html 
+keywords: netapp afx, cluster scale, node addition, node removal, 32 nodes, 32PB 
+summary: Descubre cómo NetApp AFX automatiza la incorporación y eliminación de nodos y escala los clústeres hasta 32 nodos y 32 PB. 
+---
+= Escala de clúster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx/
+
+
+[role="lead"]
+La arquitectura AFX de NetApp simplifica la incorporación y eliminación de nodos y permite ampliar la escala del clúster sin dejar capacidad ni rendimiento sin usar.
+
+
+
+[[node-additions-and-removals]]
+== Adiciones y eliminaciones de nodos
+
+Tanto ONTAP unificado como NetApp AFX permiten añadir y eliminar nodos del clúster. Sin embargo, debido a algunas de las diferencias arquitectónicas, el proceso para añadir y eliminar nodos difiere un poco.
+
+
+
+[[node-additionremoval-in-unified-ontap]]
+=== Adición/eliminación de nodos en ONTAP unificado
+
+Ya hemos aprendido que ONTAP unificado tiene una propiedad directa de nodo a disco y que todos los nodos deben tener algunos discos y al menos un agregado conectado a ellos. Teniendo esto en cuenta, lo siguiente es válido para adiciones y eliminaciones.
+
+* Las adiciones de nodos en ONTAP unificado no requieren ningún paso adicional, pero para proporcionar un rendimiento equilibrado en todos los nodos (incluidos los nuevos nodos), sería necesario mover los volúmenes a los nuevos nodos. Esto requiere un análisis previo de los volúmenes existentes y sus cargas de trabajo, decisiones sobre qué volúmenes mover y luego los movimientos de volumen reales, que, de nuevo, requerirían una copia de esos datos a través de la red de clúster backend.
+* Las eliminaciones de nodos en ONTAP unificado requerirían una evacuación manual de los volúmenes existentes en el nodo, lo que significa que tienes que identificar qué nodos pueden alojar qué volúmenes para mantener un rendimiento uniforme, y debes tener suficiente capacidad libre para proporcionar un lugar a donde mover esos volúmenes. Si la capacidad libre es un reto, puede que sea necesario mover volúmenes adicionales para reorganizar un poco las cargas de trabajo en el clúster. Las eliminaciones de nodos también implican eliminaciones de pares de HA, así que el trabajo se duplica. Como los nodos son dueños de los discos, también sería necesaria una reinicialización completa de los discos para esos nodos. Cada una de estas cosas añade tiempo y esfuerzo a lo que debería ser una tarea relativamente sencilla.
+
+
+
+
+[[node-additionremoval-in-netapp-afx]]
+=== Adición/eliminación de nodos en NetApp AFX
+
+También hemos aprendido que NetApp AFX no aprovecha la propiedad estándar de nodo a disco y no utiliza agregados físicos para presentar capacidad al clúster. Por eso, las incorporaciones y eliminaciones de nodos se comportan de manera un poco diferente.
+
+* Las adiciones de nodos en NetApp AFX no requerirán el mismo análisis previo de volúmenes ni la intervención administrativa para garantizar que cada nodo tenga un equilibrio uniforme de volúmenes. En su lugar, ONTAP equilibra automáticamente los recuentos de volúmenes entre los nodos recién añadidos para mantener perfiles de rendimiento relativamente uniformes. ONTAP moverá automáticamente los volúmenes entre los nodos sin copiar nada, lo que reduce el tiempo, la capacidad y el esfuerzo necesarios para añadir nodos a un clúster.
+* La eliminación de nodos en NetApp AFX tampoco requiere mucha, si es que alguna, intervención manual. Cuando se marca un nodo para eliminación, ONTAP mueve automáticamente los volúmenes entre los nodos (de nuevo, sin copiar) para evacuar los nodos que se eliminan. Y como no hay discos propiedad de los nodos, no es necesario reinicializar los discos después de eliminar nodos. Esto hace que los nodos en AFX sean modulares por naturaleza y fáciles de escalar hacia arriba o hacia abajo.
+
+
+
+
+[[cluster-scale-and-expansion]]
+== Escala y expansión de clústeres
+
+Los clústeres Unified ONTAP admiten hasta 24 nodos y cada nodo que se añada también debe añadirse con discos (tanto para la funcionalidad del sistema como para los servicios de datos). Se pueden añadir estantes de discos al clúster, pero siempre están conectados a un único par de alta disponibilidad y son propiedad de un solo nodo, incluso si el clúster tiene 24 nodos. Esto significa que se añade capacidad a un clúster incluso cuando solo se necesita rendimiento, y ese aumento de rendimiento queda relegado en su mayor parte a un conjunto específico de discos propiedad de los nuevos nodos. Como resultado, es posible que termines con una capacidad extra que no necesitas necesariamente.
+
+*Unified ONTAP – consideraciones de escala añadidas*
+
+image:image30.png["Imagen"]
+
+NetApp AFX es compatible con clústeres a mayor escala. A partir de la versión 9.19.1, los clústeres AFX pueden alcanzar los 32 nodos en un único clúster. Y como todos los nodos pueden ver y acceder a todos los discos, todos pueden compartir el rendimiento y la capacidad (hasta 32PB a partir de ONTAP 9.19.1) de esos discos para que nunca haya ningún recurso varado. Los movimientos de volúmenes no requieren copias, por lo que ONTAP es capaz de mover automáticamente los volúmenes a los nodos recién añadidos para garantizar una utilización uniforme de los nodos, mientras que la capacidad se distribuye uniformemente a través de la Storage Availability Zone.
+
+*NetApp AFX – consideraciones de escala añadidas*
+
+image:image31.png["Imagen"]
+
+Para obtener información sobre el tamaño máximo de un clúster, consulta la link:afx-limits.html["Límites"] página.
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture-volume-moves.html["Anterior: movimientos de volumen"] | link:afx-architecture-root-volume.html["Siguiente: cambios en el volumen raíz"] 
+|===

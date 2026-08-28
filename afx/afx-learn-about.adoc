@@ -144,3 +144,10 @@ Un nodo de computación en NetApp AFX se refiere al nodo controlador de almacena
 === Zona de disponibilidad de almacenamiento
 
 Una zona de disponibilidad de almacenamiento (SAZ) es el único grupo de capacidad en un clúster AFX de NetApp, donde todos los discos se comparten entre todos los nodos. La SAZ permite funcionalidades como capacidad compartida, alto rendimiento, deduplicación global y más.
+
+[cols="1,1"]
+|===
+
+
+|  | link:afx-whats-new.html["Siguiente: Novedades"] 
+|===

@@ -18,9 +18,15 @@ NetApp AFX se creó pensando en el rendimiento y la escalabilidad, específicame
 [[per-node-performance]]
 == Rendimiento por nodo
 
-Cada nodo de almacenamiento NetApp AFX proporciona una cantidad específica de rendimiento para lecturas y escrituras. A medida que se añaden nodos al clúster, aumentan linealmente ese rendimiento, como se explica en la sección "Escalado lineal del rendimiento de los nodos" de este documento.
+Cada nodo de almacenamiento AFX de NetApp ofrece un rendimiento específico para lecturas y escrituras. A medida que se añaden nodos al clúster, estos aumentan linealmente dicho rendimiento, como se explica en link:afx-architecture-independent-scale.html#linear-scaling-of-node-performance["Escalado lineal del rendimiento de los nodos"].
 
-Actualmente, los tipos de nodo son link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf["AFX 1K"^] y proporcionan un rendimiento para lecturas y escrituras de aproximadamente las cantidades indicadas a continuación. A medida que se disponga de hardware más nuevo para NetApp AFX, estos límites pueden cambiar. NOTA: El rendimiento máximo se alcanzó utilizando varios clientes que leían y escribían varios archivos, como se muestra en la sección "Benchmark results" a continuación.
+Actualmente, los tipos de nodo son link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf["AFX 1K"^] y link:https://www.netapp.com/media/142853-ds-3466-netapp-afx-datasheet.pdf["AFX 2K"^] y ofrecen un rendimiento en lectura y escritura aproximadamente en las cantidades que se indican a continuación*. A medida que haya hardware más reciente disponible para NetApp AFX, estos límites pueden cambiar.
+
+* Cifras de rendimiento obtenidas usando la herramienta de pruebas link:https://github.com/breuner/elbencho["ElBencho"^] y lectura/escritura secuencial.
+
+
+
+NOTE: Se alcanzó el máximo rendimiento utilizando varios clientes que leían y escribían en varios archivos, como se muestra en la sección link:#benchmark-results["Resultados de las pruebas de rendimiento"] más abajo.
 
 *Estimaciones de rendimiento por nodo*
 
@@ -29,6 +35,9 @@ Actualmente, los tipos de nodo son link:https://www.netapp.com/media/142853-ds-3
 
 
 | AFX 1K | ~35GB/s | ~10GB/s 
+
+
+| AFX 2K | ~35GB/s | ~17 GB/s (aumento del 70 %) 
 |===
 
 NOTE: Para conocer las estimaciones de rendimiento más actualizadas, consulta a tu equipo de ventas de NetApp.
@@ -60,17 +69,17 @@ La desvinculación de los nodos de almacenamiento de las estanterías en la arqu
 
 Este concepto de "densidad de rendimiento" permite a los administradores de almacenamiento aprovechar al máximo el hardware que tienen sin tener que sobreaprovisionar nunca su entorno de almacenamiento.
 
-Por ejemplo, en un clúster ONTAP unificado, como cada nodo tiene su propio conjunto de discos, el rendimiento se dirige solo a los discos propiedad del nodo, y como solo un nodo puede acceder a un conjunto de discos, no necesariamente puede saturar los discos disponibles y alcanzar su máximo rendimiento.
-
 *ONTAP unificado – cómo se divide el rendimiento*
 
 image:image32.png["Imagen"]
 
-NetApp AFX agrupa todos los discos en una única Zona de Disponibilidad de Almacenamiento, así que todos los nodos pueden aprovechar todos los discos. Y como los discos y los nodos están desacoplados, no necesitarás tantas estanterías para obtener el mismo rendimiento. Esto condensa el rendimiento y maximiza el potencial de rendimiento máximo de la estantería.
+Por ejemplo, en un clúster ONTAP unificado, cada nodo tiene su propio conjunto de discos dedicados. Como resultado, el rendimiento se dirige únicamente a los discos que pertenecen al nodo. Como solo un nodo puede acceder a un conjunto de discos, el rendimiento estaría limitado a los discos a los que puede acceder directamente.
 
 *NetApp AFX – Densidad de rendimiento*
 
 image:image33.png["Imagen"]
+
+NetApp AFX agrupa todos los discos disponibles en un único conjunto de capacidad llamado Storage Availability Zone (SAZ). Como resultado, todos los nodos pueden aprovechar todos los discos disponibles para lecturas y escrituras. Como los discos y los nodos están desacoplados, no necesariamente necesitarás tantos estantes para obtener el mismo (o mejor) rendimiento de transferencia en comparación con la arquitectura unificada de ONTAP. La arquitectura desagregada de NetApp AFX maximiza el potencial de rendimiento de un estante de discos.
 
 
 
@@ -81,7 +90,7 @@ Los nodos de Unified ONTAP requieren al menos un conjunto de discos por nodo y p
 
 NetApp AFX presenta todos los estantes de discos a todos los nodos. Cada estante contiene módulos con 16 x 100GB interfaces compatibles con RoCE para aumentar la cantidad total de rendimiento permitido por estante. Por esto, puedes saturar un solo estante con varios nodos que estarán leyendo y escribiendo en el mismo conjunto de discos.
 
-A partir de ONTAP 9.19.1, el ratio de saturación nodo:estantería es de aproximadamente 4:1.
+A partir de ONTAP 9.19.1, la relación de saturación nodo:bandeja es de al menos 4:1, y 8:3 es posible.
 
 
 
@@ -91,8 +100,8 @@ A partir de ONTAP 9.19.1, el ratio de saturación nodo:estantería es de aproxim
 La siguiente sección cubre los resultados de las pruebas de rendimiento utilizando un cluster NetApp AFX con los siguientes parámetros de configuración.
 
 * 4 nodos, 4 interfaces de datos
-* 2 estantes (unidades de 7,6 TB)
-* ONTAP 9.19.1
+* 2 estantes
+* ONTAP 9.19.1GA
 * NFSv4.2 (pNFS, trunking de sesiones)
 * FlexGroup volumen
 * link:https://github.com/breuner/elbencho["ElBencho"^] referencia
@@ -103,6 +112,9 @@ La siguiente sección cubre los resultados de las pruebas de rendimiento utiliza
 
 
 La configuración anterior alcanzó casi el máximo de lecturas disponible para el clúster de 4 nodos (~134GB/s) y se situó justo en el máximo de escrituras permitido por nodo (40GB/s).
+
+
+NOTE: Consulta la sección link:afx-performance-benchmarks.html["Consejos para pruebas de rendimiento"] para obtener instrucciones sobre cómo reproducir estos resultados.
 
 *NetApp AFX – ElBencho rendimiento de lectura, 4 nodos*
 
@@ -146,7 +158,8 @@ La versión de NFS 3 ha sido el estándar de oro para las aplicaciones NFS duran
 
 Sin embargo, NFSv3 no está exento de limitaciones. La falta de estado del protocolo, aunque es genial para el rendimiento y para minimizar las interrupciones en la conmutación por error de almacenamiento, no lo es tanto para la coherencia de los datos y la gestión de bloqueos. Un servidor NFS no realiza un seguimiento real de los estados de bloqueo, así que si ocurre una falla, el servidor NFS puede o no liberar los bloqueos, y el cliente de NFS puede que no sepa si un archivo está bloqueado o no.
 
- Security for NFSv3 is also a bit lacking. The protocol requires multiple open firewall ports to function properly and numeric IDs are sent in plaintext over the wire. Furthermore, NFS does not have robust ACL support, and does not include native file and folder auditing. As a result of these limitations, NFSv4 was created in 2003 via link:https://datatracker.ietf.org/doc/html/rfc3530[RFC-3530^] (obsoleted in 2015 by link:https://datatracker.ietf.org/doc/html/rfc7530[RFC-7530^]).
+La seguridad de NFSv3 también deja algo que desear. El protocolo requiere varios puertos abiertos en el firewall para funcionar correctamente y los identificadores numéricos se envían en texto plano por la red. Además, NFS no tiene un soporte robusto para ACL y no incluye auditoría nativa de archivos y carpetas. Como resultado de estas limitaciones, NFSv4 se creó en 2003 mediante link:https://datatracker.ietf.org/doc/html/rfc3530["RFC-3530"^] (obsoleto en 2015 por link:https://datatracker.ietf.org/doc/html/rfc7530["RFC-7530"^]).
+
 Aunque NFSv4.x existe desde hace más de 20 años, aún no se ha generalizado su adopción por varias razones.
 
 * Complejidad de la gestión de identidades: muchos entornos no disponen de una infraestructura de servicio de nombres para aprovechar adecuadamente los requisitos de cadena de nombres y de seguridad de Kerberos en NFSv4.x.
@@ -212,6 +225,13 @@ Con los cambios introducidos en AFX ONTAP 9.18.1, el rendimiento de NFSv4.x para
 
 Nuestros equipos de ingeniería de rendimiento compararon el rendimiento de las imágenes de IA estándar, EDA y los puntos de referencia de creación de software y descubrieron enormes mejoras con respecto a la versión anterior de ONTAP.
 
-*NetApp AFX – rendimiento de IO de metadatos NFSv4.1 en ONTAP 9.18.1*
+*NetApp AFX – rendimiento de E/S de metadatos de NFSv4.1 en NetApp AFX*
 
 image:image37.png["Imagen"]
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture-root-volume.html["Anterior: Cambios en el volumen raíz"] | link:afx-performance-benchmarks.html["Siguiente: Consejos para pruebas de rendimiento"] 
+|===

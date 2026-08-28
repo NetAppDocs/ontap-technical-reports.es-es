@@ -1,0 +1,44 @@
+---
+sidebar: sidebar 
+permalink: afx/afx-architecture-node-disk.html 
+keywords: netapp afx, node-to-disk relationships, disk ownership, storage availability zone 
+summary: Descubre cómo NetApp AFX le da a cada nodo de almacenamiento visibilidad de todos los discos y elimina la propiedad de los discos. 
+---
+= Relaciones entre nodos y discos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx/
+
+
+[role="lead"]
+NetApp AFX transforma la relación entre los nodos de almacenamiento y los discos al conectar todos los nodos y los shelves a través de la misma red de backend.
+
+En la arquitectura unificada de ONTAP, las lecturas y escrituras se dirigen a un subconjunto específico de discos. Así que, aunque tengas 24 estanterías de discos en un clúster de 24 nodos (una estantería por nodo), en cualquier momento cada nodo solo puede acceder directamente a una estantería de discos, lo que limita la capacidad y el rendimiento disponibles en el clúster.
+
+image:image5.png["Imagen"]
+
+Además, como la NVRAM está conectada directamente entre pares de HA, los nodos deben residir físicamente uno al lado del otro y están más estrechamente acoplados como objetivos de conmutación por error. Por ejemplo, cuando un nodo conmuta por error a su nodo asociado, los únicos discos a los que tiene acceso físico son los discos del dominio del par de HA.
+
+*Clúster ONTAP unificado durante la conmutación por error de HA*
+
+image:image6.png["Imagen"]
+
+En NetApp AFX, hay algunos cambios importantes en la forma en que los discos se presentan a los nodos de cálculo.
+
+
+
+[[all-disks-are-visible-to-all-storage-nodes-no-disk-ownership]]
+== Todos los discos son visibles para todos los nodos de almacenamiento--sin propiedad de disco
+
+En NetApp AFX, los nodos y las estanterías están todos conectados al mismo switch backend, lo que hace posible que ONTAP amplíe el dominio de visibilidad global de los discos a toda la pila. Como resultado, ningún nodo posee discos específicos. En su lugar, todos los discos participan en un único pool de capacidad llamado Storage Availability Zone, que proporciona una gestión de capacidad más sencilla y un mayor potencial de rendimiento (más discos disponibles significa más rendimiento disponible).
+
+*NetApp Zona de disponibilidad de almacenamiento AFX*
+
+image:image7.png["Imagen"]
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture.html["Anterior: Arquitectura"] | link:afx-architecture-capacity-pool.html["Siguiente: Piscina de capacidad única"] 
+|===

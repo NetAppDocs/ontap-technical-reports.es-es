@@ -25,11 +25,15 @@ Para obtener la información más reciente sobre el hardware compatible con NetA
 [[nodes]]
 == Nodos
 
-NetApp AFX se basan en el modelo de nodos AFF A1K proporcionado para clústeres ONTAP unificados. Estos nodos no tienen disco integrado para almacenamiento y están pensados para ser modulares, para que puedas añadir y quitar nodos fácilmente según los requisitos de rendimiento. Cada nodo utiliza 2U de espacio en rack y aumenta el rendimiento de forma lineal a medida que se añaden a un clúster AFX.
+NetApp AFX incluye los nodos AFX 1K (basado en el AFF A1K) y el AFX 2K. Estos nodos no tienen disco integrado para almacenamiento y están pensados para ser modulares, así puedes añadir y quitar nodos fácilmente según los requisitos de rendimiento. Cada nodo usa 2U de espacio en rack y el rendimiento aumenta de forma lineal a medida que los vas añadiendo a un clúster AFX.
 
 *NetApp detalles del nodo AFX 1K*
 
 image:image42.png["Imagen"]
+
+*NetApp detalles del nodo AFX 2K*
+
+image:image46.png["Imagen"]
 
 
 
@@ -41,6 +45,13 @@ NetApp Los nodos AFX 1K utilizan las siguientes asignaciones de ranura.
 * La ranura 1 está dedicada a la replicación de HA
 * La ranura 7 está dedicada a la replicación del clúster
 * Las ranuras 10 y 11 están dedicadas a la comunicación del estante de almacenamiento
+
+
+NetApp Los nodos AFX 2K utilizan las siguientes asignaciones de ranura.
+
+* La ranura 1 está dedicada a la replicación de HA
+* La ranura 2 está dedicada a la replicación del clúster
+* Las ranuras 8B y 10A están destinadas a la comunicación con las estanterías de almacenamiento
 
 
 
@@ -80,11 +91,75 @@ image:image44.png["Imagen"]
 [[cluster-switch-connectivity]]
 === Conectividad del conmutador de clúster
 
-NetApp AFX aprovecha en gran medida los conmutadores de clúster backend para muchos de sus principales conceptos arquitectónicos. Por ejemplo, las interfaces de clúster, los adaptadores de almacenamiento, los estantes de almacenamiento y las tarjetas NVRAM se conectan a los conmutadores de clúster. Actualmente, todas estas interfaces solo admiten comunicación de 100GB, mientras que los conmutadores admiten 400GB. Como resultado, las interfaces de 100GB se conectan a las interfaces de 400GB en el switch mediante cables breakout de 4 x 100GB. Este enfoque reduce el número de puertos utilizados en los switches. Por ejemplo, 16 puertos de módulo de estante de almacenamiento de 100GB usarán solo 4 puertos en los switches, mientras que los 8 puertos totales en los nodos usan 2 puertos del switch.
+NetApp AFX aprovecha al máximo los conmutadores de clúster de backend para muchos de sus principales conceptos arquitectónicos. Por ejemplo, las interfaces de clúster, los adaptadores de almacenamiento, las bahías de almacenamiento y las tarjetas NVRAM se conectan a los conmutadores de clúster. Los conmutadores de clúster tienen una capacidad de 400 GB. Los puertos de red del clúster de backend solo admiten conexiones de 100 GB a los conmutadores de clúster en la plataforma AFX 1K y admiten conexiones de 400 GB en la AFX 2K. Como resultado, las conexiones de los nodos del backend de la AFX 1K utilizan 4 cables de breakout de 100 GB para reducir el número de puertos utilizados en los conmutadores. El AFX 2K utiliza una conexión 1:1 de 400 GB a los conmutadores, con 6 puertos por nodo (2 HA, 2 de clúster, 2 de almacenamiento). Los módulos de estante de almacenamiento siguen utilizando interfaces de 100 GB; por ejemplo, 16 puertos de módulos de estante de almacenamiento de 100 GB utilizan solo 4 puertos en los conmutadores, mientras que los 8 puertos totales de los nodos AFX 1K utilizan 2 puertos en los conmutadores.
 
 *NetApp cableado del conmutador AFX*
 
 image:image45.png["Imagen"]
+
+
+
+[[switch-selection-guidance]]
+=== Guía para la selección de switches
+
+Suma los puertos de 400 GbE necesarios en cada conmutador y luego selecciona la clase de conmutador más pequeña que cubra ese total. NetApp AFX utiliza un par de conmutadores de clúster; dimensiona cada conmutador de forma independiente. Dos puertos en cada conmutador están reservados para ISL (9332: puertos 31–32; 9364: puertos 63–64), lo que deja 30 puertos utilizables en el 9332 y 62 puertos utilizables en el 9364.
+
+Cantidad de puertos por switch:
+
+* AFX 1K: 1 puerto de 400 GbE por nodo (cuatro puertos de 100 GB por nodo en una conexión de 4 × 100 GB)
+* AFX 2K: 3 puertos de 400 GbE por nodo por switch (6 puertos por nodo en una configuración 1:1 de 400 GB: 2 HA, 2 cluster, 2 storage)
+* Shelves: 2 puertos de 400 GbE por shelf (ocho puertos de 100 GB por switch en 4 salidas de 100 GB)
+
+
+|===
+| Puertos 400GbE combinados requeridos (por conmutador) | Switch 
+
+
+| Cabe en 32 puertos (30 utilizables después de ISL) | Cisco Nexus 9332D-GX2B (1U, 32 x 400GbE) 
+
+
+| Cabe en 64 puertos (62 utilizables tras ISL) | Cisco Nexus 9364D-GX2A (2U, 64 x 400GbE) 
+
+
+| Más de 64 puertos | Cisco Nexus 9808, o como se especifica en link:https://hwu.netapp.com["Hardware Universe"^] 
+|===
+
+
+==== Clústeres de 32 nodos
+
+Un clúster de 32 nodos (el número máximo de nodos actual; consulta link:afx-limits.html["Máximos y límites"]) consume 32 × 400GbE puertos por switch en AFX 1K y 96 × 400GbE puertos por switch en AFX 2K (32 × 3), antes de los shelves.
+
+|===
+| Switch | AFX 1K (32 nodos) | AFX 2K (32 nodos) 
+
+
+| Cisco Nexus 9332D-GX2B | No compatible (32 puertos de nodo superan los 30 puertos utilizables) | No compatible 
+
+
+| Cisco Nexus 9364D-GX2A | 32 nodos y entre 8 y 12 estantes (4:1 a 8:3) | No compatible (los 96 puertos de nodo superan los 62 puertos utilizables) 
+
+
+| Cisco Nexus 9808 | 32 nodos y entre 8 y 12 estantes (4:1 a 8:3) | 32 nodos y entre 8 y 12 estantes (4:1 a 8:3) 
+|===
+
+
+==== Número máximo de nodos por conmutador
+
+Dimensiona para una relación nodo-estante de al menos 4:1 y como máximo 8:3 (consulta link:afx-performance.html#node-to-shelf-ratios["Relación entre nodos y estantes"]), con cantidades pares de nodos (pares HA) y un mínimo de 2 estantes. Las siguientes combinaciones son la cantidad máxima de nodos que cabe en cada switch dentro de ese rango.
+
+|===
+| Switch | AFX 1K (número máximo de nodos + estantes) | AFX 2K (máximo de nodos + estantes) 
+
+
+| Cisco Nexus 9332D-GX2B | 20 nodos + 5 estantes (4:1; 8:3 no cabe en los puertos restantes) | 8 nodos + 2-3 estantes 
+
+
+| Cisco Nexus 9364D-GX2A | 32 nodos + 8–12 estantes | 16 nodos + 4–6 estantes 
+
+
+| Cisco Nexus 9808 | 32 nodos + 8–12 estantes | 32 nodos + 8–12 estantes 
+|===
+Para conocer los últimos modelos de conmutadores compatibles y sus límites, consulta link:https://hwu.netapp.com["Hardware Universe"^] y link:https://docs.netapp.com/us-en/ontap-afx/install-setup/afx-cable-overview.html["Documentación sobre el cableado AFX"^].
 
 
 
@@ -93,7 +168,6 @@ image:image45.png["Imagen"]
 
 NetApp AFX actualmente solo admite unidades SSD conectadas NVMe de los siguientes tamaños:
 
-* 7,6 TB
 * 15,3 TB
 * 30,1 TB
 * 60,6 TB
@@ -104,10 +178,17 @@ NetApp AFX actualmente solo admite unidades SSD conectadas NVMe de los siguiente
 [[tlc-vs-qlc]]
 === TLC frente a QLC
 
-NetApp AFX puede aprovechar tanto los tipos de flash TLC como QLC. Las unidades de 7,6 y 15,3 TB son modelos TLC, mientras que las unidades de más de 30,1 TB serán QLC. Independientemente del tipo de soporte, se pueden cumplir los estándares de rendimiento de la certificación NVIDIA SuperPod.
+NetApp AFX puede utilizar tanto memoria flash de tipo TLC como de tipo QLC. Las unidades de 15,3 TB son modelos TLC, mientras que las de más de 30,1 TB serán QLC. Independientemente del tipo de soporte, se pueden cumplir los estándares de rendimiento de la certificación NVIDIA SuperPod.
 
 Todas las unidades que se utilizan con NetApp AFX son unidades calificadas por su rendimiento, y tanto QLC como TLC tendrán un rendimiento casi idéntico para el tráfico de lectura. QLC se queda un poco atrás en el rendimiento de escritura en comparación con TLC y puede experimentar un poco más de nivelación de desgaste con cargas de trabajo con muchas escrituras.
 
 Para conocer las cifras de rendimiento, consulta link:afx-performance.html#per-shelf-performance["Rendimiento por estante"].
 
 A la hora de elegir el tipo de unidad que se va a utilizar, ten en cuenta las cargas de trabajo que albergará el almacenamiento y las compensaciones entre rendimiento y densidad de capacidad.
+
+[cols="1,1"]
+|===
+
+
+| link:afx-capabilities.html["Anterior"] | link:afx-limits.html["Siguiente: máximos y límites"] 
+|===

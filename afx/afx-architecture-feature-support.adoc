@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: afx/afx-architecture-feature-support.html 
+keywords: netapp afx, ontap feature support, unsupported features, metrocluster, fabricpool, block protocols 
+summary: Revisa las funciones de ONTAP que se han modificado, eliminado o que ya no son compatibles en NetApp AFX. 
+---
+= Cambios en la compatibilidad con las funciones de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx/
+
+
+[role="lead"]
+El diseño de alto rendimiento de NAS y objetos de NetApp AFX cambia la disponibilidad de algunas funciones e interfaces de ONTAP.
+
+
+
+[[ontap-features-that-have-been-removed-or-are-unsupported-with-afx]]
+[[ontap-features-that-have-been-removedare-unsupported-with-afx]]
+== Funcionalidades de ONTAP que se han eliminado o que no son compatibles con AFX
+
+NetApp AFX está diseñado para cargas de trabajo NAS y de objetos de alto rendimiento, en particular (pero no exclusivamente) las del espacio de entrenamiento e inferencia de IA. Con el diseño de NetApp AFX, se tomaron algunas decisiones para desactivar algunas de las funciones de ONTAP.
+
+* Debido al enfoque en NAS de alto rendimiento y objetos, las cargas de trabajo de bloque se han eliminado de la solución NetApp AFX. No hay soporte para protocolos de datos FCP, iSCSI o NVMe y no hay planes para añadir protocolos de bloque.
+* Disaggregated es sinónimo de de-aggregated, lo que significa que se han eliminado los agregados (al menos como concepto de administración de almacenamiento físico). La eliminación del agregado físico no solo simplifica la gestión de la capacidad en ONTAP, sino que también proporciona el mecanismo que permite disponer de un único pool de capacidad.
+* La eliminación de los agregados significa que también se eliminan las funciones específicas de los agregados. Metrocluster, por ejemplo, aprovecha la duplicación a nivel de agregado para sus funciones de conmutación por error de sitio. Por lo tanto, Metrocluster también se elimina de NetApp AFX. En su lugar, la funcionalidad de conmutación por error de sitio será proporcionada por la nueva función SnapMirror Active-Sync para NAS ofrecida en ONTAP 9.19.1GA.
+* La función de jerarquización de datos en frío denominada FabricPool tampoco está disponible actualmente para NetApp AFX, ya que también es específica de cada agregado.
+* Los movimientos de volumen basados en copias ya no son necesarios en NetApp AFX, debido a la nueva arquitectura de capacidad. Para obtener más información, consulta link:afx-architecture-volume-moves.html#zero-copy-volume-moves["Movimientos de volúmenes con copia cero"].
+* La eliminación de funciones también implica algunos cambios en la CLI/GUI/API de REST, por lo que también se eliminarán los comandos o las llamadas a la API de las funciones que ya no sean compatibles.
+* ZAPI no está disponible actualmente para NetApp AFX.
+* Descarga de copia de datos NFS para virtualización (volúmenes FlexGroup con distribución granular de datos solamente)
+
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture-storage-efficiency.html["Anterior: eficiencia de almacenamiento"] | link:afx-architecture-flexgroup.html["Siguiente: mejoras en la gestión de FlexGroup"] 
+|===

@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: afx/afx-architecture-nvram-ha.html 
+keywords: netapp afx, nvram replication, high availability, ha failover, volume rebalance 
+summary: Descubre cómo NetApp AFX replica la NVRAM a través de la red de backend y reequilibra los volúmenes durante la conmutación por error de HA. 
+---
+= Comportamiento de la NVRAM replicada y de la conmutación por error en alta disponibilidad
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx/
+
+
+[role="lead"]
+NetApp AFX traslada la replicación de NVRAM a la red del clúster de backend y utiliza la movilidad de volúmenes sin copia para reequilibrar la carga de trabajo después de un fallo de un nodo.
+
+
+
+[[nvram-moved-from-direct-connection-to-switched-replication]]
+== La NVRAM pasa de la conexión directa a la replicación conmutada
+
+ONTAP utiliza NVRAM como una etapa intermedia para proteger las escrituras entrantes en un clúster. Cada nodo en un clúster ONTAP tiene una tarjeta NVRAM respaldada por batería. Cuando se envía una escritura a un volumen desde un cliente, primero se almacena en NVRAM. Luego, el contenido de la NVRAM se vuelca al disco cuando la NVRAM se llena o cuando expira un temporizador de 10s (lo que ocurra primero). Esto se conoce como punto de coherencia.
+
+El contenido de la NVRAM también se replica constantemente entre los pares de HA, lo que ayuda aún más a proteger la coherencia de los datos, porque en caso de fallo de un nodo, el contenido de la NVRAM se conservará en el nodo superviviente y se comprometerá al disco.
+
+En los clústeres ONTAP unificados, las tarjetas NVRAM entre pares de HA están conectadas directamente entre sí. NetApp AFX traslada la replicación de NVRAM a la red backend del clúster. Como resultado, los nodos asociados de HA no tienen un requisito de distancia entre nodos tan estricto. En su lugar, los pares de HA pueden separarse hasta la distancia máxima de ethernet.
+
+*NetApp AFX NVRAM replicación*
+
+image:image10.png["Imagen"]
+
+
+
+[[ha-failover-behavior]]
+== Comportamiento de conmutación por error en HA
+
+En ONTAP unificado, los nodos son propietarios de discos y agregados, donde los datos se sirven a través de volúmenes. Las escrituras se realizan utilizando la NVRAM de un nodo local para volcarse a los discos que posee el nodo. Cuando un nodo se reinicia o falla, ONTAP activará una toma de control de los recursos del nodo fallido, donde la propiedad del disco y del agregado se transfiere al nodo asociado. Las interfaces de red también se transfieren a los puertos del espacio IP y, dado que el contenido de la NVRAM se replica constantemente en el par de HA, el nodo vaciará el contenido de la NVRAM para transferir las escrituras del nodo que ha fallado a los discos. Después de eso, el nodo superviviente será el propietario de los agregados y volúmenes del nodo fallido hasta que se produzca la recuperación del nodo. Esto significa que todo el tráfico de esos volúmenes, así como los volúmenes que ya son propiedad del nodo superviviente, se procesarán en un único nodo hasta que se resuelva el problema de la recuperación.
+
+Como parte del despliegue inicial del clúster ONTAP unificado, se recomienda planificar con antelación las conmutaciones por error para evitar que un solo nodo sobrecargue a su compañero. Eso en sí mismo supone un reto, ya que es difícil predecir qué volúmenes pueden ser los agresores del rendimiento, pero funciones como el movimiento de volumen no disruptivo y las políticas de calidad de servicio de volumen pueden ayudar a mitigarlo.
+
+Las siguientes imágenes muestran cómo los clusters ONTAP unificados pueden incurrir en un balance de rendimiento desigual entre nodos, así como cómo un failover puede crear una degradación del rendimiento en algunos casos.
+
+*ONTAP unificado: posibles desequilibrios en la utilización de nodos*
+
+image:image25.png["Imagen"]
+
+Cuando los nodos de un par de HA se desequilibran con el recuento de volúmenes y la utilización del rendimiento, los fallos de los nodos afectarán el rendimiento general, ya que el nodo superviviente ahora será propietario de todos los volúmenes del nodo que ha fallado. Mientras tanto, otros nodos del clúster pueden tener espacio para asumir trabajo adicional.
+
+*ONTAP unificado – Impacto de la conmutación por error en la utilización de nodos*
+
+image:image26.png["Imagen"]
+
+En el caso anterior, cuando un socio de HA tiene que asumir trabajo adicional, puede potencialmente sobrecargarse y afectar al rendimiento de todos los volúmenes en ese nodo. Los movimientos de volumen pueden ayudar a aliviar la situación, pero esos requieren copias entre nodos (lo que requiere espacio libre disponible), y el tiempo que lleva puede exceder el tiempo que tardan los nodos en recuperarse. Además, si reubicas un volumen, no volverá al nodo original. En su lugar, permanecerá en el nodo al que lo moviste.
+
+Con NetApp AFX, las conmutaciones por error de los nodos adoptan algunos comportamientos diferentes.
+
+* Dado que los nodos no poseen discos y no hay agregados físicos, la conmutación por error de un nodo no requerirá la transferencia de esos recursos. En su lugar, solo se transfieren a otros nodos las interfaces de red y la propiedad de los volúmenes.
+* Los commits de NVRAM siguen produciéndose, pero a través de la red de HA en lugar de una conexión directa.
+* Una vez que los volúmenes realizan la conmutación por error inicial al nodo asociado, AFX redistribuirá los volúmenes entre otros nodos supervivientes del clúster. Esto es posible gracias a los movimientos de volúmenes de copia cero.
+* Cuando se recupere el nodo, los volúmenes volverán al nodo original.
+
+
+NetApp AFX ya mantiene un equilibrio de rendimiento entre los nodos del clúster para mantener una utilización relativamente uniforme, así que cuando ocurre un failover y se reequilibran los volúmenes, la utilización de los nodos debería ser aproximadamente la misma en todo el clúster.
+
+*NetApp AFX - Reequilibrio de volúmenes tras la conmutación por error*
+
+image:image27.png["Imagen"]
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture-capacity-pool.html["Anterior: Pool de capacidad única"] | link:afx-architecture-independent-scale.html["Siguiente: escala lineal independiente"] 
+|===

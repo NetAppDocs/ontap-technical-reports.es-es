@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: afx/afx-architecture-root-volume.html 
+keywords: netapp afx, root volume, boot media, nvme, m.2, cluster database 
+summary: Descubre cómo NetApp AFX virtualiza los volúmenes raíz y mueve las imágenes de arranque y las bases de datos de clúster a los soportes de arranque integrados. 
+---
+= Cambios en el volumen raíz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/afx/
+
+
+[role="lead"]
+NetApp AFX elimina los agregados raíz físicos y utiliza soportes de arranque NVMe integrados para las imágenes de arranque y las bases de datos replicadas del clúster.
+
+
+
+[[root-volume-changes]]
+== Cambios en el volumen raíz
+
+En NetApp ONTAP, a cada nodo se le asigna un volumen raíz, que se utiliza para archivos y funciones específicos del sistema, como archivos de registro, imágenes de arranque, archivos de núcleo, bases de datos de clúster y más.
+
+En ONTAP unificado, esos volúmenes raíz vivían en agregados raíz físicos. Para reducir la cantidad de capacidad que utilizaban los agregados raíz, se crearon a través de particiones de unidades de datos mediante Advanced Disk Partitioning (ADP).
+
+NetApp AFX elimina los agregados físicos de la ecuación y, como resultado, elimina la necesidad de utilizar agregados raíz y ADP. Los volúmenes raíz siguen siendo un concepto, pero ahora viven en áreas virtualizadas del pool de capacidad y no requieren configuración adicional. Además, la funcionalidad del volumen raíz cambia. Las imágenes de arranque y las bases de datos de clúster replicadas se trasladan de la pila de almacenamiento a un medio de arranque integrado que se encuentra en cada nodo AFX. Ahora, si se pierde el acceso a la pila de almacenamiento, los nodos pueden seguir arrancando y mantener la elegibilidad del clúster, lo que reduce la complejidad de la resolución de problemas.
+
+
+
+[[onboard-boot-media]]
+== Medios de arranque a bordo
+
+NetApp Los nodos AFX utilizan un medio de arranque integrado, que es un dispositivo M.2 conectado a NVMe de aproximadamente 3,8 TB. Estos dispositivos de arranque contienen archivos de imagen de arranque y bases de datos replicadas que están separadas de las cabinas de almacenamiento, lo que proporciona redundancia adicional en caso de problemas de acceso al disco. Si el medio de arranque falla, el nodo será asumido por su socio de HA y el medio de arranque puede ser reemplazado. Una vez reemplazado, un administrador de almacenamiento cargará una nueva imagen de ONTAP en el dispositivo y ONTAP reconstruirá automáticamente la base de datos del clúster para restaurar la funcionalidad completa.
+
+[cols="1,1"]
+|===
+
+
+| link:afx-architecture-cluster-scale.html["Anterior: escala de clúster"] | link:afx-performance.html["Siguiente: rendimiento"] 
+|===
