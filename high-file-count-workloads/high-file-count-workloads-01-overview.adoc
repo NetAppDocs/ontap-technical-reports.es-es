@@ -1,0 +1,176 @@
+---
+sidebar: sidebar 
+permalink: high-file-count-workloads/high-file-count-workloads-01-overview.html 
+keywords: ONTAP, NAS, NFS, SMB, high file count, maxfiles, maxdir-size, maxdirsize, inodes, directory 
+summary: Descubre cómo las cargas de trabajo NAS con un elevado número de archivos utilizan los metadatos de ONTAP y cómo los parámetros «maxfiles» y «maxdir-size» definen distintos límites de escalabilidad. 
+---
+= NetApp Cargas de trabajo de ONTAP con un elevado número de archivos para volúmenes NAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+
+[role="lead"]
+Las cargas de trabajo NAS con un elevado número de archivos dan más importancia a las operaciones relacionadas con los espacios de nombres y los metadatos que aquellas en las que predomina un número menor de archivos de gran tamaño. Este conjunto de documentos explica cómo NetApp ONTAP almacena y gestiona grandes conjuntos de archivos, cómo distinguir los límites de `maxfiles` y `maxdir-size`, y cómo planificar los espacios de nombres NAS para obtener una capacidad y un rendimiento predecibles.
+
+
+
+[[what-is-meant-by-a-high-file-count-workload]]
+== ¿Qué se entiende por una carga de trabajo con un elevado número de archivos?
+
+El término «alto número de archivos» resulta un poco engañoso para describir la propia carga de trabajo. No existe un umbral específico de número de archivos a partir del cual toda carga de trabajo se convierta en una carga de trabajo con un alto número de archivos. Esa determinación depende de algo más que del número total de archivos.
+
+Por ejemplo:
+
+* ¿Cuántos archivos y directorios hay en un volumen?
+* ¿Cuántos nombres se concentran en un solo directorio?
+* La frecuencia con la que se crean, se abren, se enumeran, se renombran y se eliminan los archivos
+* Longitud del nombre de archivo, longitud de la ruta, juego de caracteres y nombres alternativos generados por el protocolo
+* Tanto si el acceso a los datos se distribuye entre directorios, componentes de FlexGroup y nodos del clúster
+* Con qué frecuencia las aplicaciones analizan o enumeran todo el espacio de nombres
+* El número y la retención de las copias de Snapshot
+
+
+Una carga de trabajo debe tratarse como de alto número de archivos cuando su espacio de nombres previsto pueda afectar de forma significativa a la planificación de nodos de información, al crecimiento de directorios y archivos, a la capacidad de metadatos, a la latencia de las operaciones de cliente, al comportamiento de la copia de seguridad o la replicación, o al tiempo de recuperación.
+
+Pero una carga de trabajo con varios millones de archivos distribuidos en muchos directorios puede comportarse de forma muy diferente a otra que coloca el mismo número de archivos en un solo directorio.
+
+
+
+[[workloads-commonly-associated-with-high-file-counts]]
+== Cargas de trabajo que suelen estar relacionadas con un gran número de archivos
+
+No todas las cargas de trabajo generan un perfil con un elevado número de archivos, pero la siguiente lista muestra algunas de las cargas de trabajo más habituales que pueden considerarse cargas de trabajo con un elevado número de archivos.
+
+* Automatización del diseño electrónico (EDA) y flujos de diseño de semiconductores
+* Árboles de código fuente de software, repositorios de paquetes y áreas de compilación de integración continua
+* Conjuntos de datos de inteligencia artificial y aprendizaje automático que contienen imágenes, tokens, checkpoints u otros objetos pequeños
+* Canalizaciones de genómica y ciencias de la vida
+* Repositorios de renderizado multimedia, efectos visuales y fotogramas de animación
+* Directorios principales, recursos compartidos departamentales y repositorios de gestión de contenidos
+* Entornos de análisis, telemetría y registro que generan numerosos archivos de corta duración
+* Espacios temporales para informática científica y de alto rendimiento
+
+
+El tamaño del archivo no determina si una carga de trabajo tiene un alto número de archivos, pero las cargas de trabajo con un alto número de archivos suelen estar compuestas por muchos archivos más pequeños, donde un conjunto de datos puede tener un uso de capacidad moderado, aunque consuma muchos nodos de información en un solo volumen.
+
+
+
+[[high-file-count-challenges]]
+== Retos relacionados con un gran número de archivos
+
+Las cargas de trabajo con un elevado número de archivos plantean una serie de desafíos específicos y difíciles de resolver que no siempre se dan en cargas de trabajo con un menor número de archivos o impulsadas por el rendimiento.
+
+
+
+[[metadata-operations]]
+=== Operaciones con metadatos
+
+Cada archivo o directorio requiere un nodo de información, y el nombre del objeto está en un directorio, no en el propio nodo de información. Las operaciones comunes de metadatos, como la creación de archivos, la búsqueda, la recuperación de atributos, el cambio de nombre, la enumeración y la eliminación, pueden predominar en una carga de trabajo con un elevado número de archivos, incluso cuando el rendimiento de datos es bajo. En estos escenarios, la utilización de CPU, el procesamiento en serie de las operaciones y el RTT de red pueden convertirse en cuellos de botella para el rendimiento. El comportamiento del protocolo también importa: los clientes NFS y SMB pueden emitir diferentes combinaciones de operaciones de búsqueda, apertura, cierre, atributos y lectura de directorios que a menudo dependen de la versión de protocolo. Como resultado, se pueden ver resultados diferentes para flujos de trabajo similares con un elevado número de archivos, según el protocolo y la versión de protocolo que se utilicen.
+
+
+
+[[capacity]]
+=== Capacidad
+
+ONTAP almacena los nodos de información públicos en un archivo de nodos de información oculto, gestionado por el sistema y a nivel de volumen. Cada nodo de información de ONTAP 9 usa 288 bytes, por lo que el propio archivo de nodos de información consume capacidad utilizable en el volumen. Un millón de nodos de información públicos asignados usan unos 288 MB. Eliminar objetos libera nodos de información para reutilizarlos, pero el archivo de nodos de información no se reduce.
+
+Además, los archivos de directorio consumen capacidad cuando se almacena un gran número de nombres en el mismo directorio. Esos archivos de directorio no forman parte del archivo de nodos de información. Almacenan nombres y asignaciones a números de nodos de información, y `maxdir-size` limita cada uno de forma independiente. La configuración predeterminada de 320 MB es un límite máximo, no una reserva; si un archivo de directorio crece hasta 320 MB de bloques de archivo de directorio, esos bloques usan 320 MB de capacidad real del volumen.
+
+Estas dos estructuras pueden acumularse. Con recuentos altos de nodos de información asignados, el archivo de nodos de información por sí solo puede alcanzar varios GB, y uno o más archivos de directorio grandes pueden sumar cientos de megabytes además de eso. Un volumen también puede tener un archivo de nodos de información grande y que el tamaño de todos los directorios siga siendo pequeño, o un directorio grande con un archivo de nodos de información que siga siendo pequeño. Esos metadatos consumen capacidad utilizada del volumen, algo que es fácil pasar por alto si solo miras los listados del lado del cliente de los archivos de datos de usuario. El archivo de nodos de información no es un archivo visible para el usuario; el tamaño del archivo de directorio es visible en el propio objeto de directorio.
+
+
+
+[[directory-enumeration]]
+=== Enumeración de directorios
+
+Los directorios grandes tardan más en enumerarse que los pequeños, y un directorio del que se han eliminado muchos archivos puede seguir siendo costoso de escanear. El tamaño informado del directorio-archivo se mantiene en su valor máximo incluso después de eliminar nombres. La técnica de «hole punching» en directorios indexados permite recuperar bloques físicos vacíos y omitirlos durante `READDIR`, pero normalmente no reduce el tamaño informado; consulta link:high-file-count-workloads-02-maxdirsize.html#how-the-maxdir-size-cap-behaves["Cómo funciona el límite de tamaño de «maxdir-size»"] y link:high-file-count-workloads-04-maxdirsize-indexing.html#sparse-directories-and-hole-punching["Directorios dispersos y perforación de agujeros"].
+
+
+
+[[failure-domain-concentration]]
+=== Concentración del dominio de fallos
+
+Concentrar millones de entradas en un único directorio crea un punto de escalado y serialización de un solo directorio que puede afectar al rendimiento no solo del propio directorio, sino también del nodo (o volumen) al que pertenece el directorio. Distribuir los archivos a lo largo de una jerarquía de varios directorios mejora el paralelismo, reduce el alcance de los escaneos de directorios y facilita las tareas operativas.
+
+
+
+[[data-protection-and-recovery]]
+=== Protección y recuperación de datos
+
+Un número elevado de objetos puede alargar los escaneos del espacio de nombres, la catalogación de backups, la replicación, el procesamiento de restauración y la creación del índice de directorios tras la restauración. Por ejemplo, NetApp SnapMirror replica tanto los metadatos modificados como los datos de los archivos, por lo que una copia de referencia o una actualización con muchas operaciones de creación, eliminación o cambio de nombre puede resultar costosa, incluso cuando los archivos y la capacidad utilizable son pequeños. Estos retos también pueden extenderse a los backups basados en NDMP.
+
+Para obtener información sobre la transferencia de índices de directorios con SnapMirror, consulta link:high-file-count-workloads-04-maxdirsize-indexing.html["Indexación de directorios en ONTAP"].
+
+
+
+[[maxfiles-compared-with-maxdir-size]]
+== «Maxfiles» en comparación con «maxdir-size»
+
+Los conceptos de  `maxfiles` y  `maxdir-size` protegen diferentes recursos en ONTAP. Ninguno sustituye al otro, pero a menudo generan confusión. Esta sección intenta aclarar las cosas.
+
+Un volumen puede tener muchos nodos de información libres y aun así llegar a `maxdir-size` en un directorio. Además, un conjunto de datos podría evitar directorios grandes y aun así agotar el suministro público de nodos de información del volumen. Al principio, los síntomas del cliente parecen similares: NFS normalmente devuelve `ENOSPC`, y SMB normalmente devuelve `STATUS_DISK_FULL`. Un directorio lleno también puede devolver `STATUS_CANNOT_MAKE` incluso cuando el volumen todavía tiene nodos de información libres y capacidad de datos.
+
+La siguiente tabla muestra el valor predeterminado habitual, así como los valores mínimo y máximo que permite ONTAP. El valor máximo de FlexVol `files` sigue dependiendo del tamaño del volumen, así que consulta `files-maximum-possible` antes de considerar que el límite absoluto es configurable. Los detalles están en link:high-file-count-workloads-10-maxfiles-limits.html["Información sobre el número máximo de archivos y el nodo de información de ONTAP"] y link:high-file-count-workloads-02-maxdirsize.html["Tamaño máximo de directorio y directorios grandes de ONTAP"].
+
+[cols="2,2,3,3,3"]
+|===
+| Límite | Aplica a | Predeterminado | Mínimo | Máximo 
+
+
+| `maxfiles` (`-files`) | FlexVol | Aproximadamente un nodo de información público por cada 32 KiB de tamaño del volumen | No hay un mínimo fijo de productos. `files` no puede ser inferior a `inodefile-public-capacity`. | 2.040.109.451 nodos de información públicos. Un volumen más pequeño tiene un valor más bajo `files-maximum-possible`, aproximadamente un nodo de información por cada 4 KiB de tamaño del volumen. El volumen debe tener un tamaño aproximado de 7,8 TB o más para poder configurar 2.040.109.451. 
+
+
+| `maxfiles` (`-files`) | FlexGroup | La misma densidad por componente, expresada como un total para todo el FlexGroup | El mismo límite mínimo por componente. Establece el total en el FlexGroup, no en un solo componente. | Hasta 400.000 millones de nodos de información públicos en ONTAP unificado y hasta 1 billón en AFX con ONTAP 9.19.1 y versiones posteriores. Cada componente sigue teniendo un límite de 2.040.109.451. 
+
+
+| `maxdir-size` | FlexVol y FlexGroup | 320 MB | 4 KiB | 4 GB 
+|===
+ `maxdir-size` el límite máximo es el mismo tanto en FlexVol como en FlexGroup. Un FlexGroup no multiplica ese límite por el número de componentes. Comprueba el valor máximo admitido `maxdir-size` para la versión de ONTAP y la plataforma antes de aumentarlo. Consulta link:high-file-count-workloads-07-maxdirsize-features-ems.html["Funciones, EMS y supervisión de maxdir-size"].
+
+
+
+[[what-is-maxdir-size]]
+=== ¿Qué es «maxdir-size»?
+
+ `maxdir-size` es el límite máximo por volumen del tamaño que puede alcanzar cualquier archivo de directorio de ese volumen. Se expresa como un valor de capacidad, en lugar de un número fijo de entradas, aunque el número de nombres en un solo directorio es uno de los factores que pueden aumentar el tamaño del directorio. La longitud del nombre de archivo, la representación de caracteres Unicode, los alias SMB 8.3, los nombres alternativos NFS y la representación de entradas remotas de FlexGroup influyen en el tamaño del directorio. Al aumentar el valor de  `maxdir-size` para un volumen, la configuración permite el crecimiento por directorio, en lugar de preasignar espacio.
+
+* Para obtener más información sobre el cálculo del tamaño de «maxdir», consulta link:high-file-count-workloads-02-maxdirsize.html["Tamaño máximo de directorio y directorios grandes de ONTAP"].
+* Para obtener información sobre la indexación de directorios, consulta link:high-file-count-workloads-04-maxdirsize-indexing.html["Indexación de directorios en ONTAP"].
+* Para obtener información sobre la capacidad, el rendimiento y el comportamiento cuando se superan los límites, consulta link:high-file-count-workloads-05-maxdirsize-impact.html["Impacto de maxdir-size"].
+* Para obtener información sobre FlexVol y FlexGroup, consulta link:high-file-count-workloads-06-maxdirsize-volume-types.html["Consideraciones sobre el volumen"].
+* Para conocer las mejoras de la versión y los eventos de EMS, consulta link:high-file-count-workloads-07-maxdirsize-features-ems.html["Funciones, EMS y supervisión de maxdir-size"].
+
+
+
+
+[[what-is-maxfiles]]
+=== ¿Qué es «maxfiles»?
+
+`maxfiles` (configurado como la opción de nivel de volumen `-files`) es un límite máximo configurable para el número de nodos de información públicos disponibles en un único volumen. Ese recuento incluye no solo archivos y directorios, sino también flujos con nombre, ACL y otros objetos públicos, a veces objetos que no aparecen en un listado habitual de directorios. El volumen contiene un archivo de nodos de información oculto que almacena esos registros. ONTAP amplía el archivo de nodos de información cuando se necesita un nuevo nodo de información público y no quedan registros libres, hasta la configuración de  `-files` y el tamaño total del volumen. El máximo configurable de  `-files` depende del tamaño del volumen y de los límites de ONTAP.
+
+* Para obtener información sobre los contadores de nodos de información y la capacidad, consulta link:high-file-count-workloads-08-maxfiles-high-file-counts.html["Gran número de archivos y capacidad de nodo de información"].
+* Para obtener información sobre los tipos de nodo de información públicos y privados, consulta link:high-file-count-workloads-09-maxfiles.html["Tipos de nodo de información de ONTAP"].
+* Para conocer los límites de tamaño de los volúmenes, los identificadores de archivos NFS y el comportamiento en caso de agotamiento, consulta link:high-file-count-workloads-10-maxfiles-limits.html["Información sobre el número máximo de archivos y el nodo de información de ONTAP"].
+* Para saber cómo configurar  `-files`, consulta link:high-file-count-workloads-11-maxfiles-controlling.html["Control de «maxfiles»"].
+* Para eventos de EMS y supervisión, consulta link:high-file-count-workloads-12-maxfiles-monitoring.html["Supervisa maxfiles, los eventos EMS y las mejoras de ONTAP"].
+* Para saber cómo recopilar estimaciones sobre nodo de información, directorios, tasa de operaciones y capacidad, consulta link:high-file-count-workloads-13-planning.html["Enfoque de planificación"].
+* Para consultar recomendaciones de diseño y funcionamiento, visita link:high-file-count-workloads-14-best-practices.html["Prácticas recomendadas para cargas de trabajo NAS con un elevado número de archivos"].
+
+
+[cols=">"]
+|===
+
+
+| link:high-file-count-workloads-02-maxdirsize.html["Siguiente: tamaño máximo de directorios (Maxdir) y directorios ONTAP de gran tamaño →"] 
+|===
+
+
+[[related-information]]
+== Información relacionada
+
+* link:high-file-count-workloads-08-maxfiles-high-file-counts.html["Gran número de archivos y capacidad de nodo de información"]
+* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html["Determina el uso de archivos y nodos de información para un volumen ONTAP"^]
+* link:https://docs.netapp.com/us-en/ontap/volumes/cautions-increasing-maximum-directory-size-concept.html["Tamaño máximo del directorio para volúmenes FlexVol"^]
+* link:https://docs.netapp.com/us-en/ontap/flexgroup/index.html["Gestión de volúmenes FlexGroup"^]
+

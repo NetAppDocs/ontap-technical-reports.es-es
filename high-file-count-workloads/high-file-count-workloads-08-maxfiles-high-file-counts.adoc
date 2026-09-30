@@ -1,0 +1,118 @@
+---
+sidebar: sidebar 
+permalink: high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html 
+keywords: ONTAP, NAS, maxfiles, files-used, inodefile-public-capacity, high file count 
+summary: Comprende cómo cambian los contadores de nodos de información de ONTAP y cómo un número elevado de archivos afecta a la capacidad y las cargas de trabajo NAS. 
+---
+= Gran número de archivos y capacidad de nodo de información en ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+
+[role="lead"]
+ONTAP muestra el límite configurado de nodo de información público, el uso actual de nodo de información público y la capacidad máxima del archivo de nodo de información público asignado como valores independientes.
+
+
+
+[[high-file-counts-in-ontap]]
+== Gran número de archivos en ONTAP
+
+ONTAP utiliza nodos de información para realizar un seguimiento de los objetos del sistema de archivos. Puedes supervisar el uso de nodos de información públicos mediante los siguientes valores de volumen en la CLI, la API de REST o System Manager:
+
+* `files` es el límite máximo configurado de nodos de información públicos.
+* `files-used` es el número de nodos de información públicos actualmente en uso.
+
+
+La opción `files` controla cuántas entradas de nodo de información público se pueden asignar en el archivo de nodos de información públicos. Aumentar el límite de `files` no asigna de forma inmediata nodos de información ni espacio en el archivo de nodos de información al sistema de archivos activo. En su lugar, establece el límite máximo permitido por el volumen.
+
+La creación de archivos, directorios, ACL, flujos con nombre o índices de directorios públicos puede hacer que crezca el archivo de nodos de información públicos. La eliminación de objetos reduce `files-used` y libera nodos de información públicos para su reutilización, pero no reduce el tamaño del archivo de nodos de información públicos.
+
+Para ver ejemplos de cómo consultar los detalles de uso según el número de archivos, consulta link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example["Ejemplo de supervisión"]. Para obtener orientación sobre el dimensionamiento, consulta link:high-file-count-workloads-14-best-practices.html["Prácticas recomendadas para cargas de trabajo NAS con un elevado número de archivos"].
+
+
+
+[[how-an-inode-count-increments]]
+== Cómo se incrementa el recuento de nodos de información
+
+No todos los nodos de información cuentan para el límite público de nodos de información. Los link:high-file-count-workloads-09-maxfiles.html#private-inodes["Nodos de información privados"] no cuentan. Los link:high-file-count-workloads-09-maxfiles.html#public-inodes["Nodos de información públicos"], como archivos, directorios, ACL, flujos con nombre e índices de directorios públicos, sí cuentan.
+
+ `files-used` aumenta cada vez que se usa un nodo de información público. Si ya existe un nodo de información público libre en el archivo de nodos de información asignado,  `files-used` sigue aumentando, pero  `inodefile-public-capacity` no. Si no queda ningún nodo de información público libre, ONTAP amplía el archivo de nodos de información público hasta  `files` y ambos valores aumentan.
+
+Las operaciones habituales incluyen:
+
+* Crear un archivo, un directorio, un enlace simbólico o un archivo especial: +1 nodo de información público y un nombre nuevo en el directorio padre.
+* Creación de un enlace físico: +0 nodos de información públicos y +1 nombre en el directorio padre.
+* Almacenar una ACL de NTFS o NFSv4 en un objeto que aún no tenía un nodo de información de ACL: hasta +1 nodo de información público, sujeto al uso compartido de la ACL.
+* Creación de un flujo con nombre: +1 nodo de información público para el flujo y, si es necesario, un nodo de información del directorio de flujo. Ninguna de las dos opciones añade un nombre al directorio de usuario principal.
+* Traslado de los índices de directorio al espacio público: aproximadamente +1 nodo de información público por directorio indexado.
+
+
+En link:high-file-count-workloads-09-maxfiles.html["Tipos de nodo de información de ONTAP"] se describe cómo afectan al recuento de archivos visibles esos tipos de objetos, el uso compartido de ACL y los flujos como  `Zone.Identifier`.
+
+`files-used` disminuye cuando los nodos de información públicos quedan libres, por ejemplo, una vez finalizado el proceso de eliminación y cuando los objetos ya no se conservan como zombis. `inodefile-public-capacity` permanece en su nivel máximo y el tamaño del archivo de nodos de información nunca disminuye.
+
+La opción «New» crea registros libres reutilizables hasta que el archivo de nodo de información asignado se llene, tras lo cual ONTAP lo amplía si  `files` y la capacidad del volumen lo permiten.
+
+
+
+[[how-high-file-counts-affect-nas-workloads]]
+== Cómo afecta el elevado número de archivos a las cargas de trabajo de NAS
+
+Un elevado número de archivos aumenta la proporción de trabajo relacionado con los metadatos en comparación con la transferencia de datos. Entre las operaciones habituales se incluyen:
+
+* Asignación y liberación de nodos de información
+* Búsqueda de nombres de directorios e identificadores de archivos
+* Lectura y actualización de atributos, permisos y marcas de tiempo
+* Abrir, cerrar, cambiar el nombre, vincular y eliminar archivos
+* Enumeración de directorios y recorrido de árboles de directorios
+* Escaneo de espacios de nombres para funciones de análisis, copia de seguridad, replicación o seguridad
+
+
+El efecto en el rendimiento depende de la tasa de operaciones, la concurrencia, el comportamiento del protocolo, la estructura del espacio de nombres, el estado de la caché y los recursos de los nodos. El número total de archivos por sí solo no permite predecir el rendimiento. Millones de archivos repartidos entre muchos directorios activos pueden permitir un mayor paralelismo que el mismo número de archivos concentrados en un único espacio de directorios.
+
+
+
+[[capacity-impact]]
+== Repercusión en la capacidad
+
+Cada nodo de información de ONTAP 9 ocupa 288 bytes en el archivo de nodos de información. Una aproximación de planificación es:
+
+[listing]
+----
+inode-file bytes = inode count × 288
+----
+|===
+| Nodos de información | Bytes aproximados del nodo de información sin procesar | Capacidad binaria aproximada 
+
+
+| 1 millones | 288.000.000 | 274,7 MiB 
+
+
+| 100 millones | 28.800.000.000 | 26,8 GiB 
+
+
+| 1.000 millones | 288.000.000.000 | 268,2 GiB 
+|===
+Estas cifras describen los registros de nodos de información. El uso físico observado también puede incluir la estructura de archivos de nodos de información, el redondeo de bloques, la retención de Snapshot y otros metadatos.
+
+Al aumentar `files` se modifica el límite máximo permitido; no se asigna de inmediato todo el espacio correspondiente del archivo de nodos de información. La capacidad se consume a medida que crece el archivo de nodos de información. Si después contiene un millón de nodos de información públicos, los registros sin procesar de nodos de información usan 288 MB (aproximadamente 274,7 MiB) de la capacidad real del volumen. El archivo de nodos de información no se reduce, por lo que la planificación de capacidad debe tener en cuenta su asignación máxima histórica. Después, puedes reducir `files`, pero no por debajo de `inodefile-public-capacity`. Ese campo es la marca máxima asignada del archivo de nodos de información, no el pico `files-used` ni una configuración anterior `files`. Por ejemplo, si el archivo de nodos de información ya ha crecido hasta 1 millón de registros, `files` no se puede establecer por debajo de 1 millón aunque la `files-used` actual sea mucho menor. Si aumentaste `files` sin que el archivo de nodos de información creciera hasta ese punto, puedes volver a reducirlo hasta la capacidad actual.
+
+La capacidad física utilizada para el archivo de inodos es independiente de la capacidad utilizada. `maxdir-size` `maxdir-size` limita el tamaño en bytes del archivo de asignación de nombres de cada directorio. Un archivo de directorio de 320 MB utiliza 320 MB de bloques de archivo de directorio en ese directorio; un archivo de inodos de tamaño similar representa el conjunto de inodos de todo el volumen y no está limitado por `maxdir-size`.
+
+Para saber cómo comprobar el espacio de los nodos de información en unidades de capacidad y cómo interpretar  `inodefile-public-capacity` como el número de nodos de información, consulta link:high-file-count-workloads-12-maxfiles-monitoring.html#monitoring-example["Supervisa maxfiles, los eventos EMS y las mejoras de ONTAP"].
+
+[cols="<,>"]
+|===
+
+
+| link:high-file-count-workloads-07-maxdirsize-features-ems.html["← Anterior: funciones, EMS y supervisión de maxdir-size"] | link:high-file-count-workloads-09-maxfiles.html["Siguiente: tipos de nodos de información de ONTAP →"] 
+|===
+
+
+[[related-information]]
+== Información relacionada
+
+* link:high-file-count-workloads-10-maxfiles-limits.html["Información sobre el número máximo de archivos y el nodo de información de ONTAP"]
+* link:high-file-count-workloads-11-maxfiles-controlling.html["Control de «maxfiles»"]
+

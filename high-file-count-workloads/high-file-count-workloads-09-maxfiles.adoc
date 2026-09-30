@@ -1,0 +1,170 @@
+---
+sidebar: sidebar 
+permalink: high-file-count-workloads/high-file-count-workloads-09-maxfiles.html 
+keywords: ONTAP, NAS, maxfiles, files, inode, files-used, public inode, private inode 
+summary: Comprende los nodos de información de ONTAP, los tipos de nodos de información públicos y privados, los nodos de información de ACL y los flujos con nombre. 
+---
+= Tipos de nodo de información de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+
+[role="lead"]
+ONTAP utiliza nodos de información públicos para representar los objetos del sistema de archivos presentes en los volúmenes FlexVol y FlexGroup. Cada volumen tiene un límite máximo definido (consulta link:high-file-count-workloads-10-maxfiles-limits.html["Información sobre el número máximo de archivos y el nodo de información de ONTAP"]), y los nodos de información públicos se contabilizan dentro de ese límite en el sistema de archivos.
+
+
+
+[[what-is-an-inode]]
+== ¿Qué es un nodo de información?
+
+En general, un nodo de información es el registro del sistema de archivos de un objeto. Almacena la identidad y los metadatos, como el tipo, la propiedad, las marcas de tiempo y los permisos, y apunta a los datos del objeto. El nombre del objeto se almacena en un directorio, no en el propio nodo de información.
+
+En ONTAP, WAFL almacena esos registros en un archivo oculto de nodos de información a nivel de volumen en cada componente de FlexVol o FlexGroup. Los nodos de información públicos cuentan para la configuración del volumen `files`, comúnmente llamada maxfiles. Crear un objeto público aumenta el uso de nodos de información públicos; los nodos de información privados no. La capacidad y el crecimiento del archivo de nodos de información se describen en link:high-file-count-workloads-08-maxfiles-high-file-counts.html#capacity-impact["Repercusión en la capacidad"].
+
+La siguiente figura muestra cómo se relaciona el archivo de nodo de información público con `files-used`, `inodefile-public-capacity`, el límite máximo de `files` y la capacidad consumida en el volumen.
+
+[link=../media/high-file-count-workloads/ontap-inode-file.png]
+image::ontap-inode-file.png[Diagrama del archivo de nodo de información del volumen ONTAP que muestra «files-used» anidado en «inodefile-public-capacity»,400,and files-maximum-possible]
+
+
+
+[[types-of-inodes-in-ontap]]
+== Tipos de nodos de información en ONTAP
+
+El *tipo* de un nodo de información describe qué tipo de objeto representa. ONTAP también clasifica cada nodo de información en el espacio de nodos de información *público* o *privado*. Los nodos de información públicos cuentan para el límite máximo de archivos (maxfiles); los nodos de información privados no. Un nodo de información de índice de directorio puede encontrarse en cualquiera de los dos espacios, según la configuración del volumen.
+
+
+
+[[public-inodes]]
+=== Nodos de información públicos
+
+Los nodos de información públicos se asignan a partir del archivo de nodos de información públicos del volumen y cuentan para `files` y `files-used`. Incluyen objetos visibles para el cliente y objetos de metadatos públicos que no aparecen como entradas de directorio.
+
+La siguiente tabla muestra una lista de los nodos de información públicos que se encuentran en ONTAP e información adicional sobre ellos. La columna enlace:high-file-count-workloads-02-maxdirsize.html[`maxdir-size`] indica si al crear ese objeto se añade una entrada de directorio al directorio principal y, por lo tanto, aumenta el tamaño del archivo de ese directorio principal.
+
+|===
+| Tipo | Qué representa | También cuenta para el enlace:high-file-count-workloads-02-maxdirsize.html[`maxdir-size`] 
+
+
+| Archivo normal | Contenido y atributos predeterminados de los archivos | *Sí.* Crear el archivo añade un nombre en el directorio principal. 
+
+
+| Directorio | Los nombres de un directorio y el propio nodo de información del directorio | *Sí.* Al crear el directorio, se añade un nombre en el principal. El nuevo directorio también tiene su propio archivo de directorio, que `maxdir-size` limita de forma independiente. 
+
+
+| Enlace simbólico | Un puntero a la ruta de acceso en lugar de los datos del archivo | *Sí.* ^{asterisk}^ Crear el enlace simbólico añade un nombre en el directorio principal. 
+
+
+| Archivo especial | FIFO, socket o nodo de dispositivo de UNIX | *Sí.* Crear el archivo especial añade un nombre en el directorio padre. 
+
+
+| Flujo con nombre | Datos adicionales además del contenido predeterminado del archivo (flujo de datos alternativo de NTFS) | *No.* El flujo no es un nombre en el directorio de usuario principal. 
+
+
+| Directorio de secuencias | Contenedor oculto que contiene los nombres de las secuencias con nombre de un archivo | *No.* No es una entrada de directorio visible para el usuario. 
+
+
+| ACL (xinode) | Descriptor de seguridad NTFS o ACL de NFSv4 almacenados como datos de entrada de control de acceso (ACE) | *No.* La ACL no es una entrada de directorio. 
+
+
+| Índice del directorio (cuando es público)^{asterisk}{asterisk}^ | Árbol B+ complementario utilizado para buscar nombres en un directorio grande | *No.* El índice no es una entrada de directorio. 
+|===
+
+NOTE: ^*^ Un enlace simbólico tiene su propio nodo de información público y su propia entrada de directorio. Un enlace físico es diferente: es otro nombre de directorio para un nodo de información de archivo normal existente, no un tipo de nodo de información independiente. Crear un enlace físico añade una entrada de directorio y amplía el archivo del directorio padre, pero no asigna otro nodo de información público.
+
+
+NOTE: ^**^ Los nodos de información del índice de directorios son privados por defecto. Puedes trasladarlos al espacio de nodos de información públicos, tal como se describe en link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes["Acerca de los nodos de información de índice privados y públicos"].
+
+
+
+==== Nodos de información de ACL
+
+Cuando un archivo o directorio tiene un descriptor de seguridad NTFS o una ACL de NFSv4, ONTAP almacena esa ACL como un nodo de información de ACL independiente (también denominado «nodo de información extendido» o «xinode»). El nodo de información de ACL contiene las ACE. ONTAP lo asigna a partir del espacio público de nodos de información, por lo que cuenta para `files` y `files-used`. El nodo de información del archivo o directorio hace referencia a su nodo de información de ACL.
+
+
+NOTE: Los bits de modo UNIX se almacenan en el propio nodo de información del archivo o directorio. No asignan ningún nodo de información público adicional.
+
+El uso de nodos de información de ACL no siempre mantiene una relación de 1:1 con un archivo o directorio:
+
+* Los archivos o directorios con el mismo descriptor de seguridad almacenado pueden compartir un nodo de información de ACL cuando la optimización de uso compartido de ACL de ONTAP los fusiona. La herencia suele generar descriptores idénticos que pueden compartirse.
+* Es posible que no se produzca el uso compartido cuando difieran los ACE, la información del propietario o del grupo, las marcas de control o los resultados de la herencia. Ni siquiera se garantiza que los descriptores idénticos se fusionen, por ejemplo, cuando se crean o actualizan en operaciones independientes antes de que se reconozca el uso compartido.
+* Una entrada «create» puede heredar la ACL del elemento padre cuando la solicitud no proporciona sus propios ACE y la ACL del elemento padre tiene atributos de herencia.
+* Los volúmenes de estilo de seguridad NTFS aplican las ACL de NTFS de forma predeterminada. Los archivos y directorios nuevos pueden compartir un nodo de información de ACL cuando los descriptores almacenados resultantes son idénticos, pero los administradores no deben dar por sentado que todas las ACL predeterminadas o heredadas compartirán un mismo nodo de información.
+* Los objetos de estilo de seguridad UNIX que siguen basándose únicamente en bits de modo no consumen un nodo de información de ACL hasta que se almacena una ACL de NFSv4. El estilo de seguridad mixto puede contener tanto objetos basados únicamente en bits de modo como objetos protegidos por ACL.
+
+
+
+
+==== Flujos con nombre
+
+Un flujo con nombre es información adicional adjunta a un archivo, aparte del contenido que los usuarios suelen abrir. En ONTAP, es la representación WAFL de un flujo de datos alternativo (ADS) de NTFS. Los datos predeterminados sin nombre del archivo residen en el nodo de información del archivo base. Cada flujo con nombre adicional es un nodo de información público independiente y cuenta para `files` y `files-used`.
+
+Los flujos con nombre persisten junto con el archivo. No son un área de trabajo temporal que ONTAP usa solo durante una operación de apertura, copia o guardado. Un flujo permanece asignado hasta que se elimina ese flujo o se elimina el archivo base. Una aplicación puede crear un flujo y eliminarlo después, pero ONTAP no hace que los flujos con nombre caduquen por sí solo.
+
+Algunas cosas que debes tener en cuenta:
+
+* Las cargas de trabajo SMB crean y usan flujos con nombre. Windows los identifica como `filename:stream_name`, por ejemplo `report.docx:Zone.Identifier`. `Zone.Identifier` son metadatos de Windows Mark of the Web. Cuando se descarga un archivo de internet, Windows o el navegador registran un ID de zona (normalmente la zona de internet) para que el Explorador de Windows, SmartScreen y Office puedan tratar el archivo como no confiable hasta que el usuario lo desbloquee. Ese flujo permanece en el archivo hasta que se elimina. Otras fuentes habituales incluyen aplicaciones de backup y seguridad, y aplicaciones que almacenan datos complementarios como ADS. Los archivos de bloqueo de Microsoft Office `~$` y los archivos de guardado temporal son archivos y entradas de directorio normales, no flujos con nombre. Los archivos sincronizados por OneDrive no reciben necesariamente un flujo `Zone.Identifier`; el comportamiento depende del cliente y de la ruta de transferencia.
+* Los clientes de macOS que acceden a SMB pueden utilizar flujos con nombre para los metadatos del Finder y las bifurcaciones de recursos, que suelen representarse como `AFP_AfpInfo` y `AFP_Resource`.
+* Las entradas normales ocultan los flujos con nombre. El Explorador de Windows, el Finder de macOS, `dir` y NFS `ls` / `stat` muestran el archivo predeterminado, por lo que `files-used` puede superar el recuento visible. Enumera los flujos desde un cliente SMB de Windows con `dir /r` o PowerShell `Get-Item <file> -Stream *`. ONTAP no admite los atributos con nombre de NFSv4, por lo que los clientes de NFS no ven los flujos SMB como nombres adicionales, pero los nodos de información siguen existiendo.
+* Un archivo oculto, un archivo de intercambio o un archivo de copia de seguridad creado por  `vi` (por ejemplo `.file.swp` o `file~`) es un archivo normal y una entrada de directorio, no un flujo con nombre.
+* Los atributos extendidos (xattrs) de NFSv4.2, compatibles a partir de ONTAP 9.12.1, son una característica distinta. No son nodos de información de ACL y no deben contabilizarse como xinodes de ACL.
+
+
+
+
+==== Impacto en el backup y las restauraciones de NDMP
+
+Durante el procesamiento de dump y restore de NDMP, ONTAP identifica por separado clases de objetos como archivos normales, directorios, flujos NT, directorios de flujos y nodos de información ACL, de modo que los datos y metadatos de cada objeto puedan serializarse, incluirse en las estadísticas de dump y reconstruirse correctamente. Esta clasificación no crea límites maxfiles separados ni contadores  `volume show` separados.  `files-used` sigue siendo el total combinado de nodos de información públicos.
+
+El volcado de NDMP recorre el espacio de nombres y serializa esos objetos uno por uno. La restauración los reconstruye de la misma manera. Por lo tanto, un número elevado de nodos de información públicos alarga el volcado y la restauración, incluso cuando la capacidad de datos del volumen es modesta o el número de archivos visibles parece reducido. Los flujos con nombre y los nodos de información de ACL se vuelcan y restauran incluso cuando el Explorador de Windows, el Finder, `dir` o `ls` no los muestran, por lo que las estadísticas de volcado pueden indicar un mayor número de objetos de flujo y ACL de lo que sugiere un simple listado de directorios.
+
+El trabajo suele estar limitado por los metadatos más que por el rendimiento. Crear, buscar y reconstruir millones de nodos de información, ACL y flujos consume CPU, memoria y E/S de almacenamiento, con relativamente pocos datos por objeto. Los archivos pequeños, el uso intensivo de ACL y una gran cantidad de flujos con nombre aumentan esa sobrecarga. Los directorios planos grandes añaden coste de enumeración durante el volcado, y la restauración de un volumen con un gran número de archivos también puede llevar tiempo al reconstruir los índices de directorio después de que existan los objetos. Mide la duración del volcado y la restauración con un recuento representativo de objetos, incluidos los flujos y las ACL, en lugar de estimarla solo a partir del tamaño de los datos.
+
+
+
+[[private-inodes]]
+=== Nodos de información privados
+
+Los nodos de información privados son registros de metadatos internos de ONTAP. Residen en un espacio de nodos de información privados independiente, no cuentan para `files` ni para `files-used`, y no se pueden usar como archivos de cliente adicionales.
+
+La siguiente tabla muestra los tipos de nodos de información privados más comunes.
+
+|===
+| Tipo | Qué representa | También cuenta para el enlace:high-file-count-workloads-02-maxdirsize.html[`maxdir-size`] 
+
+
+| Índice del directorio (predeterminado)^{asterisk}^ | Árbol B+ complementario utilizado para buscar nombres en un directorio grande | *No.* 
+
+
+| Metarchivo privado | Metadatos ocultos de WAFL utilizados por ONTAP | *No.* 
+
+
+| Zombi | Un objeto no vinculado que se conserva hasta que finalicen las referencias o la eliminación asíncrona | *No.* 
+|===
+
+NOTE: ^*^ Los índices de directorio son privados de forma predeterminada. La transferencia de índices públicos se describe en link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes["Acerca de los nodos de información de índice privados y públicos"].
+
+
+NOTE: En la mayoría de los casos, no necesitas supervisar el uso de los nodos de información privados, ya que no cuentan para maxfiles, a menos que el servicio de asistencia de NetApp te indique que lo hagas.
+
+
+
+==== Nodos de información zombis
+
+Un archivo desvinculado no siempre puede liberarse de inmediato. ONTAP puede retenerlo temporalmente como un «zombi» mientras se completan las referencias o las tareas asíncronas. Por lo tanto, las operaciones grandes de eliminación asíncrona pueden aumentar el uso de nodos de información privados mientras la limpieza está en curso. Una vez más, los nodos de información privados no se contabilizan dentro del total `files` permitido en el volumen.
+
+[cols="<,>"]
+|===
+
+
+| link:high-file-count-workloads-08-maxfiles-high-file-counts.html["← Anterior: gran número de archivos y capacidad de nodos de información"] | link:high-file-count-workloads-10-maxfiles-limits.html["Siguiente: información sobre Maxfiles y los nodos de información de ONTAP →"] 
+|===
+
+
+[[related-information]]
+== Información relacionada
+
+* link:https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html["Estilos de seguridad NAS de ONTAP"^]
+* link:https://docs.netapp.com/us-en/ontap/nas-audit/audit-alternate-ntfs-data-streams-concept.html["Auditoría de flujos de datos alternativos de NTFS"^]
+

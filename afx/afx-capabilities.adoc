@@ -59,7 +59,7 @@ Además, NetApp AFX es compatible con muchas de las funciones de seguridad propo
 
 Para obtener información sobre las certificaciones que ha recibido ONTAP unificado (así como otra información sobre el refuerzo de la seguridad), consulta:
 
-* link:https://security.netapp.com/certifications["NetApp Seguridad de productos"^]
+* link:https://security.netapp.com/resources/["NetApp Seguridad de productos"^]
 * link:https://docs.netapp.com/us-en/ontap-technical-reports/ontap-security-hardening/security-hardening-overview.html["Información general sobre el refuerzo de la seguridad de ONTAP"^]
 
 

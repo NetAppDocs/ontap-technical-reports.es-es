@@ -1,0 +1,108 @@
+---
+sidebar: sidebar 
+permalink: high-file-count-workloads/high-file-count-workloads-12-maxfiles-monitoring.html 
+keywords: ONTAP, NAS, maxfiles, EMS, files-used, inodefile-public-capacity, monitoring 
+summary: Supervisa el uso de maxfiles en ONTAP, interpreta los eventos EMS de los nodos de información y revisa las mejoras de la versión. 
+---
+= Supervisa maxfiles, los eventos EMS y las mejoras de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+
+[role="lead"]
+Supervisa tanto el uso actual de los nodos de información públicos como la capacidad máxima asignada al archivo de nodos de información públicos. Utiliza eventos EMS para detectar el agotamiento y el desequilibrio de los constituyentes.
+
+
+
+[[ems-messages-related-to-maxfiles]]
+== Mensajes de EMS relacionados con maxfiles
+
+
+
+[[callhome-no-inodes]]
+=== `callhome.no.inodes`
+
+Este evento de ERROR indica que un volumen se ha quedado sin nodos de información. No podrás crear nuevos objetos del sistema de archivos hasta que haya nodos de información disponibles o aumentes el límite máximo configurado. Comprueba `files`, `files-used`, `files-maximum-possible` y la capacidad del volumen antes de modificar el límite.
+
+
+
+[[flexgroup-constituent-events]]
+=== FlexGroup eventos constituyentes
+
+* `fg.inodes.member.nearlyFull` indica que un componente está a punto de quedarse sin nodos de información. ONTAP dirige menos operaciones de creación a ese componente, lo que podría afectar a la distribución y al rendimiento.
+* `fg.inodes.member.full` indica que un componente se ha quedado sin nodos de información y no puede aceptar archivos nuevos.
+* `fg.inodes.member.allOK` indica que las condiciones que provocaron los eventos de «casi lleno» o «lleno» ya no se dan.
+
+
+Para los eventos de FlexGroup, analiza la distribución de los constituyentes, así como los totales a nivel de FlexGroup. Aumenta el límite de archivos de FlexGroup en lugar de intentar establecer `files` directamente en un solo constituyente. Un constituyente que se queda sin capacidad de *datos* puede hacer que todo el FlexGroup informe `ENOSPC` e incluso falle `ls`; consulta link:high-file-count-workloads-10-maxfiles-limits.html#flexgroup-constituent-out-of-space["Componente de FlexGroup sin espacio"].
+
+
+
+[[monitoring-example]]
+== Ejemplo de supervisión
+
+Utiliza la CLI para consultar el límite máximo público y el consumo actual:
+
+[listing]
+----
+volume show -vserver <svm> -volume <volume> -fields files,files-used
+----
+En el nivel de privilegio avanzado, incluye el valor máximo posible y la capacidad asignada de archivos inode públicos:
+
+[listing]
+----
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files,files-used,files-maximum-possible,files-set-maximum,inodefile-public-capacity
+
+volume show-space -vserver <svm> -volume <volume>
+----
+Utiliza la API de REST para consultar el límite máximo público `files` y el consumo actual:
+
+[listing]
+----
+GET /api/storage/volumes?name=<volume>&fields=files
+----
+Los campos de REST `files.maximum` y `files.used` se corresponden con los de CLI `files` y `files-used`. Utiliza el campo de CLI avanzada para `inodefile-public-capacity`.
+
+`files-used` incluye nodos de información de ACL públicos, flujos con nombre, directorios de flujos, índices de directorios públicos y otros objetos públicos. `volume show` no ofrece un contador independiente para los nodos de información de ACL.
+
+Realiza un seguimiento tanto del uso actual como de la capacidad de los archivos de nodo de información. Un valor bajo `files-used` tras una eliminación grande no significa que se haya recuperado la capacidad de los archivos de nodo de información.
+
+
+
+[[ontap-functionality-and-enhancements-related-to-maxfiles]]
+== La funcionalidad y las mejoras de ONTAP relacionadas con maxfiles
+
+|===
+| Versión de ONTAP | Funcionalidad 
+
+
+| Versiones anteriores de ONTAP 9 | Los administradores pueden consultar `files` y `files-used` y establecer un valor específico de `-files`. El valor automático predeterminado históricamente dejaba de aumentar en 21.251.126 cuando el tamaño del volumen alcanzaba aproximadamente 680 GB; se trataba de una meseta de tamaño predeterminada, no del valor máximo configurable. 
+
+
+| ONTAP 9.9.1 | Se ha añadido `-files-set-maximum true`, una acción de un solo paso que establece `files` en el valor actual de `files-maximum-possible`. Consulta link:high-file-count-workloads-11-maxfiles-controlling.html#setting-files-to-the-maximum-up-front["Configurar los archivos al máximo desde el principio"]. 
+
+
+| ONTAP 9.13.1 | El ajuste automático del tamaño predeterminado de los nodos de información continúa a medida que los volúmenes superan el umbral anterior de aproximadamente 21 millones. 
+
+
+| ONTAP 9.17.1 | Se añadió la opción de colocar y migrar los nodos de información del índice de directorios al espacio público de nodos de información. Consulta link:high-file-count-workloads-04-maxdirsize-indexing.html#about-private-and-public-index-inodes["Acerca de los nodos de información de índice privados y públicos"]. 
+|===
+La compatibilidad y los límites de la versión pueden variar según la plataforma y el tipo de volumen. Comprueba el comportamiento en la referencia de comandos de la versión de ONTAP que estés utilizando.
+
+[cols="<,>"]
+|===
+
+
+| link:high-file-count-workloads-11-maxfiles-controlling.html["← Anterior: control de maxfiles"] | link:high-file-count-workloads-13-planning.html["Siguiente: enfoque de planificación →"] 
+|===
+
+
+[[related-information]]
+== Información relacionada
+
+* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html["Determina el uso de archivos y nodos de información para un volumen ONTAP"^]
+* enlace:https://docs.netapp.com/us-en/ontap-ems/callhome-no-events.html[`callhome.no.inodes` referencia sobre el EMS^]
+* link:https://docs.netapp.com/us-en/ontap-ems/fg-inodes-events.html["Eventos de EMS de nodos de información de FlexGroup"^]
+

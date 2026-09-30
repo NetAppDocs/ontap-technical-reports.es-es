@@ -1,0 +1,37 @@
+---
+section: high-file-count-workloads
+title: Cargas de trabajo NAS con un elevado número de archivos
+entries:
+- title: Descripción general
+  url: "/high-file-count-workloads/high-file-count-workloads-01-overview.html"
+- title: Maxdir-size y directorios grandes
+  entries:
+  - title: Descripción general
+    url: "/high-file-count-workloads/high-file-count-workloads-02-maxdirsize.html"
+  - title: Ver maxdir-size y el tamaño del directorio actual
+    url: "/high-file-count-workloads/high-file-count-workloads-03-maxdirsize-view.html"
+  - title: Indexación de directorios en ONTAP
+    url: "/high-file-count-workloads/high-file-count-workloads-04-maxdirsize-indexing.html"
+  - title: Impacto de maxdir-size
+    url: "/high-file-count-workloads/high-file-count-workloads-05-maxdirsize-impact.html"
+  - title: Consideraciones sobre el volumen
+    url: "/high-file-count-workloads/high-file-count-workloads-06-maxdirsize-volume-types.html"
+  - title: Funcionalidades, EMS y supervisión
+    url: "/high-file-count-workloads/high-file-count-workloads-07-maxdirsize-features-ems.html"
+- title: Gran número de archivos y capacidad de nodo de información
+  entries:
+  - title: Descripción general
+    url: "/high-file-count-workloads/high-file-count-workloads-08-maxfiles-high-file-counts.html"
+  - title: Tipos de inode
+    url: "/high-file-count-workloads/high-file-count-workloads-09-maxfiles.html"
+  - title: Información sobre el número máximo de archivos y el nodo de información
+      de ONTAP
+    url: "/high-file-count-workloads/high-file-count-workloads-10-maxfiles-limits.html"
+  - title: Control de «maxfiles»
+    url: "/high-file-count-workloads/high-file-count-workloads-11-maxfiles-controlling.html"
+  - title: Supervisión, EMS y mejoras
+    url: "/high-file-count-workloads/high-file-count-workloads-12-maxfiles-monitoring.html"
+- title: Enfoque de planificación
+  url: "/high-file-count-workloads/high-file-count-workloads-13-planning.html"
+- title: Mejores prácticas
+  url: "/high-file-count-workloads/high-file-count-workloads-14-best-practices.html"

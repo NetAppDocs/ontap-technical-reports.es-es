@@ -1,0 +1,133 @@
+---
+sidebar: sidebar 
+permalink: high-file-count-workloads/high-file-count-workloads-13-planning.html 
+keywords: ONTAP, NAS, high file count, planning, maxfiles, maxdir-size, maxdirsize, inodes, metadata, XCP 
+summary: Recopila estimaciones sobre nodo de información, directorios, tasa de operaciones y capacidad antes de dimensionar una carga de trabajo NAS con un elevado número de archivos en ONTAP. 
+---
+= Enfoque de planificación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/high-file-count-workloads/
+
+
+[role="lead"]
+Empieza la planificación de una carga de trabajo NAS con un gran número de archivos con cuatro estimaciones independientes, en lugar de una única cifra de número de archivos o de capacidad.
+
+. Total de objetos del sistema de archivos a lo largo del ciclo de vida de la carga de trabajo
+. Número máximo de entradas en el directorio más grande
+. Tasas máximas de creación, búsqueda, enumeración y eliminación
+. Capacidad para datos de usuario, nodos de información, directorios, índices de directorios, copias de Snapshot y crecimiento
+
+
+Utiliza los siguientes métodos para recopilar esos datos:
+
+
+
+[[find-total-objects-and-inode-headroom]]
+== Calcular el número total de objetos y el margen de nodos de información
+
+Compara el inventario de aplicaciones con los contadores de nodos de información públicos de ONTAP:
+
+[listing]
+----
+volume show -vserver <svm> -volume <volume> -fields files,files-used
+
+set -privilege advanced
+volume show -vserver <svm> -volume <volume> -fields files-maximum-possible,inodefile-public-capacity
+----
+En el caso de FlexGroup, comprueba tanto el total configurado como el uso de cada componente:
+
+[listing]
+----
+volume show -vserver <svm> -volume-style-extended flexgroup-constituent -fields files,files-used
+----
+* Incluye en la estimación total los archivos proyectados, los directorios, los flujos, las listas de control de acceso (ACL), los índices de directorios públicos, los objetos temporales y el solapamiento de la migración.
+* Cuando sea habitual el uso de ACL, usa hasta el doble del número previsto de archivos y directorios como estimación inicial conservadora para `files`. Cada ACL de NTFS o NFSv4 puede consumir un nodo de información público adicional, pero link:high-file-count-workloads-09-maxfiles.html#acl-inodes["Uso compartido de ACL"] puede reducir el uso real. Valídalo con datos representativos.
+* Utiliza el inventario de la aplicación o una evaluación de migración para prever el crecimiento. `files-used` es el uso actual, no el pico futuro.
+
+
+NetApp XCP puede contar los archivos y directorios en el espacio de nombres actual. En XCP 1.5 y versiones posteriores:
+
+[listing]
+----
+xcp scan -stats <host>:/<export>
+xcp scan -stats \\<server>\<share>
+----
+El `-stats` informe incluye el recuento de archivos y directorios. No incluye los nodos de información de ACL ni los flujos con nombre que nunca aparecen como entradas de directorio, así que añádelos desde el perfil de la aplicación. Dedica tiempo a los conjuntos de datos con un gran número de archivos; XCP analiza el árbol antes de mostrar los totales. Para consultar la nota sobre el subcomando XCP 1.5 y los análisis relacionados, consulta link:high-file-count-workloads-03-maxdirsize-view.html#scan-directory-sizes-with-xcp["Analizar el tamaño de los directorios con XCP"].
+
+
+
+[[find-the-largest-directories]]
+== Encuentra los directorios más grandes
+
+* Utiliza el inventario de aplicaciones, herramientas de migración o un análisis controlado del espacio de nombres para identificar los directorios con más entradas.
+* Revisa `wafl.dir.size.warning` y los eventos de EMS relacionados para los directorios que ya se están acercando al límite.
+* Mide el propio objeto de directorio tal como se describe en link:high-file-count-workloads-03-maxdirsize-view.html["Ver maxdir-size y el tamaño del directorio actual"].
+* Define las longitudes de los nombres de archivo y los nombres alternativos tal y como se describe en link:high-file-count-workloads-02-maxdirsize.html["Tamaño máximo de directorio y directorios grandes de ONTAP"].
+
+
+XCP puede clasificar los directorios por número de entradas o por tamaño de directorio-archivo. El  `-stats` informe incluye el número de entradas del directorio más grande como  `Dirsize`. Para mostrar todos los directorios con su tamaño de archivo de metadatos, primero los más grandes:
+
+[listing]
+----
+xcp scan -match "type == d" -fmt "'{} {}'.format(used, x)" <host>:/<export> | sort -rn
+----
+Para mostrar los directorios que superen un número determinado de entradas (2,000 en este ejemplo):
+
+[listing]
+----
+xcp diag find --branch-match True -fmt "'{size} {name}'.format(size=x.digest, name=x)" <host>:/<export> 2>/dev/null | awk '{if ($1 > 2000) print $1 " " $2}'
+----
+Esos análisis detectan los directorios con mucha actividad. No sustituyen el modelado de la longitud de los nombres y la codificación para `maxdir-size`.
+
+
+
+[[measure-metadata-operation-rates]]
+== Medir las tasas de operaciones de los metadatos
+
+* Usa la telemetría de las aplicaciones, las herramientas de carga de trabajo de los clientes, los rastros de paquetes, las estadísticas de rendimiento de ONTAP o una herramienta de supervisión como Harvest para medir las tasas de creación, búsqueda, apertura, cierre, atributos, enumeración, cambio de nombre y eliminación.
+* Comprueba la concurrencia representativa y el comportamiento tanto con caché caliente como con caché fría.
+* Las mediciones de rendimiento no caracterizan necesariamente una carga de trabajo con muchos metadatos. Los contadores de operaciones pueden ser una pista, especialmente `other_ops`.
+
+
+
+
+[[find-metadata-and-snapshot-capacity]]
+== Buscar metadatos y capacidad de snapshot
+
+* Utiliza  `volume show-space` para separar los datos de usuario, los metadatos del sistema de archivos, los nodos de información y la reserva de snapshot.
+* Utiliza `volume show-footprint` para revisar la huella del agregado del volumen.
+* Calcula aproximadamente los registros sin procesar de nodos de información de ONTAP 9 como `peak allocated inodes × 288 bytes`, y luego añade el tamaño de directorio-archivo.
+* En ONTAP unificado, revisa los metadatos del agregado con `storage aggregate show-space`.
+* En AFX, consulta los metadatos de la zona de disponibilidad de almacenamiento con `storage availability-zone show`.
+* Representa aproximadamente el 1 % de la capacidad destinada a otros metadatos del sistema que no pueden inventariarse desde el host.
+
+
+
+
+[[dont-conflate-maxdir-size-with-maxfiles]]
+== No confundas «maxdir-size» con «maxfiles»
+
+* `files` (maxfiles) es el límite máximo de nodos de información públicos para un componente de FlexVol o FlexGroup.
+* `maxdir-size` es el límite de bytes de cada archivo de directorio del volumen. La cantidad de nombres que caben depende de la longitud y la codificación de los nombres, no del recuento de archivos del volumen.
+* No calcules el valor de « `maxdir-size`» a partir del recuento total de archivos del volumen, ni utilices « `maxfiles`» para estimar cuántos nombres caben en un directorio.
+
+
+Para consultar recomendaciones de diseño y funcionamiento, visita link:high-file-count-workloads-14-best-practices.html["Prácticas recomendadas para cargas de trabajo NAS con un elevado número de archivos"].
+
+[cols="<,>"]
+|===
+
+
+| link:high-file-count-workloads-12-maxfiles-monitoring.html["← Anterior: supervisa «maxfiles», eventos EMS y mejoras de ONTAP"] | link:high-file-count-workloads-14-best-practices.html["Siguiente: prácticas recomendadas para cargas de trabajo NAS con un gran número de archivos →"] 
+|===
+
+
+[[related-information]]
+== Información relacionada
+
+* link:high-file-count-workloads-09-maxfiles.html["Tipos de nodo de información de ONTAP"]
+* link:high-file-count-workloads-03-maxdirsize-view.html["Ver maxdir-size y el tamaño del directorio actual"]
+* link:https://docs.netapp.com/us-en/ontap/volumes/display-file-inode-usage-task.html["Determina el uso de archivos y nodos de información para un volumen ONTAP"^]
+* link:https://www.netapp.com/pdf.html?item=/media/12385-tr4571.pdf["TR-4571: volúmenes NetApp ONTAP FlexGroup"^]
+
